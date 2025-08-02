@@ -40,6 +40,7 @@ const FeedPage = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const [snackbar, setSnackbar] = useState({ open: false, message: '', severity: 'success' });
+  const [searchTerm, setSearchTerm] = useState('');
 
   // Gérer les états passés depuis la page d'accueil
   useEffect(() => {
@@ -293,17 +294,32 @@ const FeedPage = () => {
   };
 
   const getFilteredPosts = () => {
+    let filteredPosts = posts;
+
+    // Filtrage par recherche
+    if (searchTerm.trim()) {
+      const searchLower = searchTerm.toLowerCase();
+      filteredPosts = filteredPosts.filter(post => 
+        post.content.toLowerCase().includes(searchLower) ||
+        post.author.name.toLowerCase().includes(searchLower) ||
+        post.location.toLowerCase().includes(searchLower) ||
+        post.tags.some(tag => tag.toLowerCase().includes(searchLower)) ||
+        post.type.toLowerCase().includes(searchLower)
+      );
+    }
+
+    // Filtrage par onglet
     switch (activeTab) {
       case 0: // Tous
-        return posts;
+        return filteredPosts;
       case 1: // Tendances
-        return posts.filter(post => post.likes.length >= 3);
+        return filteredPosts.filter(post => post.likes.length >= 3);
       case 2: // Récents
-        return posts.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+        return filteredPosts.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
       case 3: // Alertes
-        return posts.filter(post => post.type === 'alerte');
+        return filteredPosts.filter(post => post.type === 'alerte');
       default:
-        return posts;
+        return filteredPosts;
     }
   };
 
@@ -386,6 +402,8 @@ const FeedPage = () => {
                 <TextField
                   fullWidth
                   placeholder="Rechercher dans les publications..."
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
                   variant="outlined"
                   InputProps={{
                     startAdornment: (
