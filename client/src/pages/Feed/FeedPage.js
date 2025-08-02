@@ -43,13 +43,33 @@ const FeedPage = () => {
 
   // Gérer les états passés depuis la page d'accueil
   useEffect(() => {
+    console.log('🔄 FeedPage useEffect - Vérification des états');
+    console.log('📍 location.state:', location.state);
+    console.log('📍 localStorage showCreatePost:', localStorage.getItem('showCreatePost'));
+    console.log('📍 localStorage showSearch:', localStorage.getItem('showSearch'));
+    
+    // Vérifier location.state (méthode originale)
     if (location.state) {
       if (location.state.showCreatePost) {
+        console.log('✅ Activation showCreatePost via location.state');
         setShowCreatePost(true);
       }
       if (location.state.showSearch) {
+        console.log('✅ Activation showSearch via location.state');
         setShowSearch(true);
       }
+    }
+    
+    // Vérifier localStorage (solution alternative)
+    if (localStorage.getItem('showCreatePost') === 'true') {
+      console.log('✅ Activation showCreatePost via localStorage');
+      setShowCreatePost(true);
+      localStorage.removeItem('showCreatePost');
+    }
+    if (localStorage.getItem('showSearch') === 'true') {
+      console.log('✅ Activation showSearch via localStorage');
+      setShowSearch(true);
+      localStorage.removeItem('showSearch');
     }
   }, [location.state]);
 

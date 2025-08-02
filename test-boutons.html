@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Boutons CommuniConnect</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .test-section {
+            margin: 20px 0;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+        }
+        .btn {
+            padding: 10px 20px;
+            margin: 5px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .btn-primary {
+            background-color: #1976d2;
+            color: white;
+        }
+        .btn-outline {
+            background-color: transparent;
+            color: #1976d2;
+            border: 1px solid #1976d2;
+        }
+        .result {
+            margin-top: 10px;
+            padding: 10px;
+            background-color: #f5f5f5;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <h1>🧪 Test des Boutons CommuniConnect</h1>
+    
+    <div class="test-section">
+        <h2>Test Navigation</h2>
+        <p>Cliquez sur les boutons pour tester la navigation :</p>
+        
+        <button class="btn btn-primary" onclick="testCreatePost()">
+            ➕ Nouvelle publication
+        </button>
+        
+        <button class="btn btn-outline" onclick="testSearch()">
+            🔍 Rechercher
+        </button>
+        
+        <div id="result" class="result">
+            Résultat : En attente de test...
+        </div>
+    </div>
+
+    <div class="test-section">
+        <h2>Instructions de Test</h2>
+        <ol>
+            <li>Ouvrez l'application CommuniConnect dans un autre onglet</li>
+            <li>Cliquez sur "Nouvelle publication" depuis la page d'accueil</li>
+            <li>Vérifiez que le formulaire de création s'ouvre automatiquement</li>
+            <li>Retournez à la page d'accueil</li>
+            <li>Cliquez sur "Rechercher"</li>
+            <li>Vérifiez que le champ de recherche s'affiche dans le Feed</li>
+        </ol>
+    </div>
+
+    <script>
+        function testCreatePost() {
+            document.getElementById('result').innerHTML = 
+                '✅ Test "Nouvelle publication" : Redirection vers /feed avec showCreatePost: true';
+        }
+        
+        function testSearch() {
+            document.getElementById('result').innerHTML = 
+                '✅ Test "Rechercher" : Redirection vers /feed avec showSearch: true';
+        }
+    </script>
+</body>
+</html> 

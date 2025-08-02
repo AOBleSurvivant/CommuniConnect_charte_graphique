@@ -105,11 +105,21 @@ const HomePageCommuniConnect = () => {
   };
 
   const handleCreateNewPost = () => {
-    navigate('/feed', { state: { showCreatePost: true } });
+    console.log('🔵 Bouton "Nouvelle publication" cliqué');
+    // Solution alternative avec localStorage
+    localStorage.setItem('showCreatePost', 'true');
+    console.log('✅ localStorage showCreatePost défini');
+    navigate('/feed');
+    console.log('✅ Navigation vers /feed');
   };
 
   const handleSearch = () => {
-    navigate('/feed', { state: { showSearch: true } });
+    console.log('🔍 Bouton "Rechercher" cliqué');
+    // Solution alternative avec localStorage
+    localStorage.setItem('showSearch', 'true');
+    console.log('✅ localStorage showSearch défini');
+    navigate('/feed');
+    console.log('✅ Navigation vers /feed');
   };
 
   const handleQuickAction = (action) => {
@@ -131,6 +141,38 @@ const HomePageCommuniConnect = () => {
     }
   };
 
+  // Gestionnaire d'événements global pour les boutons
+  useEffect(() => {
+    const handleButtonClick = (event) => {
+      const target = event.target;
+      
+      // Vérifier si le clic est sur un bouton de la section welcome-actions
+      if (target.closest('.welcome-actions')) {
+        const button = target.closest('button');
+        if (button) {
+          const buttonText = button.textContent.trim();
+          console.log('🎯 Clic détecté sur:', buttonText);
+          
+          if (buttonText.includes('Nouvelle publication')) {
+            console.log('🔵 Déclenchement handleCreateNewPost via gestionnaire global');
+            handleCreateNewPost();
+          } else if (buttonText.includes('Rechercher')) {
+            console.log('🔍 Déclenchement handleSearch via gestionnaire global');
+            handleSearch();
+          }
+        }
+      }
+    };
+
+    // Ajouter le gestionnaire d'événements
+    document.addEventListener('click', handleButtonClick);
+    
+    // Nettoyer le gestionnaire d'événements
+    return () => {
+      document.removeEventListener('click', handleButtonClick);
+    };
+  }, []);
+
   return (
     <div className="home-page">
       {/* Header avec bienvenue */}
@@ -144,11 +186,29 @@ const HomePageCommuniConnect = () => {
           </p>
         </div>
         <div className="welcome-actions">
-          <button className="btn btn-primary" onClick={handleCreateNewPost}>
+          <button 
+            className="btn btn-primary" 
+            onClick={handleCreateNewPost}
+            style={{ cursor: 'pointer', position: 'relative', zIndex: 10 }}
+            onMouseDown={(e) => {
+              console.log('🖱️ MouseDown sur Nouvelle publication');
+              e.preventDefault();
+              handleCreateNewPost();
+            }}
+          >
             <Add />
             <span>Nouvelle publication</span>
           </button>
-          <button className="btn btn-outline" onClick={handleSearch}>
+          <button 
+            className="btn btn-outline" 
+            onClick={handleSearch}
+            style={{ cursor: 'pointer', position: 'relative', zIndex: 10 }}
+            onMouseDown={(e) => {
+              console.log('🖱️ MouseDown sur Rechercher');
+              e.preventDefault();
+              handleSearch();
+            }}
+          >
             <Search />
             <span>Rechercher</span>
           </button>

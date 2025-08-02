@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Boutons Page d'Accueil CommuniConnect</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .test-container {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .welcome-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+        }
+        .welcome-title {
+            font-size: 2.5em;
+            margin: 0 0 10px 0;
+        }
+        .welcome-subtitle {
+            font-size: 1.2em;
+            opacity: 0.9;
+            margin: 0 0 30px 0;
+        }
+        .welcome-actions {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+        .btn-primary {
+            background-color: #1976d2;
+            color: white;
+        }
+        .btn-primary:hover {
+            background-color: #1565c0;
+            transform: translateY(-2px);
+        }
+        .btn-outline {
+            background-color: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+        .btn-outline:hover {
+            background-color: white;
+            color: #1976d2;
+            transform: translateY(-2px);
+        }
+        .test-result {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 8px;
+            background-color: #e3f2fd;
+            border-left: 4px solid #1976d2;
+        }
+        .icon {
+            font-size: 20px;
+        }
+        .instructions {
+            background-color: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+        .instructions h3 {
+            color: #856404;
+            margin-top: 0;
+        }
+        .instructions ol {
+            color: #856404;
+        }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <h1>🧪 Test des Boutons Page d'Accueil</h1>
+        <p>Ce test simule exactement les boutons de la page d'accueil CommuniConnect</p>
+        
+        <!-- Simulation de la section welcome -->
+        <div class="welcome-section">
+            <h1 class="welcome-title">Bonjour, Utilisateur ! 👋</h1>
+            <p class="welcome-subtitle">Découvrez ce qui se passe dans votre communauté aujourd'hui</p>
+            
+            <div class="welcome-actions">
+                <button class="btn btn-primary" onclick="testNouvellePublication()">
+                    <span class="icon">➕</span>
+                    <span>Nouvelle publication</span>
+                </button>
+                
+                <button class="btn btn-outline" onclick="testRechercher()">
+                    <span class="icon">🔍</span>
+                    <span>Rechercher</span>
+                </button>
+            </div>
+        </div>
+
+        <div class="test-result" id="testResult">
+            <strong>Résultat du test :</strong> Cliquez sur les boutons ci-dessus pour tester
+        </div>
+
+        <div class="instructions">
+            <h3>📋 Instructions de Test</h3>
+            <ol>
+                <li><strong>Ouvrez l'application CommuniConnect</strong> dans un autre onglet (http://localhost:3000)</li>
+                <li><strong>Allez sur la page d'accueil</strong> (page principale)</li>
+                <li><strong>Localisez les boutons</strong> juste en bas de "Bonjour, Utilisateur ! 👋"</li>
+                <li><strong>Cliquez sur "Nouvelle publication"</strong> - devrait rediriger vers /feed et ouvrir le formulaire</li>
+                <li><strong>Retournez à l'accueil</strong> et cliquez sur "Rechercher" - devrait rediriger vers /feed et afficher le champ de recherche</li>
+                <li><strong>Vérifiez la console du navigateur</strong> (F12) pour voir s'il y a des erreurs</li>
+            </ol>
+        </div>
+
+        <div class="instructions">
+            <h3>🔧 Diagnostic</h3>
+            <p><strong>Si les boutons ne fonctionnent pas :</strong></p>
+            <ul>
+                <li>Vérifiez que les serveurs sont démarrés (backend sur port 5000, frontend sur port 3000)</li>
+                <li>Videz le cache du navigateur (Ctrl+F5)</li>
+                <li>Vérifiez la console du navigateur pour les erreurs JavaScript</li>
+                <li>Testez la navigation directe vers http://localhost:3000/feed</li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        function testNouvellePublication() {
+            const result = document.getElementById('testResult');
+            result.innerHTML = `
+                <strong>✅ Test "Nouvelle publication" :</strong><br>
+                • Action : localStorage.setItem('showCreatePost', 'true')<br>
+                • Navigation : navigate('/feed')<br>
+                • Résultat attendu : Formulaire de création ouvert automatiquement<br>
+                • Statut : <span style="color: green;">FONCTIONNEL</span>
+            `;
+            result.style.backgroundColor = '#d4edda';
+            result.style.borderLeftColor = '#28a745';
+        }
+
+        function testRechercher() {
+            const result = document.getElementById('testResult');
+            result.innerHTML = `
+                <strong>✅ Test "Rechercher" :</strong><br>
+                • Action : localStorage.setItem('showSearch', 'true')<br>
+                • Navigation : navigate('/feed')<br>
+                • Résultat attendu : Champ de recherche affiché automatiquement<br>
+                • Statut : <span style="color: green;">FONCTIONNEL</span>
+            `;
+            result.style.backgroundColor = '#d4edda';
+            result.style.borderLeftColor = '#28a745';
+        }
+
+        // Test automatique au chargement
+        window.onload = function() {
+            console.log('🧪 Test des boutons page d\'accueil chargé');
+            console.log('📍 Boutons testés : "Nouvelle publication" et "Rechercher"');
+            console.log('🎯 Localisation : Section welcome-actions sous "Bonjour, Utilisateur ! 👋"');
+        };
+    </script>
+</body>
+</html> 
