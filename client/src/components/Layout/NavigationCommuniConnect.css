@@ -46,6 +46,14 @@
   font-weight: 600;
   color: var(--color-text-light);
   letter-spacing: -0.5px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  user-select: none;
+}
+
+.navbar-title:hover {
+  color: var(--color-secondary);
+  transform: scale(1.05);
 }
 
 /* Navigation principale - Centrée */

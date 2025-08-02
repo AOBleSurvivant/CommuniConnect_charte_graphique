@@ -152,7 +152,14 @@ const NavigationCommuniConnect = () => {
           {/* Logo et titre */}
           <div className="navbar-brand">
             <span className="navbar-logo">🌍</span>
-            <span className="navbar-title">CommuniConnect</span>
+            <span 
+              className="navbar-title" 
+              onClick={() => handleNavigation('/')}
+              style={{ cursor: 'pointer' }}
+              title="Retour à l'accueil"
+            >
+              CommuniConnect
+            </span>
           </div>
 
           {/* Navigation principale - éléments essentiels */}
