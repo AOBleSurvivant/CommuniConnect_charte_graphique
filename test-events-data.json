@@ -1,0 +1,80 @@
+[
+  {
+    "_id": "test-event-1",
+    "title": "Nettoyage communautaire",
+    "description": "Grande opération de nettoyage du quartier",
+    "type": "nettoyage",
+    "category": "communautaire",
+    "startDate": "2025-08-02T10:50:01.904Z",
+    "endDate": "2025-08-02T14:50:01.904Z",
+    "startTime": "08:00",
+    "endTime": "12:00",
+    "location": {
+      "coordinates": {
+        "latitude": 9.537,
+        "longitude": -13.6785
+      },
+      "region": "Conakry",
+      "prefecture": "Conakry",
+      "commune": "Kaloum",
+      "address": "Quartier Centre, Conakry",
+      "venue": "Place du marché"
+    },
+    "organizer": {
+      "_id": "test-user-1",
+      "firstName": "Mamadou",
+      "lastName": "Diallo",
+      "profilePicture": null,
+      "isVerified": true
+    },
+    "status": "published",
+    "visibility": "public",
+    "participants": [],
+    "media": {
+      "images": [],
+      "videos": [],
+      "documents": []
+    },
+    "createdAt": "2025-07-31T10:50:01.904Z",
+    "updatedAt": "2025-07-31T10:50:01.904Z"
+  },
+  {
+    "_id": "test-event-2",
+    "title": "Formation informatique",
+    "description": "Formation en informatique pour les jeunes",
+    "type": "formation",
+    "category": "educatif",
+    "startDate": "2025-08-05T10:50:01.904Z",
+    "endDate": "2025-08-05T13:50:01.904Z",
+    "startTime": "14:00",
+    "endTime": "17:00",
+    "location": {
+      "coordinates": {
+        "latitude": 9.545,
+        "longitude": -13.675
+      },
+      "region": "Conakry",
+      "prefecture": "Conakry",
+      "commune": "Ratoma",
+      "address": "Centre culturel, Conakry",
+      "venue": "Salle de formation"
+    },
+    "organizer": {
+      "_id": "test-user-2",
+      "firstName": "Fatou",
+      "lastName": "Camara",
+      "profilePicture": null,
+      "isVerified": true
+    },
+    "status": "published",
+    "visibility": "public",
+    "participants": [],
+    "media": {
+      "images": [],
+      "videos": [],
+      "documents": []
+    },
+    "createdAt": "2025-07-31T10:50:01.904Z",
+    "updatedAt": "2025-07-31T10:50:01.904Z"
+  }
+]

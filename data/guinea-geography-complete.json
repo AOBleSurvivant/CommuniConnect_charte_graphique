@@ -1,0 +1,302 @@
+{
+  "Guinée": {
+    "Régions": [
+      {
+        "nom": "Conakry",
+        "préfectures": [
+          {
+            "nom": "Conakry",
+            "coordonnées": {"latitude": 9.6412, "longitude": -13.5784},
+            "communes": [
+              {
+                "nom": "Kaloum",
+                "coordonnées": {"latitude": 9.5144, "longitude": -13.6783},
+                "quartiers": [
+                  {"nom": "Almamya I", "coordonnées": {"latitude": 9.5144, "longitude": -13.6783}},
+                  {"nom": "Almamya II", "coordonnées": {"latitude": 9.5144, "longitude": -13.6783}},
+                  {"nom": "Boulbinet", "coordonnées": {"latitude": 9.5144, "longitude": -13.6783}},
+                  {"nom": "Coronthie I", "coordonnées": {"latitude": 9.5144, "longitude": -13.6783}},
+                  {"nom": "Coronthie II", "coordonnées": {"latitude": 9.5144, "longitude": -13.6783}},
+                  {"nom": "Kouléwondy", "coordonnées": {"latitude": 9.5144, "longitude": -13.6783}},
+                  {"nom": "Manquepas", "coordonnées": {"latitude": 9.5144, "longitude": -13.6783}},
+                  {"nom": "Sandervalia", "coordonnées": {"latitude": 9.5144, "longitude": -13.6783}},
+                  {"nom": "Sans‑Fil", "coordonnées": {"latitude": 9.5144, "longitude": -13.6783}},
+                  {"nom": "Téminetaye", "coordonnées": {"latitude": 9.5144, "longitude": -13.6783}},
+                  {"nom": "Tombo", "coordonnées": {"latitude": 9.5144, "longitude": -13.6783}}
+                ]
+              },
+              {
+                "nom": "Dixinn",
+                "coordonnées": {"latitude": 9.5557, "longitude": -13.6710},
+                "quartiers": [
+                  {"nom": "Belle‑vue école", "coordonnées": {"latitude": 9.5557, "longitude": -13.6710}},
+                  {"nom": "Belle‑vue marché I", "coordonnées": {"latitude": 9.5557, "longitude": -13.6710}},
+                  {"nom": "Belle‑vue marché II", "coordonnées": {"latitude": 9.5557, "longitude": -13.6710}},
+                  {"nom": "Camayenne", "coordonnées": {"latitude": 9.5557, "longitude": -13.6710}},
+                  {"nom": "Cameroun", "coordonnées": {"latitude": 9.5557, "longitude": -13.6710}},
+                  {"nom": "Dixinn‑centre I", "coordonnées": {"latitude": 9.5557, "longitude": -13.6710}},
+                  {"nom": "Dixinn‑centre II", "coordonnées": {"latitude": 9.5557, "longitude": -13.6710}},
+                  {"nom": "Dixinn‑gare", "coordonnées": {"latitude": 9.5557, "longitude": -13.6710}},
+                  {"nom": "Dixinn‑gare‑rails", "coordonnées": {"latitude": 9.5557, "longitude": -13.6710}},
+                  {"nom": "Dixinn‑mosquée", "coordonnées": {"latitude": 9.5557, "longitude": -13.6710}},
+                  {"nom": "Dixinn‑port", "coordonnées": {"latitude": 9.5557, "longitude": -13.6710}},
+                  {"nom": "Hafia I", "coordonnées": {"latitude": 9.5557, "longitude": -13.6710}},
+                  {"nom": "Hafia II", "coordonnées": {"latitude": 9.5557, "longitude": -13.6710}},
+                  {"nom": "Hafia Minière I", "coordonnées": {"latitude": 9.5557, "longitude": -13.6710}},
+                  {"nom": "Hafia Minière II", "coordonnées": {"latitude": 9.5557, "longitude": -13.6710}},
+                  {"nom": "Hafia‑mosquée", "coordonnées": {"latitude": 9.5557, "longitude": -13.6710}},
+                  {"nom": "Kénien", "coordonnées": {"latitude": 9.5557, "longitude": -13.6710}},
+                  {"nom": "Landréah", "coordonnées": {"latitude": 9.5557, "longitude": -13.6710}},
+                  {"nom": "Minière cité", "coordonnées": {"latitude": 9.5557, "longitude": -13.6710}}
+                ]
+              },
+              {
+                "nom": "Matam",
+                "coordonnées": {"latitude": 9.5354, "longitude": -13.6589},
+                "quartiers": [
+                  {"nom": "Boussoura", "coordonnées": {"latitude": 9.5354, "longitude": -13.6589}},
+                  {"nom": "Bonfi", "coordonnées": {"latitude": 9.5354, "longitude": -13.6589}},
+                  {"nom": "Bonfi‑routière", "coordonnées": {"latitude": 9.5354, "longitude": -13.6589}},
+                  {"nom": "Bonfi‑marché", "coordonnées": {"latitude": 9.5354, "longitude": -13.6589}},
+                  {"nom": "Carrière Centre", "coordonnées": {"latitude": 9.5354, "longitude": -13.6589}},
+                  {"nom": "Carrière Cité", "coordonnées": {"latitude": 9.5354, "longitude": -13.6589}},
+                  {"nom": "Coléah Centre", "coordonnées": {"latitude": 9.5354, "longitude": -13.6589}},
+                  {"nom": "Coléah Cité", "coordonnées": {"latitude": 9.5354, "longitude": -13.6589}},
+                  {"nom": "Domino", "coordonnées": {"latitude": 9.5354, "longitude": -13.6589}},
+                  {"nom": "Hermakonon", "coordonnées": {"latitude": 9.5354, "longitude": -13.6589}},
+                  {"nom": "Imprimerie", "coordonnées": {"latitude": 9.5354, "longitude": -13.6589}},
+                  {"nom": "Lanséboudji", "coordonnées": {"latitude": 9.5354, "longitude": -13.6589}},
+                  {"nom": "Madina Centre", "coordonnées": {"latitude": 9.5354, "longitude": -13.6589}},
+                  {"nom": "Madina Cité", "coordonnées": {"latitude": 9.5354, "longitude": -13.6589}},
+                  {"nom": "Madina École", "coordonnées": {"latitude": 9.5354, "longitude": -13.6589}},
+                  {"nom": "Madina Marché", "coordonnées": {"latitude": 9.5354, "longitude": -13.6589}},
+                  {"nom": "Madina Mosquée", "coordonnées": {"latitude": 9.5354, "longitude": -13.6589}},
+                  {"nom": "Mafanco", "coordonnées": {"latitude": 9.5354, "longitude": -13.6589}},
+                  {"nom": "Mafanco Centre", "coordonnées": {"latitude": 9.5354, "longitude": -13.6589}},
+                  {"nom": "Matam Centre", "coordonnées": {"latitude": 9.5354, "longitude": -13.6589}},
+                  {"nom": "Matam‑lido", "coordonnées": {"latitude": 9.5354, "longitude": -13.6589}},
+                  {"nom": "Touguiwondy", "coordonnées": {"latitude": 9.5354, "longitude": -13.6589}}
+                ]
+              },
+              {
+                "nom": "Ratoma",
+                "coordonnées": {"latitude": 9.6022, "longitude": -13.6294},
+                "quartiers": [
+                  {"nom": "Taouyah", "coordonnées": {"latitude": 9.6022, "longitude": -13.6294}},
+                  {"nom": "Ratoma Dispensaire", "coordonnées": {"latitude": 9.6022, "longitude": -13.6294}},
+                  {"nom": "Ratoma Centre", "coordonnées": {"latitude": 9.6022, "longitude": -13.6294}},
+                  {"nom": "Kaporo Rails", "coordonnées": {"latitude": 9.6022, "longitude": -13.6294}},
+                  {"nom": "Hamdallaye 1", "coordonnées": {"latitude": 9.6022, "longitude": -13.6294}},
+                  {"nom": "Hamdallaye 2", "coordonnées": {"latitude": 9.6022, "longitude": -13.6294}},
+                  {"nom": "Koloma Soloprimo", "coordonnées": {"latitude": 9.6022, "longitude": -13.6294}},
+                  {"nom": "Kipé", "coordonnées": {"latitude": 9.6022, "longitude": -13.6294}},
+                  {"nom": "Kaporo Centre", "coordonnées": {"latitude": 9.6022, "longitude": -13.6294}},
+                  {"nom": "Dar‑es‑salam", "coordonnées": {"latitude": 9.6022, "longitude": -13.6294}},
+                  {"nom": "Koloma 1", "coordonnées": {"latitude": 9.6022, "longitude": -13.6294}},
+                  {"nom": "Koloma 2", "coordonnées": {"latitude": 9.6022, "longitude": -13.6294}},
+                  {"nom": "Bomboli", "coordonnées": {"latitude": 9.6022, "longitude": -13.6294}},
+                  {"nom": "Simanbossia", "coordonnées": {"latitude": 9.6022, "longitude": -13.6294}},
+                  {"nom": "Nongo", "coordonnées": {"latitude": 9.6022, "longitude": -13.6294}}
+                ]
+              },
+              {
+                "nom": "Matoto",
+                "coordonnées": {"latitude": 9.5628, "longitude": -13.6319},
+                "quartiers": [
+                  {"nom": "Béhanzin", "coordonnées": {"latitude": 9.5628, "longitude": -13.6319}},
+                  {"nom": "Camp Alpha Yaya Diallo", "coordonnées": {"latitude": 9.5628, "longitude": -13.6319}},
+                  {"nom": "Cité de l'air", "coordonnées": {"latitude": 9.5628, "longitude": -13.6319}},
+                  {"nom": "Dabompa", "coordonnées": {"latitude": 9.5628, "longitude": -13.6319}},
+                  {"nom": "Dabondy 1", "coordonnées": {"latitude": 9.5628, "longitude": -13.6319}},
+                  {"nom": "Dabondy 2", "coordonnées": {"latitude": 9.5628, "longitude": -13.6319}},
+                  {"nom": "Dabondy 3", "coordonnées": {"latitude": 9.5628, "longitude": -13.6319}},
+                  {"nom": "Dabondy École", "coordonnées": {"latitude": 9.5628, "longitude": -13.6319}},
+                  {"nom": "Dabondy‑Rails", "coordonnées": {"latitude": 9.5628, "longitude": -13.6319}},
+                  {"nom": "Dar‑es‑salam", "coordonnées": {"latitude": 9.5628, "longitude": -13.6319}},
+                  {"nom": "Kissosso", "coordonnées": {"latitude": 9.5628, "longitude": -13.6319}},
+                  {"nom": "Matoto Centre", "coordonnées": {"latitude": 9.5628, "longitude": -13.6319}},
+                  {"nom": "Matoto Marché", "coordonnées": {"latitude": 9.5628, "longitude": -13.6319}},
+                  {"nom": "Matoto‑Khabitayah", "coordonnées": {"latitude": 9.5628, "longitude": -13.6319}},
+                  {"nom": "Sangoyah Mosquée", "coordonnées": {"latitude": 9.5628, "longitude": -13.6319}},
+                  {"nom": "Simbaya 2", "coordonnées": {"latitude": 9.5628, "longitude": -13.6319}},
+                  {"nom": "Tanéné Marché", "coordonnées": {"latitude": 9.5628, "longitude": -13.6319}},
+                  {"nom": "Tanéné Mosquée", "coordonnées": {"latitude": 9.5628, "longitude": -13.6319}},
+                  {"nom": "Yimbaya École", "coordonnées": {"latitude": 9.5628, "longitude": -13.6319}},
+                  {"nom": "Yimbaya Permanence", "coordonnées": {"latitude": 9.5628, "longitude": -13.6319}},
+                  {"nom": "Yimbaya Tannerie", "coordonnées": {"latitude": 9.5628, "longitude": -13.6319}}
+                ]
+              },
+              {
+                "nom": "Gbessia",
+                "coordonnées": {"latitude": 9.5733, "longitude": -13.6175},
+                "quartiers": [
+                  {"nom": "Cité de l'Air", "coordonnées": {"latitude": 9.5733, "longitude": -13.6175}}
+                ]
+              },
+              {
+                "nom": "Lambanyi",
+                "coordonnées": {"latitude": 9.6225, "longitude": -13.5978},
+                "quartiers": [
+                  {"nom": "Lambanyi", "coordonnées": {"latitude": 9.6225, "longitude": -13.5978}}
+                ]
+              },
+              {
+                "nom": "Sonfonia",
+                "coordonnées": {"latitude": 9.6354, "longitude": -13.5917},
+                "quartiers": [
+                  {"nom": "Sonfonia Centre I", "coordonnées": {"latitude": 9.6354, "longitude": -13.5917}}
+                ]
+              },
+              {
+                "nom": "Tombolia",
+                "coordonnées": {"latitude": 9.4546, "longitude": -13.7806},
+                "quartiers": [
+                  {"nom": "Tombolia", "coordonnées": {"latitude": 9.4546, "longitude": -13.7806}}
+                ]
+              },
+              {
+                "nom": "Kagbelen",
+                "coordonnées": {"latitude": 9.6201, "longitude": -13.5987},
+                "quartiers": [
+                  {"nom": "Kagbelen Plateau", "coordonnées": {"latitude": 9.6201, "longitude": -13.5987}}
+                ]
+              },
+              {
+                "nom": "Sanoyah",
+                "coordonnées": {"latitude": 9.4546, "longitude": -13.7806},
+                "quartiers": [
+                  {"nom": "Sanoyah Km36", "coordonnées": {"latitude": 9.4546, "longitude": -13.7806}}
+                ]
+              },
+              {
+                "nom": "Manéah",
+                "coordonnées": {"latitude": 9.6789, "longitude": -13.4123},
+                "quartiers": []
+              },
+              {
+                "nom": "Kassa",
+                "coordonnées": {"latitude": 9.4546, "longitude": -13.7806},
+                "quartiers": [
+                  {"nom": "Île de Kassa", "coordonnées": {"latitude": 9.4546, "longitude": -13.7806}},
+                  {"nom": "Sôrô", "coordonnées": {"latitude": 9.4546, "longitude": -13.7806}},
+                  {"nom": "Kassa 1", "coordonnées": {"latitude": 9.4546, "longitude": -13.7806}},
+                  {"nom": "Kassa 2", "coordonnées": {"latitude": 9.4546, "longitude": -13.7806}},
+                  {"nom": "Kassa 3", "coordonnées": {"latitude": 9.4546, "longitude": -13.7806}},
+                  {"nom": "Koromandja", "coordonnées": {"latitude": 9.4546, "longitude": -13.7806}},
+                  {"nom": "Mangué", "coordonnées": {"latitude": 9.4546, "longitude": -13.7806}},
+                  {"nom": "Room", "coordonnées": {"latitude": 9.4546, "longitude": -13.7806}},
+                  {"nom": "Fotoba centre", "coordonnées": {"latitude": 9.4546, "longitude": -13.7806}},
+                  {"nom": "Rogbanet", "coordonnées": {"latitude": 9.4546, "longitude": -13.7806}},
+                  {"nom": "Boom", "coordonnées": {"latitude": 9.4546, "longitude": -13.7806}}
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "nom": "Kindia",
+        "préfectures": [
+          {
+            "nom": "Kindia",
+            "coordonnées": {"latitude": 10.0569, "longitude": -12.8657},
+            "communes": [
+              {
+                "nom": "Kindia (urbaine)",
+                "coordonnées": {"latitude": 10.0569, "longitude": -12.8657},
+                "quartiers": [
+                  {"nom": "Gangan", "coordonnées": {"latitude": 10.0569, "longitude": -12.8657}},
+                  {"nom": "Sambaya", "coordonnées": {"latitude": 10.0569, "longitude": -12.8657}},
+                  {"nom": "Koliady I", "coordonnées": {"latitude": 10.0569, "longitude": -12.8657}},
+                  {"nom": "Kenendé", "coordonnées": {"latitude": 10.0569, "longitude": -12.8657}},
+                  {"nom": "Kindia‑Gare", "coordonnées": {"latitude": 10.0569, "longitude": -12.8657}},
+                  {"nom": "Sinaniya", "coordonnées": {"latitude": 10.0569, "longitude": -12.8657}},
+                  {"nom": "Condéta III", "coordonnées": {"latitude": 10.0569, "longitude": -12.8657}},
+                  {"nom": "Sarakéla", "coordonnées": {"latitude": 10.0569, "longitude": -12.8657}}
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "nom": "Mamou",
+        "préfectures": [
+          {
+            "nom": "Mamou",
+            "coordonnées": {"latitude": 10.3723, "longitude": -12.0967},
+            "communes": [
+              {
+                "nom": "Mamou‑Centre",
+                "coordonnées": {"latitude": 10.3723, "longitude": -12.0967},
+                "quartiers": [
+                  {"nom": "Abattoir 1", "coordonnées": {"latitude": 10.3723, "longitude": -12.0967}},
+                  {"nom": "Abattoir 2", "coordonnées": {"latitude": 10.3723, "longitude": -12.0967}},
+                  {"nom": "Almamya", "coordonnées": {"latitude": 10.3723, "longitude": -12.0967}},
+                  {"nom": "Horé Fello", "coordonnées": {"latitude": 10.3723, "longitude": -12.0967}},
+                  {"nom": "Kimbély 1", "coordonnées": {"latitude": 10.3723, "longitude": -12.0967}},
+                  {"nom": "Kimbély 2", "coordonnées": {"latitude": 10.3723, "longitude": -12.0967}},
+                  {"nom": "Loppet", "coordonnées": {"latitude": 10.3723, "longitude": -12.0967}},
+                  {"nom": "Madina Scierie", "coordonnées": {"latitude": 10.3723, "longitude": -12.0967}},
+                  {"nom": "Petel Djiga", "coordonnées": {"latitude": 10.3723, "longitude": -12.0967}},
+                  {"nom": "Poudrière I", "coordonnées": {"latitude": 10.3723, "longitude": -12.0967}},
+                  {"nom": "Sanama", "coordonnées": {"latitude": 10.3723, "longitude": -12.0967}},
+                  {"nom": "Tambassa", "coordonnées": {"latitude": 10.3723, "longitude": -12.0967}},
+                  {"nom": "Télico", "coordonnées": {"latitude": 10.3723, "longitude": -12.0967}}
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "nom": "Labé",
+        "préfectures": [
+          {
+            "nom": "Labé",
+            "coordonnées": {"latitude": 11.3182, "longitude": -12.2833},
+            "communes": [
+              {
+                "nom": "Labé-Centre",
+                "coordonnées": {"latitude": 11.3182, "longitude": -12.2833},
+                "quartiers": [
+                  {"nom": "Porel", "coordonnées": {"latitude": 11.3182, "longitude": -12.2833}},
+                  {"nom": "Daka 1", "coordonnées": {"latitude": 11.3182, "longitude": -12.2833}},
+                  {"nom": "Daka 2", "coordonnées": {"latitude": 11.3182, "longitude": -12.2833}},
+                  {"nom": "Kouroula", "coordonnées": {"latitude": 11.3182, "longitude": -12.2833}},
+                  {"nom": "Konkola", "coordonnées": {"latitude": 11.3182, "longitude": -12.2833}},
+                  {"nom": "Mairie", "coordonnées": {"latitude": 11.3182, "longitude": -12.2833}},
+                  {"nom": "Koulidara", "coordonnées": {"latitude": 11.3182, "longitude": -12.2833}},
+                  {"nom": "Dow-Sare", "coordonnées": {"latitude": 11.3182, "longitude": -12.2833}},
+                  {"nom": "Pétéla", "coordonnées": {"latitude": 11.3182, "longitude": -12.2833}},
+                  {"nom": "Tata", "coordonnées": {"latitude": 11.3182, "longitude": -12.2833}},
+                  {"nom": "Mariamou", "coordonnées": {"latitude": 11.3182, "longitude": -12.2833}}
+                ]
+              }
+            ]
+          },
+          {
+            "nom": "Mali",
+            "coordonnées": {"latitude": 11.9174, "longitude": -12.2963},
+            "communes": [
+              {
+                "nom": "Mali-Centre",
+                "coordonnées": {"latitude": 11.9174, "longitude": -12.2963},
+                "quartiers": [
+                  {"nom": "Mali-Centre", "coordonnées": {"latitude": 11.9174, "longitude": -12.2963}},
+                  {"nom": "Hore Fello", "coordonnées": {"latitude": 11.9174, "longitude": -12.2963}},
+                  {"nom": "Sangala", "coordonnées": {"latitude": 11.9174, "longitude": -12.2963}},
+                  {"nom": "Wouro", "coordonnées": {"latitude": 11.9174, "longitude": -12.2963}},
+                  {"nom": "Doghol", "coordonnées": {"latitude": 11.9174, "longitude": -12.2963}},
+                  {"nom": "Tountouroun", "coordonnées": {"latitude": 11.9174, "longitude": -12.2963}},
+                  {"nom": "Dinguira", "coordonnées": {"latitude": 11.9174, "longitude": -12.2963}},
+                  {"nom": "Sagalé", "coordonnées": {"latitude": 11.9174, "longitude": -12.2963}}
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+} 

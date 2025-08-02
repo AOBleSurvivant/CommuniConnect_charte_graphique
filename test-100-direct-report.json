@@ -1,0 +1,56 @@
+{
+  "timestamp": "2025-07-28T14:10:23.041Z",
+  "results": {
+    "events": {
+      "success": true,
+      "details": [
+        "✅ Navigation réussie",
+        "✅ Action de création simulée",
+        "✅ Formulaire ouvert (simulé)",
+        "✅ Formulaire rempli",
+        "✅ Formulaire soumis (simulé)"
+      ]
+    },
+    "alerts": {
+      "success": true,
+      "details": [
+        "✅ Navigation réussie",
+        "✅ Bouton de création cliqué",
+        "✅ Formulaire ouvert (simulé)",
+        "✅ Formulaire rempli",
+        "✅ Formulaire soumis (simulé)"
+      ]
+    },
+    "help": {
+      "success": true,
+      "details": [
+        "✅ Navigation réussie",
+        "✅ Bouton FAB cliqué",
+        "✅ Formulaire ouvert (simulé)",
+        "✅ Formulaire rempli",
+        "✅ Formulaire soumis (simulé)"
+      ]
+    },
+    "sharing": {
+      "success": true,
+      "details": [
+        "✅ Navigation vers le feed réussie",
+        "✅ Publication créée (simulé)",
+        "✅ Publication publiée (simulé)",
+        "✅ Action de partage testée (simulé)",
+        "✅ Boutons de partage sur la carte testés (simulé)"
+      ]
+    },
+    "overall": {
+      "success": true,
+      "score": 20,
+      "total": 22
+    }
+  },
+  "summary": {
+    "totalTests": 22,
+    "passedTests": 20,
+    "percentage": 91,
+    "success": true
+  }
+}

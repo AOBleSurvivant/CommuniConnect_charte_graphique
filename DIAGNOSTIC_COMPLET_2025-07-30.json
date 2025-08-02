@@ -1,0 +1,2840 @@
+{
+  "timestamp": "2025-07-30T08:06:52.701Z",
+  "serveur": {
+    "statut": "FONCTIONNEL",
+    "port": 5000,
+    "endpoints": {
+      "health": {
+        "success": true,
+        "status": 200,
+        "data": {
+          "status": "OK",
+          "message": "CommuniConnect API fonctionne correctement",
+          "timestamp": "2025-07-30T08:06:52.853Z"
+        },
+        "temps_reponse": "N/A"
+      },
+      "/auth/login": {
+        "success": false,
+        "status": 404,
+        "message": "Request failed with status code 404",
+        "details": {
+          "success": false,
+          "message": "Route non trouvée"
+        }
+      },
+      "/users/profile": {
+        "success": true,
+        "status": 200,
+        "data": {
+          "success": true,
+          "profile": {
+            "_id": "test-user-id",
+            "firstName": "Test",
+            "lastName": "User",
+            "email": "test@example.com",
+            "phone": "+224123456789",
+            "address": "Conakry, Guinée",
+            "profilePicture": null,
+            "isVerified": true,
+            "createdAt": "2025-07-30T08:06:52.889Z",
+            "updatedAt": "2025-07-30T08:06:52.889Z"
+          }
+        },
+        "temps_reponse": "N/A"
+      },
+      "/posts": {
+        "success": true,
+        "status": 200,
+        "data": {
+          "success": true,
+          "data": {
+            "posts": [
+              {
+                "_id": "2",
+                "author": {
+                  "_id": "user3",
+                  "firstName": "Ibrahima",
+                  "lastName": "Sow",
+                  "avatar": null
+                },
+                "content": "Attention ! Il y a des travaux sur la route principale demain. Prévoyez un itinéraire alternatif.",
+                "media": [],
+                "location": {
+                  "region": "Conakry",
+                  "prefecture": "Conakry",
+                  "commune": "Kaloum",
+                  "quartier": "Centre",
+                  "coordinates": {
+                    "latitude": 9.5144,
+                    "longitude": -13.6783
+                  }
+                },
+                "type": "alert",
+                "reactions": {
+                  "like": [
+                    "user1",
+                    "user4"
+                  ],
+                  "helpful": [
+                    "user2",
+                    "user5"
+                  ]
+                },
+                "comments": [],
+                "shares": 5,
+                "isPublic": true,
+                "isActive": true,
+                "createdAt": "2025-07-29T07:57:08.851Z",
+                "updatedAt": "2025-07-29T07:57:08.851Z"
+              },
+              {
+                "_id": "1",
+                "author": {
+                  "_id": "user1",
+                  "firstName": "Mamadou",
+                  "lastName": "Diallo",
+                  "avatar": null
+                },
+                "content": "Bonjour à tous ! J'organise une réunion de quartier ce samedi à 16h pour discuter de la propreté de notre quartier. Tout le monde est invité !",
+                "media": [],
+                "location": {
+                  "region": "Conakry",
+                  "prefecture": "Conakry",
+                  "commune": "Kaloum",
+                  "quartier": "Centre",
+                  "coordinates": {
+                    "latitude": 9.5144,
+                    "longitude": -13.6783
+                  }
+                },
+                "type": "community",
+                "reactions": {
+                  "like": [
+                    "user2",
+                    "user3"
+                  ],
+                  "love": [
+                    "user4"
+                  ],
+                  "helpful": [
+                    "user5"
+                  ]
+                },
+                "comments": [
+                  {
+                    "_id": "comment1",
+                    "author": {
+                      "_id": "user2",
+                      "firstName": "Fatou",
+                      "lastName": "Camara"
+                    },
+                    "content": "Excellente initiative ! Je serai là.",
+                    "createdAt": "2025-07-29T07:57:08.851Z"
+                  }
+                ],
+                "shares": 2,
+                "isPublic": true,
+                "isActive": true,
+                "createdAt": "2025-07-28T07:57:08.851Z",
+                "updatedAt": "2025-07-28T07:57:08.851Z"
+              }
+            ],
+            "pagination": {
+              "currentPage": 1,
+              "totalPages": 1,
+              "totalPosts": 2,
+              "hasNextPage": false,
+              "hasPrevPage": false
+            }
+          }
+        },
+        "temps_reponse": "N/A"
+      },
+      "/events": {
+        "success": true,
+        "status": 200,
+        "data": {
+          "success": true,
+          "data": {
+            "events": [
+              {
+                "_id": "fake-event-1",
+                "title": "Nettoyage communautaire du quartier",
+                "description": "Grande opération de nettoyage du quartier avec tous les habitants.",
+                "type": "nettoyage",
+                "category": "communautaire",
+                "startDate": "2025-08-01T08:06:53.505Z",
+                "endDate": "2025-08-01T12:06:53.505Z",
+                "startTime": "08:00",
+                "endTime": "12:00",
+                "location": {
+                  "coordinates": {
+                    "latitude": 9.537,
+                    "longitude": -13.6785
+                  },
+                  "region": "Conakry",
+                  "prefecture": "Conakry",
+                  "commune": "Kaloum",
+                  "quartier": "Centre",
+                  "address": "Quartier Centre, Conakry",
+                  "venue": "Place du marché"
+                },
+                "organizer": {
+                  "_id": "507f1f77bcf86cd799439012",
+                  "firstName": "Mamadou",
+                  "lastName": "Diallo",
+                  "profilePicture": null,
+                  "isVerified": true
+                },
+                "status": "published",
+                "visibility": "public",
+                "participants": [],
+                "media": {
+                  "images": [],
+                  "videos": [],
+                  "documents": []
+                },
+                "createdAt": "2025-07-30T08:06:53.505Z",
+                "updatedAt": "2025-07-30T08:06:53.505Z"
+              },
+              {
+                "_id": "fake-event-2",
+                "title": "Formation informatique gratuite",
+                "description": "Formation en informatique pour les jeunes du quartier.",
+                "type": "formation",
+                "category": "educatif",
+                "startDate": "2025-08-04T08:06:53.505Z",
+                "endDate": "2025-08-04T11:06:53.505Z",
+                "startTime": "14:00",
+                "endTime": "17:00",
+                "location": {
+                  "coordinates": {
+                    "latitude": 9.545,
+                    "longitude": -13.675
+                  },
+                  "region": "Conakry",
+                  "prefecture": "Conakry",
+                  "commune": "Ratoma",
+                  "quartier": "Almamya",
+                  "address": "Centre culturel, Conakry",
+                  "venue": "Salle de formation"
+                },
+                "organizer": {
+                  "_id": "507f1f77bcf86cd799439014",
+                  "firstName": "Fatou",
+                  "lastName": "Camara",
+                  "profilePicture": null,
+                  "isVerified": true
+                },
+                "status": "published",
+                "visibility": "public",
+                "participants": [],
+                "media": {
+                  "images": [],
+                  "videos": [],
+                  "documents": []
+                },
+                "createdAt": "2025-07-30T08:06:53.505Z",
+                "updatedAt": "2025-07-30T08:06:53.505Z"
+              },
+              {
+                "_id": "fake-event-3",
+                "title": "Match de football inter-quartiers",
+                "description": "Tournoi de football entre les quartiers de Conakry.",
+                "type": "sport",
+                "category": "sportif",
+                "startDate": "2025-08-06T08:06:53.505Z",
+                "endDate": "2025-08-06T10:06:53.505Z",
+                "startTime": "16:00",
+                "endTime": "18:00",
+                "location": {
+                  "coordinates": {
+                    "latitude": 9.53,
+                    "longitude": -13.68
+                  },
+                  "region": "Conakry",
+                  "prefecture": "Conakry",
+                  "commune": "Dixinn",
+                  "quartier": "Kipé",
+                  "address": "Stade municipal, Conakry",
+                  "venue": "Terrain principal"
+                },
+                "organizer": {
+                  "_id": "507f1f77bcf86cd799439015",
+                  "firstName": "Ibrahima",
+                  "lastName": "Sow",
+                  "profilePicture": null,
+                  "isVerified": true
+                },
+                "status": "published",
+                "visibility": "public",
+                "participants": [],
+                "media": {
+                  "images": [],
+                  "videos": [],
+                  "documents": []
+                },
+                "createdAt": "2025-07-30T08:06:53.505Z",
+                "updatedAt": "2025-07-30T08:06:53.505Z"
+              },
+              {
+                "_id": "fake-event-4",
+                "title": "Concert de musique traditionnelle",
+                "description": "Concert de musique traditionnelle guinéenne.",
+                "type": "festival",
+                "category": "culturel",
+                "startDate": "2025-08-09T08:06:53.505Z",
+                "endDate": "2025-08-09T12:06:53.505Z",
+                "startTime": "19:00",
+                "endTime": "23:00",
+                "location": {
+                  "coordinates": {
+                    "latitude": 9.537,
+                    "longitude": -13.6785
+                  },
+                  "region": "Conakry",
+                  "prefecture": "Conakry",
+                  "commune": "Kaloum",
+                  "quartier": "Centre",
+                  "address": "Place de l'Indépendance, Conakry",
+                  "venue": "Place publique"
+                },
+                "organizer": {
+                  "_id": "507f1f77bcf86cd799439016",
+                  "firstName": "Ousmane",
+                  "lastName": "Toure",
+                  "profilePicture": null,
+                  "isVerified": true
+                },
+                "status": "published",
+                "visibility": "public",
+                "participants": [],
+                "media": {
+                  "images": [],
+                  "videos": [],
+                  "documents": []
+                },
+                "createdAt": "2025-07-30T08:06:53.505Z",
+                "updatedAt": "2025-07-30T08:06:53.505Z"
+              },
+              {
+                "_id": "fake-event-5",
+                "title": "Campagne de vaccination",
+                "description": "Campagne de vaccination gratuite pour tous les âges.",
+                "type": "sante",
+                "category": "sante",
+                "startDate": "2025-08-02T08:06:53.505Z",
+                "endDate": "2025-08-02T16:06:53.505Z",
+                "startTime": "09:00",
+                "endTime": "17:00",
+                "location": {
+                  "coordinates": {
+                    "latitude": 9.54,
+                    "longitude": -13.67
+                  },
+                  "region": "Conakry",
+                  "prefecture": "Conakry",
+                  "commune": "Matam",
+                  "quartier": "Donka",
+                  "address": "Centre de santé, Conakry",
+                  "venue": "Salle de consultation"
+                },
+                "organizer": {
+                  "_id": "507f1f77bcf86cd799439017",
+                  "firstName": "Aissatou",
+                  "lastName": "Barry",
+                  "profilePicture": null,
+                  "isVerified": true
+                },
+                "status": "published",
+                "visibility": "public",
+                "participants": [],
+                "media": {
+                  "images": [],
+                  "videos": [],
+                  "documents": []
+                },
+                "createdAt": "2025-07-30T08:06:53.505Z",
+                "updatedAt": "2025-07-30T08:06:53.505Z"
+              }
+            ],
+            "pagination": {
+              "page": 1,
+              "limit": 20,
+              "total": 5,
+              "pages": 1
+            }
+          }
+        },
+        "temps_reponse": "N/A"
+      },
+      "/alerts": {
+        "success": true,
+        "status": 200,
+        "data": {
+          "success": true,
+          "data": {
+            "alerts": [
+              {
+                "_id": "1",
+                "title": "Accident de circulation sur la route de Donka",
+                "description": "Accident grave impliquant deux véhicules sur la route principale de Donka.",
+                "type": "accident",
+                "category": "circulation",
+                "priority": "urgent",
+                "status": "active",
+                "location": {
+                  "coordinates": {
+                    "latitude": 9.537,
+                    "longitude": -13.6785
+                  },
+                  "region": "Conakry",
+                  "prefecture": "Conakry",
+                  "commune": "Kaloum",
+                  "quartier": "Donka",
+                  "address": "Route de Donka, près du marché central"
+                },
+                "author": {
+                  "_id": "user1",
+                  "firstName": "Mamadou",
+                  "lastName": "Diallo",
+                  "profilePicture": null,
+                  "isVerified": true
+                },
+                "interactions": {
+                  "views": 15,
+                  "shares": 3,
+                  "confirmations": 8,
+                  "denials": 1
+                },
+                "userInteractions": {
+                  "confirmed": [],
+                  "denied": []
+                },
+                "createdAt": "2025-07-30T08:06:53.625Z",
+                "updatedAt": "2025-07-30T08:06:53.625Z",
+                "expiresAt": "2025-07-31T08:06:53.625Z"
+              },
+              {
+                "_id": "2",
+                "title": "Coupure d'électricité dans le quartier Almamya",
+                "description": "Coupure d'électricité généralisée dans tout le quartier Almamya.",
+                "type": "infrastructure",
+                "category": "coupure_electricite",
+                "priority": "important",
+                "status": "active",
+                "location": {
+                  "coordinates": {
+                    "latitude": 9.547,
+                    "longitude": -13.6885
+                  },
+                  "region": "Conakry",
+                  "prefecture": "Conakry",
+                  "commune": "Ratoma",
+                  "quartier": "Almamya",
+                  "address": "Quartier Almamya, zone résidentielle"
+                },
+                "author": {
+                  "_id": "user2",
+                  "firstName": "Fatou",
+                  "lastName": "Camara",
+                  "profilePicture": null,
+                  "isVerified": true
+                },
+                "interactions": {
+                  "views": 8,
+                  "shares": 1,
+                  "confirmations": 5,
+                  "denials": 0
+                },
+                "userInteractions": {
+                  "confirmed": [],
+                  "denied": []
+                },
+                "createdAt": "2025-07-30T06:06:53.625Z",
+                "updatedAt": "2025-07-30T06:06:53.625Z",
+                "expiresAt": "2025-08-06T08:06:53.625Z"
+              }
+            ],
+            "pagination": {
+              "page": 1,
+              "limit": 20,
+              "total": 2,
+              "pages": 1
+            }
+          }
+        },
+        "temps_reponse": "N/A"
+      },
+      "/livestreams": {
+        "success": true,
+        "status": 200,
+        "data": {
+          "success": true,
+          "data": [
+            {
+              "_id": "fake-live-1",
+              "type": "alert",
+              "title": "Incendie dans le quartier Centre",
+              "description": "Incendie signalé rue principale, pompiers en route. Évitez la zone.",
+              "status": "live",
+              "urgency": "critical",
+              "startedAt": "2025-07-30T07:56:53.633Z",
+              "location": {
+                "region": "Conakry",
+                "prefecture": "Conakry",
+                "commune": "Kaloum",
+                "quartier": "Centre",
+                "coordinates": {
+                  "latitude": 9.537,
+                  "longitude": -13.6785
+                }
+              },
+              "visibility": "quartier",
+              "author": {
+                "_id": "507f1f77bcf86cd799439042",
+                "firstName": "Mamadou",
+                "lastName": "Diallo",
+                "profilePicture": null,
+                "isVerified": true
+              },
+              "stats": {
+                "currentViewers": 23,
+                "totalViewers": 45,
+                "totalMessages": 12
+              },
+              "viewers": [],
+              "messages": [
+                {
+                  "_id": "507f1f77bcf86cd799439043",
+                  "user": {
+                    "_id": "507f1f77bcf86cd799439044",
+                    "firstName": "Fatou",
+                    "lastName": "Camara",
+                    "profilePicture": null
+                  },
+                  "message": "Les pompiers arrivent dans 5 minutes",
+                  "timestamp": "2025-07-30T08:04:53.633Z"
+                }
+              ],
+              "reactions": [],
+              "createdAt": "2025-07-30T07:56:53.633Z",
+              "updatedAt": "2025-07-30T08:06:53.633Z"
+            },
+            {
+              "_id": "fake-live-2",
+              "type": "alert",
+              "title": "Coupure d'électricité - Quartier Almamya",
+              "description": "Coupure d'électricité prévue de 14h à 18h pour maintenance.",
+              "status": "live",
+              "urgency": "medium",
+              "startedAt": "2025-07-30T07:51:53.633Z",
+              "location": {
+                "region": "Conakry",
+                "prefecture": "Conakry",
+                "commune": "Ratoma",
+                "quartier": "Almamya",
+                "coordinates": {
+                  "latitude": 9.545,
+                  "longitude": -13.675
+                }
+              },
+              "visibility": "quartier",
+              "author": {
+                "_id": "507f1f77bcf86cd799439047",
+                "firstName": "Fatou",
+                "lastName": "Camara",
+                "profilePicture": null,
+                "isVerified": true
+              },
+              "stats": {
+                "currentViewers": 18,
+                "totalViewers": 32,
+                "totalMessages": 8
+              },
+              "viewers": [],
+              "messages": [],
+              "reactions": [],
+              "createdAt": "2025-07-30T07:51:53.633Z",
+              "updatedAt": "2025-07-30T08:06:53.633Z"
+            },
+            {
+              "_id": "fake-live-3",
+              "type": "community",
+              "title": "Réunion communautaire - Nettoyage du quartier",
+              "description": "Réunion pour organiser le nettoyage du quartier ce weekend.",
+              "status": "live",
+              "urgency": "low",
+              "startedAt": "2025-07-30T07:46:53.633Z",
+              "location": {
+                "region": "Conakry",
+                "prefecture": "Conakry",
+                "commune": "Dixinn",
+                "quartier": "Kipé",
+                "coordinates": {
+                  "latitude": 9.53,
+                  "longitude": -13.68
+                }
+              },
+              "visibility": "quartier",
+              "author": {
+                "_id": "507f1f77bcf86cd799439048",
+                "firstName": "Ibrahima",
+                "lastName": "Sow",
+                "profilePicture": null,
+                "isVerified": true
+              },
+              "stats": {
+                "currentViewers": 12,
+                "totalViewers": 25,
+                "totalMessages": 6
+              },
+              "viewers": [],
+              "messages": [],
+              "reactions": [],
+              "createdAt": "2025-07-30T07:46:53.633Z",
+              "updatedAt": "2025-07-30T08:06:53.633Z"
+            },
+            {
+              "_id": "fake-live-4",
+              "type": "alert",
+              "title": "Accident de circulation - Route de Donka",
+              "description": "Accident sur la route de Donka, circulation ralentie.",
+              "status": "live",
+              "urgency": "high",
+              "startedAt": "2025-07-30T08:01:53.633Z",
+              "location": {
+                "region": "Conakry",
+                "prefecture": "Conakry",
+                "commune": "Matam",
+                "quartier": "Donka",
+                "coordinates": {
+                  "latitude": 9.54,
+                  "longitude": -13.67
+                }
+              },
+              "visibility": "quartier",
+              "author": {
+                "_id": "507f1f77bcf86cd799439049",
+                "firstName": "Aissatou",
+                "lastName": "Barry",
+                "profilePicture": null,
+                "isVerified": true
+              },
+              "stats": {
+                "currentViewers": 35,
+                "totalViewers": 67,
+                "totalMessages": 15
+              },
+              "viewers": [],
+              "messages": [],
+              "reactions": [],
+              "createdAt": "2025-07-30T08:01:53.633Z",
+              "updatedAt": "2025-07-30T08:06:53.633Z"
+            },
+            {
+              "_id": "fake-live-5",
+              "type": "community",
+              "title": "Festival culturel - Place de l'Indépendance",
+              "description": "Festival culturel avec musique traditionnelle et danses.",
+              "status": "live",
+              "urgency": "low",
+              "startedAt": "2025-07-30T07:41:53.633Z",
+              "location": {
+                "region": "Conakry",
+                "prefecture": "Conakry",
+                "commune": "Kaloum",
+                "quartier": "Centre",
+                "coordinates": {
+                  "latitude": 9.537,
+                  "longitude": -13.6785
+                }
+              },
+              "visibility": "quartier",
+              "author": {
+                "_id": "507f1f77bcf86cd799439050",
+                "firstName": "Ousmane",
+                "lastName": "Toure",
+                "profilePicture": null,
+                "isVerified": true
+              },
+              "stats": {
+                "currentViewers": 45,
+                "totalViewers": 89,
+                "totalMessages": 22
+              },
+              "viewers": [],
+              "messages": [],
+              "reactions": [],
+              "createdAt": "2025-07-30T07:41:53.633Z",
+              "updatedAt": "2025-07-30T08:06:53.633Z"
+            }
+          ]
+        },
+        "temps_reponse": "N/A"
+      },
+      "/messages/conversations": {
+        "success": true,
+        "status": 200,
+        "data": {
+          "success": true,
+          "conversations": [
+            {
+              "_id": "fake-conversation-1",
+              "participants": [
+                {
+                  "_id": "test-user-id",
+                  "firstName": "Test",
+                  "lastName": "User"
+                },
+                {
+                  "_id": "user-2",
+                  "firstName": "Mamadou",
+                  "lastName": "Diallo"
+                }
+              ],
+              "title": "Conversation Test 1",
+              "lastMessage": {
+                "content": "Il y a une réunion demain à 14h.",
+                "timestamp": "2025-07-30T07:56:53.644Z"
+              },
+              "createdAt": "2025-07-30T07:06:53.644Z",
+              "updatedAt": "2025-07-30T07:56:53.644Z"
+            },
+            {
+              "_id": "fake-conversation-2",
+              "participants": [
+                {
+                  "_id": "test-user-id",
+                  "firstName": "Test",
+                  "lastName": "User"
+                },
+                {
+                  "_id": "user-3",
+                  "firstName": "Fatou",
+                  "lastName": "Camara"
+                }
+              ],
+              "title": "Conversation Test 2",
+              "lastMessage": {
+                "content": "À bientôt !",
+                "timestamp": "2025-07-30T08:01:53.644Z"
+              },
+              "createdAt": "2025-07-30T07:36:53.644Z",
+              "updatedAt": "2025-07-30T08:01:53.644Z"
+            },
+            {
+              "_id": "fake-conversation-3",
+              "participants": [
+                {
+                  "_id": "test-user-id",
+                  "firstName": "Test",
+                  "lastName": "User"
+                },
+                {
+                  "_id": "user-4",
+                  "firstName": "Ibrahima",
+                  "lastName": "Sow"
+                }
+              ],
+              "title": "Conversation Test 3",
+              "lastMessage": {
+                "content": "Parfait !",
+                "timestamp": "2025-07-30T08:04:53.644Z"
+              },
+              "createdAt": "2025-07-30T07:51:53.644Z",
+              "updatedAt": "2025-07-30T08:04:53.644Z"
+            }
+          ]
+        },
+        "temps_reponse": "N/A"
+      },
+      "/friends/list": {
+        "success": true,
+        "status": 200,
+        "data": {
+          "success": true,
+          "friends": [
+            {
+              "_id": "friend-1",
+              "firstName": "Mamadou",
+              "lastName": "Diallo",
+              "email": "mamadou.diallo@communiconnect.gn",
+              "status": "accepted",
+              "friendshipId": "friendship-1"
+            },
+            {
+              "_id": "friend-2",
+              "firstName": "Fatou",
+              "lastName": "Camara",
+              "email": "fatou.camara@communiconnect.gn",
+              "status": "accepted",
+              "friendshipId": "friendship-2"
+            },
+            {
+              "_id": "friend-3",
+              "firstName": "Ibrahima",
+              "lastName": "Sow",
+              "email": "ibrahima.sow@communiconnect.gn",
+              "status": "accepted",
+              "friendshipId": "friendship-3"
+            }
+          ]
+        },
+        "temps_reponse": "N/A"
+      },
+      "/notifications": {
+        "success": true,
+        "status": 200,
+        "data": {
+          "success": true,
+          "notifications": [
+            {
+              "_id": "notif-1",
+              "title": "Nouveau message",
+              "body": "Vous avez reçu un nouveau message",
+              "type": "message",
+              "data": {
+                "conversationId": "conv-1",
+                "senderName": "Test User"
+              },
+              "timestamp": "2025-07-30T08:06:53.686Z",
+              "isRead": false
+            },
+            {
+              "_id": "notif-2",
+              "title": "Nouvelle alerte",
+              "body": "Une nouvelle alerte a été publiée dans votre région",
+              "type": "alert",
+              "data": {
+                "alertId": "alert-1",
+                "urgency": "high"
+              },
+              "timestamp": "2025-07-30T08:06:53.686Z",
+              "isRead": true
+            }
+          ]
+        },
+        "temps_reponse": "N/A"
+      },
+      "/moderation/reports": {
+        "success": true,
+        "status": 200,
+        "data": {
+          "success": true,
+          "reports": [
+            {
+              "_id": "report-1",
+              "type": "post",
+              "contentId": "post-1",
+              "reason": "Contenu inapproprié",
+              "description": "Ce post contient du contenu offensant",
+              "reporter": {
+                "_id": "user-1",
+                "firstName": "Signaleur",
+                "lastName": "Test"
+              },
+              "status": "pending",
+              "severity": "high",
+              "createdAt": "2025-07-30T08:06:53.691Z"
+            },
+            {
+              "_id": "report-2",
+              "type": "message",
+              "contentId": "message-1",
+              "reason": "Harcèlement",
+              "description": "Messages répétés et harcelants",
+              "reporter": {
+                "_id": "user-2",
+                "firstName": "Autre",
+                "lastName": "Utilisateur"
+              },
+              "status": "investigating",
+              "severity": "medium",
+              "createdAt": "2025-07-30T08:06:53.691Z"
+            }
+          ]
+        },
+        "temps_reponse": "N/A"
+      },
+      "/search": {
+        "success": false,
+        "status": 400,
+        "message": "Request failed with status code 400",
+        "details": {
+          "success": false,
+          "message": "Terme de recherche requis"
+        }
+      },
+      "/stats": {
+        "success": true,
+        "status": 200,
+        "data": {
+          "success": true,
+          "stats": {
+            "users": {
+              "total": 1250,
+              "active": 890,
+              "newThisMonth": 45,
+              "verified": 1100
+            },
+            "content": {
+              "posts": 3450,
+              "alerts": 156,
+              "events": 89,
+              "livestreams": 23
+            },
+            "engagement": {
+              "reactions": 12500,
+              "comments": 8900,
+              "shares": 3400,
+              "participations": 1200
+            },
+            "locations": {
+              "regions": 8,
+              "prefectures": 33,
+              "communes": 303,
+              "quartiers": 1500
+            },
+            "moderation": {
+              "reports": 45,
+              "resolved": 38,
+              "pending": 7,
+              "blockedUsers": 3
+            }
+          },
+          "lastUpdated": "2025-07-30T08:06:53.702Z"
+        },
+        "temps_reponse": "N/A"
+      }
+    },
+    "erreurs": [
+      "/auth/login: Request failed with status code 404",
+      "/search: Request failed with status code 400"
+    ]
+  },
+  "client": {
+    "statut": "PROBLEMES",
+    "port": 3000,
+    "pages": {
+      "/": {
+        "success": true,
+        "status": 200,
+        "temps_chargement": "N/A"
+      },
+      "/login": {
+        "success": false,
+        "status": 404,
+        "message": "Request failed with status code 404"
+      },
+      "/register": {
+        "success": false,
+        "status": 404,
+        "message": "Request failed with status code 404"
+      },
+      "/feed": {
+        "success": false,
+        "status": 404,
+        "message": "Request failed with status code 404"
+      },
+      "/alerts": {
+        "success": false,
+        "status": 404,
+        "message": "Request failed with status code 404"
+      },
+      "/events": {
+        "success": false,
+        "status": 404,
+        "message": "Request failed with status code 404"
+      },
+      "/livestreams": {
+        "success": false,
+        "status": 404,
+        "message": "Request failed with status code 404"
+      },
+      "/messages": {
+        "success": false,
+        "status": 404,
+        "message": "Request failed with status code 404"
+      },
+      "/friends": {
+        "success": false,
+        "status": 404,
+        "message": "Request failed with status code 404"
+      },
+      "/profile": {
+        "success": false,
+        "status": 404,
+        "message": "Request failed with status code 404"
+      },
+      "/map": {
+        "success": false,
+        "status": 404,
+        "message": "Request failed with status code 404"
+      },
+      "/help": {
+        "success": false,
+        "status": 404,
+        "message": "Request failed with status code 404"
+      }
+    },
+    "erreurs": [
+      "/login: Request failed with status code 404",
+      "/register: Request failed with status code 404",
+      "/feed: Request failed with status code 404",
+      "/alerts: Request failed with status code 404",
+      "/events: Request failed with status code 404",
+      "/livestreams: Request failed with status code 404",
+      "/messages: Request failed with status code 404",
+      "/friends: Request failed with status code 404",
+      "/profile: Request failed with status code 404",
+      "/map: Request failed with status code 404",
+      "/help: Request failed with status code 404"
+    ]
+  },
+  "baseDeDonnees": {
+    "statut": "MODE_DEVELOPPEMENT",
+    "connexion": false,
+    "modeles": {
+      "User": {
+        "success": false,
+        "status": 404,
+        "message": "Request failed with status code 404",
+        "details": {
+          "success": false,
+          "message": "Route non trouvée"
+        }
+      },
+      "Post": {
+        "success": true,
+        "status": 200,
+        "data": {
+          "success": true,
+          "data": {
+            "posts": [
+              {
+                "_id": "2",
+                "author": {
+                  "_id": "user3",
+                  "firstName": "Ibrahima",
+                  "lastName": "Sow",
+                  "avatar": null
+                },
+                "content": "Attention ! Il y a des travaux sur la route principale demain. Prévoyez un itinéraire alternatif.",
+                "media": [],
+                "location": {
+                  "region": "Conakry",
+                  "prefecture": "Conakry",
+                  "commune": "Kaloum",
+                  "quartier": "Centre",
+                  "coordinates": {
+                    "latitude": 9.5144,
+                    "longitude": -13.6783
+                  }
+                },
+                "type": "alert",
+                "reactions": {
+                  "like": [
+                    "user1",
+                    "user4"
+                  ],
+                  "helpful": [
+                    "user2",
+                    "user5"
+                  ]
+                },
+                "comments": [],
+                "shares": 5,
+                "isPublic": true,
+                "isActive": true,
+                "createdAt": "2025-07-29T07:57:08.851Z",
+                "updatedAt": "2025-07-29T07:57:08.851Z"
+              },
+              {
+                "_id": "1",
+                "author": {
+                  "_id": "user1",
+                  "firstName": "Mamadou",
+                  "lastName": "Diallo",
+                  "avatar": null
+                },
+                "content": "Bonjour à tous ! J'organise une réunion de quartier ce samedi à 16h pour discuter de la propreté de notre quartier. Tout le monde est invité !",
+                "media": [],
+                "location": {
+                  "region": "Conakry",
+                  "prefecture": "Conakry",
+                  "commune": "Kaloum",
+                  "quartier": "Centre",
+                  "coordinates": {
+                    "latitude": 9.5144,
+                    "longitude": -13.6783
+                  }
+                },
+                "type": "community",
+                "reactions": {
+                  "like": [
+                    "user2",
+                    "user3"
+                  ],
+                  "love": [
+                    "user4"
+                  ],
+                  "helpful": [
+                    "user5"
+                  ]
+                },
+                "comments": [
+                  {
+                    "_id": "comment1",
+                    "author": {
+                      "_id": "user2",
+                      "firstName": "Fatou",
+                      "lastName": "Camara"
+                    },
+                    "content": "Excellente initiative ! Je serai là.",
+                    "createdAt": "2025-07-29T07:57:08.851Z"
+                  }
+                ],
+                "shares": 2,
+                "isPublic": true,
+                "isActive": true,
+                "createdAt": "2025-07-28T07:57:08.851Z",
+                "updatedAt": "2025-07-28T07:57:08.851Z"
+              }
+            ],
+            "pagination": {
+              "currentPage": 1,
+              "totalPages": 1,
+              "totalPosts": 2,
+              "hasNextPage": false,
+              "hasPrevPage": false
+            }
+          }
+        },
+        "temps_reponse": "N/A"
+      },
+      "Event": {
+        "success": true,
+        "status": 200,
+        "data": {
+          "success": true,
+          "data": {
+            "events": [
+              {
+                "_id": "fake-event-1",
+                "title": "Nettoyage communautaire du quartier",
+                "description": "Grande opération de nettoyage du quartier avec tous les habitants.",
+                "type": "nettoyage",
+                "category": "communautaire",
+                "startDate": "2025-08-01T08:06:53.780Z",
+                "endDate": "2025-08-01T12:06:53.780Z",
+                "startTime": "08:00",
+                "endTime": "12:00",
+                "location": {
+                  "coordinates": {
+                    "latitude": 9.537,
+                    "longitude": -13.6785
+                  },
+                  "region": "Conakry",
+                  "prefecture": "Conakry",
+                  "commune": "Kaloum",
+                  "quartier": "Centre",
+                  "address": "Quartier Centre, Conakry",
+                  "venue": "Place du marché"
+                },
+                "organizer": {
+                  "_id": "507f1f77bcf86cd799439012",
+                  "firstName": "Mamadou",
+                  "lastName": "Diallo",
+                  "profilePicture": null,
+                  "isVerified": true
+                },
+                "status": "published",
+                "visibility": "public",
+                "participants": [],
+                "media": {
+                  "images": [],
+                  "videos": [],
+                  "documents": []
+                },
+                "createdAt": "2025-07-30T08:06:53.780Z",
+                "updatedAt": "2025-07-30T08:06:53.780Z"
+              },
+              {
+                "_id": "fake-event-2",
+                "title": "Formation informatique gratuite",
+                "description": "Formation en informatique pour les jeunes du quartier.",
+                "type": "formation",
+                "category": "educatif",
+                "startDate": "2025-08-04T08:06:53.780Z",
+                "endDate": "2025-08-04T11:06:53.780Z",
+                "startTime": "14:00",
+                "endTime": "17:00",
+                "location": {
+                  "coordinates": {
+                    "latitude": 9.545,
+                    "longitude": -13.675
+                  },
+                  "region": "Conakry",
+                  "prefecture": "Conakry",
+                  "commune": "Ratoma",
+                  "quartier": "Almamya",
+                  "address": "Centre culturel, Conakry",
+                  "venue": "Salle de formation"
+                },
+                "organizer": {
+                  "_id": "507f1f77bcf86cd799439014",
+                  "firstName": "Fatou",
+                  "lastName": "Camara",
+                  "profilePicture": null,
+                  "isVerified": true
+                },
+                "status": "published",
+                "visibility": "public",
+                "participants": [],
+                "media": {
+                  "images": [],
+                  "videos": [],
+                  "documents": []
+                },
+                "createdAt": "2025-07-30T08:06:53.780Z",
+                "updatedAt": "2025-07-30T08:06:53.780Z"
+              },
+              {
+                "_id": "fake-event-3",
+                "title": "Match de football inter-quartiers",
+                "description": "Tournoi de football entre les quartiers de Conakry.",
+                "type": "sport",
+                "category": "sportif",
+                "startDate": "2025-08-06T08:06:53.780Z",
+                "endDate": "2025-08-06T10:06:53.780Z",
+                "startTime": "16:00",
+                "endTime": "18:00",
+                "location": {
+                  "coordinates": {
+                    "latitude": 9.53,
+                    "longitude": -13.68
+                  },
+                  "region": "Conakry",
+                  "prefecture": "Conakry",
+                  "commune": "Dixinn",
+                  "quartier": "Kipé",
+                  "address": "Stade municipal, Conakry",
+                  "venue": "Terrain principal"
+                },
+                "organizer": {
+                  "_id": "507f1f77bcf86cd799439015",
+                  "firstName": "Ibrahima",
+                  "lastName": "Sow",
+                  "profilePicture": null,
+                  "isVerified": true
+                },
+                "status": "published",
+                "visibility": "public",
+                "participants": [],
+                "media": {
+                  "images": [],
+                  "videos": [],
+                  "documents": []
+                },
+                "createdAt": "2025-07-30T08:06:53.780Z",
+                "updatedAt": "2025-07-30T08:06:53.780Z"
+              },
+              {
+                "_id": "fake-event-4",
+                "title": "Concert de musique traditionnelle",
+                "description": "Concert de musique traditionnelle guinéenne.",
+                "type": "festival",
+                "category": "culturel",
+                "startDate": "2025-08-09T08:06:53.780Z",
+                "endDate": "2025-08-09T12:06:53.780Z",
+                "startTime": "19:00",
+                "endTime": "23:00",
+                "location": {
+                  "coordinates": {
+                    "latitude": 9.537,
+                    "longitude": -13.6785
+                  },
+                  "region": "Conakry",
+                  "prefecture": "Conakry",
+                  "commune": "Kaloum",
+                  "quartier": "Centre",
+                  "address": "Place de l'Indépendance, Conakry",
+                  "venue": "Place publique"
+                },
+                "organizer": {
+                  "_id": "507f1f77bcf86cd799439016",
+                  "firstName": "Ousmane",
+                  "lastName": "Toure",
+                  "profilePicture": null,
+                  "isVerified": true
+                },
+                "status": "published",
+                "visibility": "public",
+                "participants": [],
+                "media": {
+                  "images": [],
+                  "videos": [],
+                  "documents": []
+                },
+                "createdAt": "2025-07-30T08:06:53.780Z",
+                "updatedAt": "2025-07-30T08:06:53.780Z"
+              },
+              {
+                "_id": "fake-event-5",
+                "title": "Campagne de vaccination",
+                "description": "Campagne de vaccination gratuite pour tous les âges.",
+                "type": "sante",
+                "category": "sante",
+                "startDate": "2025-08-02T08:06:53.780Z",
+                "endDate": "2025-08-02T16:06:53.780Z",
+                "startTime": "09:00",
+                "endTime": "17:00",
+                "location": {
+                  "coordinates": {
+                    "latitude": 9.54,
+                    "longitude": -13.67
+                  },
+                  "region": "Conakry",
+                  "prefecture": "Conakry",
+                  "commune": "Matam",
+                  "quartier": "Donka",
+                  "address": "Centre de santé, Conakry",
+                  "venue": "Salle de consultation"
+                },
+                "organizer": {
+                  "_id": "507f1f77bcf86cd799439017",
+                  "firstName": "Aissatou",
+                  "lastName": "Barry",
+                  "profilePicture": null,
+                  "isVerified": true
+                },
+                "status": "published",
+                "visibility": "public",
+                "participants": [],
+                "media": {
+                  "images": [],
+                  "videos": [],
+                  "documents": []
+                },
+                "createdAt": "2025-07-30T08:06:53.780Z",
+                "updatedAt": "2025-07-30T08:06:53.780Z"
+              }
+            ],
+            "pagination": {
+              "page": 1,
+              "limit": 20,
+              "total": 5,
+              "pages": 1
+            }
+          }
+        },
+        "temps_reponse": "N/A"
+      },
+      "Alert": {
+        "success": true,
+        "status": 200,
+        "data": {
+          "success": true,
+          "data": {
+            "alerts": [
+              {
+                "_id": "1",
+                "title": "Accident de circulation sur la route de Donka",
+                "description": "Accident grave impliquant deux véhicules sur la route principale de Donka.",
+                "type": "accident",
+                "category": "circulation",
+                "priority": "urgent",
+                "status": "active",
+                "location": {
+                  "coordinates": {
+                    "latitude": 9.537,
+                    "longitude": -13.6785
+                  },
+                  "region": "Conakry",
+                  "prefecture": "Conakry",
+                  "commune": "Kaloum",
+                  "quartier": "Donka",
+                  "address": "Route de Donka, près du marché central"
+                },
+                "author": {
+                  "_id": "user1",
+                  "firstName": "Mamadou",
+                  "lastName": "Diallo",
+                  "profilePicture": null,
+                  "isVerified": true
+                },
+                "interactions": {
+                  "views": 15,
+                  "shares": 3,
+                  "confirmations": 8,
+                  "denials": 1
+                },
+                "userInteractions": {
+                  "confirmed": [],
+                  "denied": []
+                },
+                "createdAt": "2025-07-30T08:06:53.795Z",
+                "updatedAt": "2025-07-30T08:06:53.795Z",
+                "expiresAt": "2025-07-31T08:06:53.795Z"
+              },
+              {
+                "_id": "2",
+                "title": "Coupure d'électricité dans le quartier Almamya",
+                "description": "Coupure d'électricité généralisée dans tout le quartier Almamya.",
+                "type": "infrastructure",
+                "category": "coupure_electricite",
+                "priority": "important",
+                "status": "active",
+                "location": {
+                  "coordinates": {
+                    "latitude": 9.547,
+                    "longitude": -13.6885
+                  },
+                  "region": "Conakry",
+                  "prefecture": "Conakry",
+                  "commune": "Ratoma",
+                  "quartier": "Almamya",
+                  "address": "Quartier Almamya, zone résidentielle"
+                },
+                "author": {
+                  "_id": "user2",
+                  "firstName": "Fatou",
+                  "lastName": "Camara",
+                  "profilePicture": null,
+                  "isVerified": true
+                },
+                "interactions": {
+                  "views": 8,
+                  "shares": 1,
+                  "confirmations": 5,
+                  "denials": 0
+                },
+                "userInteractions": {
+                  "confirmed": [],
+                  "denied": []
+                },
+                "createdAt": "2025-07-30T06:06:53.795Z",
+                "updatedAt": "2025-07-30T06:06:53.795Z",
+                "expiresAt": "2025-08-06T08:06:53.795Z"
+              }
+            ],
+            "pagination": {
+              "page": 1,
+              "limit": 20,
+              "total": 2,
+              "pages": 1
+            }
+          }
+        },
+        "temps_reponse": "N/A"
+      },
+      "LiveStream": {
+        "success": true,
+        "status": 200,
+        "data": {
+          "success": true,
+          "data": [
+            {
+              "_id": "fake-live-1",
+              "type": "alert",
+              "title": "Incendie dans le quartier Centre",
+              "description": "Incendie signalé rue principale, pompiers en route. Évitez la zone.",
+              "status": "live",
+              "urgency": "critical",
+              "startedAt": "2025-07-30T07:56:53.812Z",
+              "location": {
+                "region": "Conakry",
+                "prefecture": "Conakry",
+                "commune": "Kaloum",
+                "quartier": "Centre",
+                "coordinates": {
+                  "latitude": 9.537,
+                  "longitude": -13.6785
+                }
+              },
+              "visibility": "quartier",
+              "author": {
+                "_id": "507f1f77bcf86cd799439042",
+                "firstName": "Mamadou",
+                "lastName": "Diallo",
+                "profilePicture": null,
+                "isVerified": true
+              },
+              "stats": {
+                "currentViewers": 23,
+                "totalViewers": 45,
+                "totalMessages": 12
+              },
+              "viewers": [],
+              "messages": [
+                {
+                  "_id": "507f1f77bcf86cd799439043",
+                  "user": {
+                    "_id": "507f1f77bcf86cd799439044",
+                    "firstName": "Fatou",
+                    "lastName": "Camara",
+                    "profilePicture": null
+                  },
+                  "message": "Les pompiers arrivent dans 5 minutes",
+                  "timestamp": "2025-07-30T08:04:53.812Z"
+                }
+              ],
+              "reactions": [],
+              "createdAt": "2025-07-30T07:56:53.812Z",
+              "updatedAt": "2025-07-30T08:06:53.812Z"
+            },
+            {
+              "_id": "fake-live-2",
+              "type": "alert",
+              "title": "Coupure d'électricité - Quartier Almamya",
+              "description": "Coupure d'électricité prévue de 14h à 18h pour maintenance.",
+              "status": "live",
+              "urgency": "medium",
+              "startedAt": "2025-07-30T07:51:53.812Z",
+              "location": {
+                "region": "Conakry",
+                "prefecture": "Conakry",
+                "commune": "Ratoma",
+                "quartier": "Almamya",
+                "coordinates": {
+                  "latitude": 9.545,
+                  "longitude": -13.675
+                }
+              },
+              "visibility": "quartier",
+              "author": {
+                "_id": "507f1f77bcf86cd799439047",
+                "firstName": "Fatou",
+                "lastName": "Camara",
+                "profilePicture": null,
+                "isVerified": true
+              },
+              "stats": {
+                "currentViewers": 18,
+                "totalViewers": 32,
+                "totalMessages": 8
+              },
+              "viewers": [],
+              "messages": [],
+              "reactions": [],
+              "createdAt": "2025-07-30T07:51:53.812Z",
+              "updatedAt": "2025-07-30T08:06:53.812Z"
+            },
+            {
+              "_id": "fake-live-3",
+              "type": "community",
+              "title": "Réunion communautaire - Nettoyage du quartier",
+              "description": "Réunion pour organiser le nettoyage du quartier ce weekend.",
+              "status": "live",
+              "urgency": "low",
+              "startedAt": "2025-07-30T07:46:53.812Z",
+              "location": {
+                "region": "Conakry",
+                "prefecture": "Conakry",
+                "commune": "Dixinn",
+                "quartier": "Kipé",
+                "coordinates": {
+                  "latitude": 9.53,
+                  "longitude": -13.68
+                }
+              },
+              "visibility": "quartier",
+              "author": {
+                "_id": "507f1f77bcf86cd799439048",
+                "firstName": "Ibrahima",
+                "lastName": "Sow",
+                "profilePicture": null,
+                "isVerified": true
+              },
+              "stats": {
+                "currentViewers": 12,
+                "totalViewers": 25,
+                "totalMessages": 6
+              },
+              "viewers": [],
+              "messages": [],
+              "reactions": [],
+              "createdAt": "2025-07-30T07:46:53.812Z",
+              "updatedAt": "2025-07-30T08:06:53.812Z"
+            },
+            {
+              "_id": "fake-live-4",
+              "type": "alert",
+              "title": "Accident de circulation - Route de Donka",
+              "description": "Accident sur la route de Donka, circulation ralentie.",
+              "status": "live",
+              "urgency": "high",
+              "startedAt": "2025-07-30T08:01:53.812Z",
+              "location": {
+                "region": "Conakry",
+                "prefecture": "Conakry",
+                "commune": "Matam",
+                "quartier": "Donka",
+                "coordinates": {
+                  "latitude": 9.54,
+                  "longitude": -13.67
+                }
+              },
+              "visibility": "quartier",
+              "author": {
+                "_id": "507f1f77bcf86cd799439049",
+                "firstName": "Aissatou",
+                "lastName": "Barry",
+                "profilePicture": null,
+                "isVerified": true
+              },
+              "stats": {
+                "currentViewers": 35,
+                "totalViewers": 67,
+                "totalMessages": 15
+              },
+              "viewers": [],
+              "messages": [],
+              "reactions": [],
+              "createdAt": "2025-07-30T08:01:53.812Z",
+              "updatedAt": "2025-07-30T08:06:53.812Z"
+            },
+            {
+              "_id": "fake-live-5",
+              "type": "community",
+              "title": "Festival culturel - Place de l'Indépendance",
+              "description": "Festival culturel avec musique traditionnelle et danses.",
+              "status": "live",
+              "urgency": "low",
+              "startedAt": "2025-07-30T07:41:53.812Z",
+              "location": {
+                "region": "Conakry",
+                "prefecture": "Conakry",
+                "commune": "Kaloum",
+                "quartier": "Centre",
+                "coordinates": {
+                  "latitude": 9.537,
+                  "longitude": -13.6785
+                }
+              },
+              "visibility": "quartier",
+              "author": {
+                "_id": "507f1f77bcf86cd799439050",
+                "firstName": "Ousmane",
+                "lastName": "Toure",
+                "profilePicture": null,
+                "isVerified": true
+              },
+              "stats": {
+                "currentViewers": 45,
+                "totalViewers": 89,
+                "totalMessages": 22
+              },
+              "viewers": [],
+              "messages": [],
+              "reactions": [],
+              "createdAt": "2025-07-30T07:41:53.812Z",
+              "updatedAt": "2025-07-30T08:06:53.812Z"
+            }
+          ]
+        },
+        "temps_reponse": "N/A"
+      },
+      "Message": {
+        "success": true,
+        "status": 200,
+        "data": {
+          "success": true,
+          "conversations": [
+            {
+              "_id": "fake-conversation-1",
+              "participants": [
+                {
+                  "_id": "test-user-id",
+                  "firstName": "Test",
+                  "lastName": "User"
+                },
+                {
+                  "_id": "user-2",
+                  "firstName": "Mamadou",
+                  "lastName": "Diallo"
+                }
+              ],
+              "title": "Conversation Test 1",
+              "lastMessage": {
+                "content": "Il y a une réunion demain à 14h.",
+                "timestamp": "2025-07-30T07:56:53.828Z"
+              },
+              "createdAt": "2025-07-30T07:06:53.828Z",
+              "updatedAt": "2025-07-30T07:56:53.828Z"
+            },
+            {
+              "_id": "fake-conversation-2",
+              "participants": [
+                {
+                  "_id": "test-user-id",
+                  "firstName": "Test",
+                  "lastName": "User"
+                },
+                {
+                  "_id": "user-3",
+                  "firstName": "Fatou",
+                  "lastName": "Camara"
+                }
+              ],
+              "title": "Conversation Test 2",
+              "lastMessage": {
+                "content": "À bientôt !",
+                "timestamp": "2025-07-30T08:01:53.828Z"
+              },
+              "createdAt": "2025-07-30T07:36:53.828Z",
+              "updatedAt": "2025-07-30T08:01:53.828Z"
+            },
+            {
+              "_id": "fake-conversation-3",
+              "participants": [
+                {
+                  "_id": "test-user-id",
+                  "firstName": "Test",
+                  "lastName": "User"
+                },
+                {
+                  "_id": "user-4",
+                  "firstName": "Ibrahima",
+                  "lastName": "Sow"
+                }
+              ],
+              "title": "Conversation Test 3",
+              "lastMessage": {
+                "content": "Parfait !",
+                "timestamp": "2025-07-30T08:04:53.828Z"
+              },
+              "createdAt": "2025-07-30T07:51:53.828Z",
+              "updatedAt": "2025-07-30T08:04:53.828Z"
+            }
+          ]
+        },
+        "temps_reponse": "N/A"
+      },
+      "Friendship": {
+        "success": true,
+        "status": 200,
+        "data": {
+          "success": true,
+          "friends": [
+            {
+              "_id": "friend-1",
+              "firstName": "Mamadou",
+              "lastName": "Diallo",
+              "email": "mamadou.diallo@communiconnect.gn",
+              "status": "accepted",
+              "friendshipId": "friendship-1"
+            },
+            {
+              "_id": "friend-2",
+              "firstName": "Fatou",
+              "lastName": "Camara",
+              "email": "fatou.camara@communiconnect.gn",
+              "status": "accepted",
+              "friendshipId": "friendship-2"
+            },
+            {
+              "_id": "friend-3",
+              "firstName": "Ibrahima",
+              "lastName": "Sow",
+              "email": "ibrahima.sow@communiconnect.gn",
+              "status": "accepted",
+              "friendshipId": "friendship-3"
+            }
+          ]
+        },
+        "temps_reponse": "N/A"
+      },
+      "Notification": {
+        "success": true,
+        "status": 200,
+        "data": {
+          "success": true,
+          "notifications": [
+            {
+              "_id": "notif-1",
+              "title": "Nouveau message",
+              "body": "Vous avez reçu un nouveau message",
+              "type": "message",
+              "data": {
+                "conversationId": "conv-1",
+                "senderName": "Test User"
+              },
+              "timestamp": "2025-07-30T08:06:53.849Z",
+              "isRead": false
+            },
+            {
+              "_id": "notif-2",
+              "title": "Nouvelle alerte",
+              "body": "Une nouvelle alerte a été publiée dans votre région",
+              "type": "alert",
+              "data": {
+                "alertId": "alert-1",
+                "urgency": "high"
+              },
+              "timestamp": "2025-07-30T08:06:53.849Z",
+              "isRead": true
+            }
+          ]
+        },
+        "temps_reponse": "N/A"
+      },
+      "Report": {
+        "success": true,
+        "status": 200,
+        "data": {
+          "success": true,
+          "reports": [
+            {
+              "_id": "report-1",
+              "type": "post",
+              "contentId": "post-1",
+              "reason": "Contenu inapproprié",
+              "description": "Ce post contient du contenu offensant",
+              "reporter": {
+                "_id": "user-1",
+                "firstName": "Signaleur",
+                "lastName": "Test"
+              },
+              "status": "pending",
+              "severity": "high",
+              "createdAt": "2025-07-30T08:06:53.860Z"
+            },
+            {
+              "_id": "report-2",
+              "type": "message",
+              "contentId": "message-1",
+              "reason": "Harcèlement",
+              "description": "Messages répétés et harcelants",
+              "reporter": {
+                "_id": "user-2",
+                "firstName": "Autre",
+                "lastName": "Utilisateur"
+              },
+              "status": "investigating",
+              "severity": "medium",
+              "createdAt": "2025-07-30T08:06:53.860Z"
+            }
+          ]
+        },
+        "temps_reponse": "N/A"
+      }
+    },
+    "erreurs": [
+      "User: Request failed with status code 404"
+    ]
+  },
+  "fonctionnalites": {
+    "authentification": {
+      "statut": "FONCTIONNEL",
+      "details": {
+        "success": true,
+        "status": 200,
+        "data": {
+          "success": true,
+          "message": "Connexion réussie (mode développement)",
+          "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjQzODI1MGNhOTVhZDE1M2RhMTQ5MTU4YTY3N2U2MTQ1IiwiaWF0IjoxNzUzODYyODE1LCJleHAiOjE3NTQ0Njc2MTV9.Y12Zk7FfeFjNCFW4_htCR1d-m0q5FQrkflF3Xth9MMo",
+          "user": {
+            "_id": "438250ca95ad153da149158a677e6145",
+            "firstName": "Utilisateur",
+            "lastName": "Test",
+            "fullName": "Utilisateur Test",
+            "email": "test@communiconnect.gn",
+            "phone": "22412345678",
+            "region": "Conakry",
+            "prefecture": "Conakry",
+            "commune": "",
+            "quartier": "",
+            "role": "user",
+            "isVerified": true,
+            "createdAt": "2025-07-30T08:06:55.246Z"
+          }
+        },
+        "temps_reponse": "N/A"
+      }
+    },
+    "alertes": {
+      "statut": "FONCTIONNEL",
+      "details": {
+        "success": true,
+        "status": 200,
+        "data": {
+          "success": true,
+          "data": {
+            "alerts": [
+              {
+                "_id": "1",
+                "title": "Accident de circulation sur la route de Donka",
+                "description": "Accident grave impliquant deux véhicules sur la route principale de Donka.",
+                "type": "accident",
+                "category": "circulation",
+                "priority": "urgent",
+                "status": "active",
+                "location": {
+                  "coordinates": {
+                    "latitude": 9.537,
+                    "longitude": -13.6785
+                  },
+                  "region": "Conakry",
+                  "prefecture": "Conakry",
+                  "commune": "Kaloum",
+                  "quartier": "Donka",
+                  "address": "Route de Donka, près du marché central"
+                },
+                "author": {
+                  "_id": "user1",
+                  "firstName": "Mamadou",
+                  "lastName": "Diallo",
+                  "profilePicture": null,
+                  "isVerified": true
+                },
+                "interactions": {
+                  "views": 15,
+                  "shares": 3,
+                  "confirmations": 8,
+                  "denials": 1
+                },
+                "userInteractions": {
+                  "confirmed": [],
+                  "denied": []
+                },
+                "createdAt": "2025-07-30T08:06:56.029Z",
+                "updatedAt": "2025-07-30T08:06:56.029Z",
+                "expiresAt": "2025-07-31T08:06:56.029Z"
+              },
+              {
+                "_id": "2",
+                "title": "Coupure d'électricité dans le quartier Almamya",
+                "description": "Coupure d'électricité généralisée dans tout le quartier Almamya.",
+                "type": "infrastructure",
+                "category": "coupure_electricite",
+                "priority": "important",
+                "status": "active",
+                "location": {
+                  "coordinates": {
+                    "latitude": 9.547,
+                    "longitude": -13.6885
+                  },
+                  "region": "Conakry",
+                  "prefecture": "Conakry",
+                  "commune": "Ratoma",
+                  "quartier": "Almamya",
+                  "address": "Quartier Almamya, zone résidentielle"
+                },
+                "author": {
+                  "_id": "user2",
+                  "firstName": "Fatou",
+                  "lastName": "Camara",
+                  "profilePicture": null,
+                  "isVerified": true
+                },
+                "interactions": {
+                  "views": 8,
+                  "shares": 1,
+                  "confirmations": 5,
+                  "denials": 0
+                },
+                "userInteractions": {
+                  "confirmed": [],
+                  "denied": []
+                },
+                "createdAt": "2025-07-30T06:06:56.029Z",
+                "updatedAt": "2025-07-30T06:06:56.029Z",
+                "expiresAt": "2025-08-06T08:06:56.029Z"
+              }
+            ],
+            "pagination": {
+              "page": 1,
+              "limit": 20,
+              "total": 2,
+              "pages": 1
+            }
+          }
+        },
+        "temps_reponse": "N/A"
+      }
+    },
+    "evenements": {
+      "statut": "FONCTIONNEL",
+      "details": {
+        "success": true,
+        "status": 200,
+        "data": {
+          "success": true,
+          "data": {
+            "events": [
+              {
+                "_id": "fake-event-1",
+                "title": "Nettoyage communautaire du quartier",
+                "description": "Grande opération de nettoyage du quartier avec tous les habitants.",
+                "type": "nettoyage",
+                "category": "communautaire",
+                "startDate": "2025-08-01T08:06:56.037Z",
+                "endDate": "2025-08-01T12:06:56.037Z",
+                "startTime": "08:00",
+                "endTime": "12:00",
+                "location": {
+                  "coordinates": {
+                    "latitude": 9.537,
+                    "longitude": -13.6785
+                  },
+                  "region": "Conakry",
+                  "prefecture": "Conakry",
+                  "commune": "Kaloum",
+                  "quartier": "Centre",
+                  "address": "Quartier Centre, Conakry",
+                  "venue": "Place du marché"
+                },
+                "organizer": {
+                  "_id": "507f1f77bcf86cd799439012",
+                  "firstName": "Mamadou",
+                  "lastName": "Diallo",
+                  "profilePicture": null,
+                  "isVerified": true
+                },
+                "status": "published",
+                "visibility": "public",
+                "participants": [],
+                "media": {
+                  "images": [],
+                  "videos": [],
+                  "documents": []
+                },
+                "createdAt": "2025-07-30T08:06:56.037Z",
+                "updatedAt": "2025-07-30T08:06:56.037Z"
+              },
+              {
+                "_id": "fake-event-2",
+                "title": "Formation informatique gratuite",
+                "description": "Formation en informatique pour les jeunes du quartier.",
+                "type": "formation",
+                "category": "educatif",
+                "startDate": "2025-08-04T08:06:56.037Z",
+                "endDate": "2025-08-04T11:06:56.037Z",
+                "startTime": "14:00",
+                "endTime": "17:00",
+                "location": {
+                  "coordinates": {
+                    "latitude": 9.545,
+                    "longitude": -13.675
+                  },
+                  "region": "Conakry",
+                  "prefecture": "Conakry",
+                  "commune": "Ratoma",
+                  "quartier": "Almamya",
+                  "address": "Centre culturel, Conakry",
+                  "venue": "Salle de formation"
+                },
+                "organizer": {
+                  "_id": "507f1f77bcf86cd799439014",
+                  "firstName": "Fatou",
+                  "lastName": "Camara",
+                  "profilePicture": null,
+                  "isVerified": true
+                },
+                "status": "published",
+                "visibility": "public",
+                "participants": [],
+                "media": {
+                  "images": [],
+                  "videos": [],
+                  "documents": []
+                },
+                "createdAt": "2025-07-30T08:06:56.037Z",
+                "updatedAt": "2025-07-30T08:06:56.037Z"
+              },
+              {
+                "_id": "fake-event-3",
+                "title": "Match de football inter-quartiers",
+                "description": "Tournoi de football entre les quartiers de Conakry.",
+                "type": "sport",
+                "category": "sportif",
+                "startDate": "2025-08-06T08:06:56.037Z",
+                "endDate": "2025-08-06T10:06:56.037Z",
+                "startTime": "16:00",
+                "endTime": "18:00",
+                "location": {
+                  "coordinates": {
+                    "latitude": 9.53,
+                    "longitude": -13.68
+                  },
+                  "region": "Conakry",
+                  "prefecture": "Conakry",
+                  "commune": "Dixinn",
+                  "quartier": "Kipé",
+                  "address": "Stade municipal, Conakry",
+                  "venue": "Terrain principal"
+                },
+                "organizer": {
+                  "_id": "507f1f77bcf86cd799439015",
+                  "firstName": "Ibrahima",
+                  "lastName": "Sow",
+                  "profilePicture": null,
+                  "isVerified": true
+                },
+                "status": "published",
+                "visibility": "public",
+                "participants": [],
+                "media": {
+                  "images": [],
+                  "videos": [],
+                  "documents": []
+                },
+                "createdAt": "2025-07-30T08:06:56.037Z",
+                "updatedAt": "2025-07-30T08:06:56.037Z"
+              },
+              {
+                "_id": "fake-event-4",
+                "title": "Concert de musique traditionnelle",
+                "description": "Concert de musique traditionnelle guinéenne.",
+                "type": "festival",
+                "category": "culturel",
+                "startDate": "2025-08-09T08:06:56.037Z",
+                "endDate": "2025-08-09T12:06:56.037Z",
+                "startTime": "19:00",
+                "endTime": "23:00",
+                "location": {
+                  "coordinates": {
+                    "latitude": 9.537,
+                    "longitude": -13.6785
+                  },
+                  "region": "Conakry",
+                  "prefecture": "Conakry",
+                  "commune": "Kaloum",
+                  "quartier": "Centre",
+                  "address": "Place de l'Indépendance, Conakry",
+                  "venue": "Place publique"
+                },
+                "organizer": {
+                  "_id": "507f1f77bcf86cd799439016",
+                  "firstName": "Ousmane",
+                  "lastName": "Toure",
+                  "profilePicture": null,
+                  "isVerified": true
+                },
+                "status": "published",
+                "visibility": "public",
+                "participants": [],
+                "media": {
+                  "images": [],
+                  "videos": [],
+                  "documents": []
+                },
+                "createdAt": "2025-07-30T08:06:56.037Z",
+                "updatedAt": "2025-07-30T08:06:56.037Z"
+              },
+              {
+                "_id": "fake-event-5",
+                "title": "Campagne de vaccination",
+                "description": "Campagne de vaccination gratuite pour tous les âges.",
+                "type": "sante",
+                "category": "sante",
+                "startDate": "2025-08-02T08:06:56.037Z",
+                "endDate": "2025-08-02T16:06:56.037Z",
+                "startTime": "09:00",
+                "endTime": "17:00",
+                "location": {
+                  "coordinates": {
+                    "latitude": 9.54,
+                    "longitude": -13.67
+                  },
+                  "region": "Conakry",
+                  "prefecture": "Conakry",
+                  "commune": "Matam",
+                  "quartier": "Donka",
+                  "address": "Centre de santé, Conakry",
+                  "venue": "Salle de consultation"
+                },
+                "organizer": {
+                  "_id": "507f1f77bcf86cd799439017",
+                  "firstName": "Aissatou",
+                  "lastName": "Barry",
+                  "profilePicture": null,
+                  "isVerified": true
+                },
+                "status": "published",
+                "visibility": "public",
+                "participants": [],
+                "media": {
+                  "images": [],
+                  "videos": [],
+                  "documents": []
+                },
+                "createdAt": "2025-07-30T08:06:56.037Z",
+                "updatedAt": "2025-07-30T08:06:56.037Z"
+              }
+            ],
+            "pagination": {
+              "page": 1,
+              "limit": 20,
+              "total": 5,
+              "pages": 1
+            }
+          }
+        },
+        "temps_reponse": "N/A"
+      }
+    },
+    "livestreams": {
+      "statut": "FONCTIONNEL",
+      "details": {
+        "success": true,
+        "status": 200,
+        "data": {
+          "success": true,
+          "data": [
+            {
+              "_id": "fake-live-1",
+              "type": "alert",
+              "title": "Incendie dans le quartier Centre",
+              "description": "Incendie signalé rue principale, pompiers en route. Évitez la zone.",
+              "status": "live",
+              "urgency": "critical",
+              "startedAt": "2025-07-30T07:56:56.047Z",
+              "location": {
+                "region": "Conakry",
+                "prefecture": "Conakry",
+                "commune": "Kaloum",
+                "quartier": "Centre",
+                "coordinates": {
+                  "latitude": 9.537,
+                  "longitude": -13.6785
+                }
+              },
+              "visibility": "quartier",
+              "author": {
+                "_id": "507f1f77bcf86cd799439042",
+                "firstName": "Mamadou",
+                "lastName": "Diallo",
+                "profilePicture": null,
+                "isVerified": true
+              },
+              "stats": {
+                "currentViewers": 23,
+                "totalViewers": 45,
+                "totalMessages": 12
+              },
+              "viewers": [],
+              "messages": [
+                {
+                  "_id": "507f1f77bcf86cd799439043",
+                  "user": {
+                    "_id": "507f1f77bcf86cd799439044",
+                    "firstName": "Fatou",
+                    "lastName": "Camara",
+                    "profilePicture": null
+                  },
+                  "message": "Les pompiers arrivent dans 5 minutes",
+                  "timestamp": "2025-07-30T08:04:56.047Z"
+                }
+              ],
+              "reactions": [],
+              "createdAt": "2025-07-30T07:56:56.047Z",
+              "updatedAt": "2025-07-30T08:06:56.047Z"
+            },
+            {
+              "_id": "fake-live-2",
+              "type": "alert",
+              "title": "Coupure d'électricité - Quartier Almamya",
+              "description": "Coupure d'électricité prévue de 14h à 18h pour maintenance.",
+              "status": "live",
+              "urgency": "medium",
+              "startedAt": "2025-07-30T07:51:56.047Z",
+              "location": {
+                "region": "Conakry",
+                "prefecture": "Conakry",
+                "commune": "Ratoma",
+                "quartier": "Almamya",
+                "coordinates": {
+                  "latitude": 9.545,
+                  "longitude": -13.675
+                }
+              },
+              "visibility": "quartier",
+              "author": {
+                "_id": "507f1f77bcf86cd799439047",
+                "firstName": "Fatou",
+                "lastName": "Camara",
+                "profilePicture": null,
+                "isVerified": true
+              },
+              "stats": {
+                "currentViewers": 18,
+                "totalViewers": 32,
+                "totalMessages": 8
+              },
+              "viewers": [],
+              "messages": [],
+              "reactions": [],
+              "createdAt": "2025-07-30T07:51:56.047Z",
+              "updatedAt": "2025-07-30T08:06:56.047Z"
+            },
+            {
+              "_id": "fake-live-3",
+              "type": "community",
+              "title": "Réunion communautaire - Nettoyage du quartier",
+              "description": "Réunion pour organiser le nettoyage du quartier ce weekend.",
+              "status": "live",
+              "urgency": "low",
+              "startedAt": "2025-07-30T07:46:56.047Z",
+              "location": {
+                "region": "Conakry",
+                "prefecture": "Conakry",
+                "commune": "Dixinn",
+                "quartier": "Kipé",
+                "coordinates": {
+                  "latitude": 9.53,
+                  "longitude": -13.68
+                }
+              },
+              "visibility": "quartier",
+              "author": {
+                "_id": "507f1f77bcf86cd799439048",
+                "firstName": "Ibrahima",
+                "lastName": "Sow",
+                "profilePicture": null,
+                "isVerified": true
+              },
+              "stats": {
+                "currentViewers": 12,
+                "totalViewers": 25,
+                "totalMessages": 6
+              },
+              "viewers": [],
+              "messages": [],
+              "reactions": [],
+              "createdAt": "2025-07-30T07:46:56.047Z",
+              "updatedAt": "2025-07-30T08:06:56.047Z"
+            },
+            {
+              "_id": "fake-live-4",
+              "type": "alert",
+              "title": "Accident de circulation - Route de Donka",
+              "description": "Accident sur la route de Donka, circulation ralentie.",
+              "status": "live",
+              "urgency": "high",
+              "startedAt": "2025-07-30T08:01:56.047Z",
+              "location": {
+                "region": "Conakry",
+                "prefecture": "Conakry",
+                "commune": "Matam",
+                "quartier": "Donka",
+                "coordinates": {
+                  "latitude": 9.54,
+                  "longitude": -13.67
+                }
+              },
+              "visibility": "quartier",
+              "author": {
+                "_id": "507f1f77bcf86cd799439049",
+                "firstName": "Aissatou",
+                "lastName": "Barry",
+                "profilePicture": null,
+                "isVerified": true
+              },
+              "stats": {
+                "currentViewers": 35,
+                "totalViewers": 67,
+                "totalMessages": 15
+              },
+              "viewers": [],
+              "messages": [],
+              "reactions": [],
+              "createdAt": "2025-07-30T08:01:56.047Z",
+              "updatedAt": "2025-07-30T08:06:56.047Z"
+            },
+            {
+              "_id": "fake-live-5",
+              "type": "community",
+              "title": "Festival culturel - Place de l'Indépendance",
+              "description": "Festival culturel avec musique traditionnelle et danses.",
+              "status": "live",
+              "urgency": "low",
+              "startedAt": "2025-07-30T07:41:56.047Z",
+              "location": {
+                "region": "Conakry",
+                "prefecture": "Conakry",
+                "commune": "Kaloum",
+                "quartier": "Centre",
+                "coordinates": {
+                  "latitude": 9.537,
+                  "longitude": -13.6785
+                }
+              },
+              "visibility": "quartier",
+              "author": {
+                "_id": "507f1f77bcf86cd799439050",
+                "firstName": "Ousmane",
+                "lastName": "Toure",
+                "profilePicture": null,
+                "isVerified": true
+              },
+              "stats": {
+                "currentViewers": 45,
+                "totalViewers": 89,
+                "totalMessages": 22
+              },
+              "viewers": [],
+              "messages": [],
+              "reactions": [],
+              "createdAt": "2025-07-30T07:41:56.047Z",
+              "updatedAt": "2025-07-30T08:06:56.047Z"
+            }
+          ]
+        },
+        "temps_reponse": "N/A"
+      }
+    },
+    "posts": {
+      "statut": "FONCTIONNEL",
+      "details": {
+        "success": true,
+        "status": 200,
+        "data": {
+          "success": true,
+          "data": {
+            "posts": [
+              {
+                "_id": "2",
+                "author": {
+                  "_id": "user3",
+                  "firstName": "Ibrahima",
+                  "lastName": "Sow",
+                  "avatar": null
+                },
+                "content": "Attention ! Il y a des travaux sur la route principale demain. Prévoyez un itinéraire alternatif.",
+                "media": [],
+                "location": {
+                  "region": "Conakry",
+                  "prefecture": "Conakry",
+                  "commune": "Kaloum",
+                  "quartier": "Centre",
+                  "coordinates": {
+                    "latitude": 9.5144,
+                    "longitude": -13.6783
+                  }
+                },
+                "type": "alert",
+                "reactions": {
+                  "like": [
+                    "user1",
+                    "user4"
+                  ],
+                  "helpful": [
+                    "user2",
+                    "user5"
+                  ]
+                },
+                "comments": [],
+                "shares": 5,
+                "isPublic": true,
+                "isActive": true,
+                "createdAt": "2025-07-29T07:57:08.851Z",
+                "updatedAt": "2025-07-29T07:57:08.851Z"
+              },
+              {
+                "_id": "1",
+                "author": {
+                  "_id": "user1",
+                  "firstName": "Mamadou",
+                  "lastName": "Diallo",
+                  "avatar": null
+                },
+                "content": "Bonjour à tous ! J'organise une réunion de quartier ce samedi à 16h pour discuter de la propreté de notre quartier. Tout le monde est invité !",
+                "media": [],
+                "location": {
+                  "region": "Conakry",
+                  "prefecture": "Conakry",
+                  "commune": "Kaloum",
+                  "quartier": "Centre",
+                  "coordinates": {
+                    "latitude": 9.5144,
+                    "longitude": -13.6783
+                  }
+                },
+                "type": "community",
+                "reactions": {
+                  "like": [
+                    "user2",
+                    "user3"
+                  ],
+                  "love": [
+                    "user4"
+                  ],
+                  "helpful": [
+                    "user5"
+                  ]
+                },
+                "comments": [
+                  {
+                    "_id": "comment1",
+                    "author": {
+                      "_id": "user2",
+                      "firstName": "Fatou",
+                      "lastName": "Camara"
+                    },
+                    "content": "Excellente initiative ! Je serai là.",
+                    "createdAt": "2025-07-29T07:57:08.851Z"
+                  }
+                ],
+                "shares": 2,
+                "isPublic": true,
+                "isActive": true,
+                "createdAt": "2025-07-28T07:57:08.851Z",
+                "updatedAt": "2025-07-28T07:57:08.851Z"
+              }
+            ],
+            "pagination": {
+              "currentPage": 1,
+              "totalPages": 1,
+              "totalPosts": 2,
+              "hasNextPage": false,
+              "hasPrevPage": false
+            }
+          }
+        },
+        "temps_reponse": "N/A"
+      }
+    },
+    "messages": {
+      "statut": "FONCTIONNEL",
+      "details": {
+        "success": true,
+        "status": 200,
+        "data": {
+          "success": true,
+          "conversations": [
+            {
+              "_id": "fake-conversation-1",
+              "participants": [
+                {
+                  "_id": "test-user-id",
+                  "firstName": "Test",
+                  "lastName": "User"
+                },
+                {
+                  "_id": "user-2",
+                  "firstName": "Mamadou",
+                  "lastName": "Diallo"
+                }
+              ],
+              "title": "Conversation Test 1",
+              "lastMessage": {
+                "content": "Il y a une réunion demain à 14h.",
+                "timestamp": "2025-07-30T07:56:56.076Z"
+              },
+              "createdAt": "2025-07-30T07:06:56.076Z",
+              "updatedAt": "2025-07-30T07:56:56.076Z"
+            },
+            {
+              "_id": "fake-conversation-2",
+              "participants": [
+                {
+                  "_id": "test-user-id",
+                  "firstName": "Test",
+                  "lastName": "User"
+                },
+                {
+                  "_id": "user-3",
+                  "firstName": "Fatou",
+                  "lastName": "Camara"
+                }
+              ],
+              "title": "Conversation Test 2",
+              "lastMessage": {
+                "content": "À bientôt !",
+                "timestamp": "2025-07-30T08:01:56.076Z"
+              },
+              "createdAt": "2025-07-30T07:36:56.076Z",
+              "updatedAt": "2025-07-30T08:01:56.076Z"
+            },
+            {
+              "_id": "fake-conversation-3",
+              "participants": [
+                {
+                  "_id": "test-user-id",
+                  "firstName": "Test",
+                  "lastName": "User"
+                },
+                {
+                  "_id": "user-4",
+                  "firstName": "Ibrahima",
+                  "lastName": "Sow"
+                }
+              ],
+              "title": "Conversation Test 3",
+              "lastMessage": {
+                "content": "Parfait !",
+                "timestamp": "2025-07-30T08:04:56.076Z"
+              },
+              "createdAt": "2025-07-30T07:51:56.076Z",
+              "updatedAt": "2025-07-30T08:04:56.076Z"
+            }
+          ]
+        },
+        "temps_reponse": "N/A"
+      }
+    },
+    "amis": {
+      "statut": "FONCTIONNEL",
+      "details": {
+        "success": true,
+        "status": 200,
+        "data": {
+          "success": true,
+          "friends": [
+            {
+              "_id": "friend-1",
+              "firstName": "Mamadou",
+              "lastName": "Diallo",
+              "email": "mamadou.diallo@communiconnect.gn",
+              "status": "accepted",
+              "friendshipId": "friendship-1"
+            },
+            {
+              "_id": "friend-2",
+              "firstName": "Fatou",
+              "lastName": "Camara",
+              "email": "fatou.camara@communiconnect.gn",
+              "status": "accepted",
+              "friendshipId": "friendship-2"
+            },
+            {
+              "_id": "friend-3",
+              "firstName": "Ibrahima",
+              "lastName": "Sow",
+              "email": "ibrahima.sow@communiconnect.gn",
+              "status": "accepted",
+              "friendshipId": "friendship-3"
+            }
+          ]
+        },
+        "temps_reponse": "N/A"
+      }
+    },
+    "moderation": {
+      "statut": "FONCTIONNEL",
+      "details": {
+        "success": true,
+        "status": 200,
+        "data": {
+          "success": true,
+          "reports": [
+            {
+              "_id": "report-1",
+              "type": "post",
+              "contentId": "post-1",
+              "reason": "Contenu inapproprié",
+              "description": "Ce post contient du contenu offensant",
+              "reporter": {
+                "_id": "user-1",
+                "firstName": "Signaleur",
+                "lastName": "Test"
+              },
+              "status": "pending",
+              "severity": "high",
+              "createdAt": "2025-07-30T08:06:56.098Z"
+            },
+            {
+              "_id": "report-2",
+              "type": "message",
+              "contentId": "message-1",
+              "reason": "Harcèlement",
+              "description": "Messages répétés et harcelants",
+              "reporter": {
+                "_id": "user-2",
+                "firstName": "Autre",
+                "lastName": "Utilisateur"
+              },
+              "status": "investigating",
+              "severity": "medium",
+              "createdAt": "2025-07-30T08:06:56.098Z"
+            }
+          ]
+        },
+        "temps_reponse": "N/A"
+      }
+    },
+    "notifications": {
+      "statut": "FONCTIONNEL",
+      "details": {
+        "success": true,
+        "status": 200,
+        "data": {
+          "success": true,
+          "notifications": [
+            {
+              "_id": "notif-1",
+              "title": "Nouveau message",
+              "body": "Vous avez reçu un nouveau message",
+              "type": "message",
+              "data": {
+                "conversationId": "conv-1",
+                "senderName": "Test User"
+              },
+              "timestamp": "2025-07-30T08:06:56.107Z",
+              "isRead": false
+            },
+            {
+              "_id": "notif-2",
+              "title": "Nouvelle alerte",
+              "body": "Une nouvelle alerte a été publiée dans votre région",
+              "type": "alert",
+              "data": {
+                "alertId": "alert-1",
+                "urgency": "high"
+              },
+              "timestamp": "2025-07-30T08:06:56.107Z",
+              "isRead": true
+            }
+          ]
+        },
+        "temps_reponse": "N/A"
+      }
+    },
+    "geolocalisation": {
+      "statut": "PROBLEME",
+      "details": {
+        "success": false,
+        "status": 404,
+        "message": "Request failed with status code 404",
+        "details": {
+          "success": false,
+          "message": "Route non trouvée"
+        }
+      }
+    },
+    "recherche": {
+      "statut": "FONCTIONNEL",
+      "details": {
+        "success": true,
+        "status": 200,
+        "data": {
+          "success": true,
+          "query": "test",
+          "type": "all",
+          "results": {
+            "posts": [
+              {
+                "_id": "post-1",
+                "content": "Post contenant \"test\"",
+                "author": {
+                  "firstName": "Utilisateur",
+                  "lastName": "Test"
+                },
+                "createdAt": "2025-07-30T08:06:56.219Z"
+              }
+            ],
+            "alerts": [
+              {
+                "_id": "alert-1",
+                "title": "Alerte contenant \"test\"",
+                "type": "accident",
+                "location": "Centre, Kaloum"
+              }
+            ],
+            "events": [
+              {
+                "_id": "event-1",
+                "title": "Événement contenant \"test\"",
+                "type": "reunion",
+                "date": "2025-07-30T08:06:56.219Z"
+              }
+            ],
+            "users": []
+          },
+          "total": 3
+        },
+        "temps_reponse": "N/A"
+      }
+    },
+    "statistiques": {
+      "statut": "FONCTIONNEL",
+      "details": {
+        "success": true,
+        "status": 200,
+        "data": {
+          "success": true,
+          "stats": {
+            "users": {
+              "total": 1250,
+              "active": 890,
+              "newThisMonth": 45,
+              "verified": 1100
+            },
+            "content": {
+              "posts": 3450,
+              "alerts": 156,
+              "events": 89,
+              "livestreams": 23
+            },
+            "engagement": {
+              "reactions": 12500,
+              "comments": 8900,
+              "shares": 3400,
+              "participations": 1200
+            },
+            "locations": {
+              "regions": 8,
+              "prefectures": 33,
+              "communes": 303,
+              "quartiers": 1500
+            },
+            "moderation": {
+              "reports": 45,
+              "resolved": 38,
+              "pending": 7,
+              "blockedUsers": 3
+            }
+          },
+          "lastUpdated": "2025-07-30T08:06:56.234Z"
+        },
+        "temps_reponse": "N/A"
+      }
+    }
+  },
+  "securite": {
+    "cors": "CONFIGURE",
+    "rate_limiting": "ACTIF_EN_PRODUCTION",
+    "validation": "INACTIVE",
+    "authentification": "FONCTIONNEL"
+  },
+  "performance": {
+    "temps_reponse": [
+      {
+        "endpoint": "/health",
+        "temps": 3,
+        "statut": "OK"
+      },
+      {
+        "endpoint": "/posts",
+        "temps": 25,
+        "statut": "OK"
+      },
+      {
+        "endpoint": "/events",
+        "temps": 18,
+        "statut": "OK"
+      },
+      {
+        "endpoint": "/alerts",
+        "temps": 10,
+        "statut": "OK"
+      }
+    ],
+    "memoire": "N/A",
+    "optimisation": "N/A"
+  },
+  "qualite": {
+    "tests": "DISPONIBLES",
+    "documentation": "DISPONIBLE",
+    "accessibilite": "N/A"
+  },
+  "deploiement": {
+    "configuration": "CONFIGUREE",
+    "scripts": "DISPONIBLES",
+    "monitoring": "N/A"
+  }
+}

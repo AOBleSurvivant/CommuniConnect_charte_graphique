@@ -1,0 +1,195 @@
+{
+  "Guinée": {
+    "Régions": [
+      {
+        "nom": "Conakry",
+        "préfectures": [
+          {
+            "nom": "Conakry",
+            "communes": [
+              {
+                "nom": "Kaloum",
+                "quartiers": [
+                  { "nom": "Centre", "coordonnées": { "latitude": 9.537, "longitude": -13.6785 } },
+                  { "nom": "Port", "coordonnées": { "latitude": 9.540, "longitude": -13.680 } },
+                  { "nom": "Almamya", "coordonnées": { "latitude": 9.535, "longitude": -13.675 } }
+                ]
+              },
+              {
+                "nom": "Ratoma",
+                "quartiers": [
+                  { "nom": "Centre", "coordonnées": { "latitude": 9.545, "longitude": -13.685 } },
+                  { "nom": "Hamdallaye", "coordonnées": { "latitude": 9.550, "longitude": -13.690 } },
+                  { "nom": "Koloma", "coordonnées": { "latitude": 9.548, "longitude": -13.688 } }
+                ]
+              },
+              {
+                "nom": "Dixinn",
+                "quartiers": [
+                  { "nom": "Centre", "coordonnées": { "latitude": 9.555, "longitude": -13.695 } },
+                  { "nom": "Kipé", "coordonnées": { "latitude": 9.560, "longitude": -13.700 } },
+                  { "nom": "Lansanaya", "coordonnées": { "latitude": 9.558, "longitude": -13.698 } }
+                ]
+              },
+              {
+                "nom": "Matam",
+                "quartiers": [
+                  { "nom": "Centre", "coordonnées": { "latitude": 9.565, "longitude": -13.705 } },
+                  { "nom": "Matoto", "coordonnées": { "latitude": 9.570, "longitude": -13.710 } },
+                  { "nom": "Kagbelen", "coordonnées": { "latitude": 9.568, "longitude": -13.708 } }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "nom": "Labé",
+        "préfectures": [
+          {
+            "nom": "Labé",
+            "communes": [
+              {
+                "nom": "Labé-Centre",
+                "quartiers": [
+                  { "nom": "Centre", "coordonnées": { "latitude": 11.316, "longitude": -12.283 } },
+                  { "nom": "Porel", "coordonnées": { "latitude": 11.320, "longitude": -12.285 } },
+                  { "nom": "Hafia", "coordonnées": { "latitude": 11.318, "longitude": -12.287 } }
+                ]
+              },
+              {
+                "nom": "Labé-Banora",
+                "quartiers": [
+                  { "nom": "Centre", "coordonnées": { "latitude": 11.325, "longitude": -12.290 } },
+                  { "nom": "Banora", "coordonnées": { "latitude": 11.330, "longitude": -12.295 } },
+                  { "nom": "Kouramangui", "coordonnées": { "latitude": 11.328, "longitude": -12.293 } }
+                ]
+              }
+            ]
+          },
+          {
+            "nom": "Lélouma",
+            "communes": [
+              {
+                "nom": "Lélouma-Centre",
+                "quartiers": [
+                  { "nom": "Centre", "coordonnées": { "latitude": 11.400, "longitude": -12.350 } },
+                  { "nom": "Koubia", "coordonnées": { "latitude": 11.405, "longitude": -12.355 } },
+                  { "nom": "Tougué", "coordonnées": { "latitude": 11.403, "longitude": -12.353 } }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "nom": "Kankan",
+        "préfectures": [
+          {
+            "nom": "Kankan",
+            "communes": [
+              {
+                "nom": "Kankan-Centre",
+                "quartiers": [
+                  { "nom": "Centre", "coordonnées": { "latitude": 10.383, "longitude": -9.306 } },
+                  { "nom": "Sofa", "coordonnées": { "latitude": 10.385, "longitude": -9.308 } },
+                  { "nom": "Moribaya", "coordonnées": { "latitude": 10.387, "longitude": -9.310 } }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "nom": "Kindia",
+        "préfectures": [
+          {
+            "nom": "Kindia",
+            "communes": [
+              {
+                "nom": "Kindia-Centre",
+                "quartiers": [
+                  { "nom": "Centre", "coordonnées": { "latitude": 10.057, "longitude": -12.865 } },
+                  { "nom": "Alah", "coordonnées": { "latitude": 10.060, "longitude": -12.870 } },
+                  { "nom": "Madina", "coordonnées": { "latitude": 10.058, "longitude": -12.868 } }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "nom": "Faranah",
+        "préfectures": [
+          {
+            "nom": "Faranah",
+            "communes": [
+              {
+                "nom": "Faranah-Centre",
+                "quartiers": [
+                  { "nom": "Centre", "coordonnées": { "latitude": 10.040, "longitude": -10.743 } },
+                  { "nom": "Sambailo", "coordonnées": { "latitude": 10.045, "longitude": -10.748 } },
+                  { "nom": "Bantignel", "coordonnées": { "latitude": 10.043, "longitude": -10.745 } }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "nom": "Boké",
+        "préfectures": [
+          {
+            "nom": "Boké",
+            "communes": [
+              {
+                "nom": "Boké-Centre",
+                "quartiers": [
+                  { "nom": "Centre", "coordonnées": { "latitude": 10.940, "longitude": -14.290 } },
+                  { "nom": "Kamsar", "coordonnées": { "latitude": 10.945, "longitude": -14.295 } },
+                  { "nom": "Sangarédi", "coordonnées": { "latitude": 10.943, "longitude": -14.293 } }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "nom": "Mamou",
+        "préfectures": [
+          {
+            "nom": "Mamou",
+            "communes": [
+              {
+                "nom": "Mamou-Centre",
+                "quartiers": [
+                  { "nom": "Centre", "coordonnées": { "latitude": 10.375, "longitude": -12.091 } },
+                  { "nom": "Tolô", "coordonnées": { "latitude": 10.380, "longitude": -12.096 } },
+                  { "nom": "Soyah", "coordonnées": { "latitude": 10.378, "longitude": -12.094 } }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "nom": "Nzérékoré",
+        "préfectures": [
+          {
+            "nom": "Nzérékoré",
+            "communes": [
+              {
+                "nom": "Nzérékoré-Centre",
+                "quartiers": [
+                  { "nom": "Centre", "coordonnées": { "latitude": 7.748, "longitude": -8.823 } },
+                  { "nom": "Konia", "coordonnées": { "latitude": 7.750, "longitude": -8.825 } },
+                  { "nom": "Bambou", "coordonnées": { "latitude": 7.752, "longitude": -8.827 } }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+} 

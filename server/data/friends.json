@@ -1,0 +1,47 @@
+[
+  {
+    "_id": "fake-friend-request-1",
+    "requester": "test@communiconnect.gn",
+    "recipient": "mamadou.diallo@communiconnect.gn",
+    "status": "pending",
+    "message": "Salut ! J'aimerais t'ajouter comme ami.",
+    "createdAt": "2024-01-15T10:00:00.000Z",
+    "updatedAt": "2024-01-15T10:00:00.000Z"
+  },
+  {
+    "_id": "fake-friend-request-2",
+    "requester": "test@communiconnect.gn",
+    "recipient": "fatou.camara@communiconnect.gn",
+    "status": "pending",
+    "message": "Bonjour ! Voulez-vous être mon ami ?",
+    "createdAt": "2024-01-15T11:00:00.000Z",
+    "updatedAt": "2024-01-15T11:00:00.000Z"
+  },
+  {
+    "_id": "fake-friend-request-3",
+    "requester": "test@communiconnect.gn",
+    "recipient": "ibrahima.sow@communiconnect.gn",
+    "status": "pending",
+    "message": "Salut ! On se connaît du quartier.",
+    "createdAt": "2024-01-15T12:00:00.000Z",
+    "updatedAt": "2024-01-15T12:00:00.000Z"
+  },
+  {
+    "_id": "fake-friend-request-4",
+    "requester": "test@communiconnect.gn",
+    "recipient": "aissatou.barry@communiconnect.gn",
+    "status": "pending",
+    "message": "Bonjour ! J'aimerais vous ajouter.",
+    "createdAt": "2024-01-15T13:00:00.000Z",
+    "updatedAt": "2024-01-15T13:00:00.000Z"
+  },
+  {
+    "_id": "fake-friend-request-5",
+    "requester": "test@communiconnect.gn",
+    "recipient": "ousmane.toure@communiconnect.gn",
+    "status": "pending",
+    "message": "Salut ! Voulez-vous être ami ?",
+    "createdAt": "2024-01-15T14:00:00.000Z",
+    "updatedAt": "2024-01-15T14:00:00.000Z"
+  }
+] 

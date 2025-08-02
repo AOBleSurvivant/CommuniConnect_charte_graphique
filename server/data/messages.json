@@ -1,0 +1,85 @@
+[
+  {
+    "_id": "fake-conversation-1",
+    "participants": ["test@communiconnect.gn"],
+    "name": "Conversation Test 1",
+    "messages": [
+      {
+        "_id": "fake-message-1",
+        "sender": "test@communiconnect.gn",
+        "content": "Bonjour ! Comment allez-vous ?",
+        "timestamp": "2024-01-15T10:00:00.000Z",
+        "type": "text"
+      },
+      {
+        "_id": "fake-message-2",
+        "sender": "test@communiconnect.gn",
+        "content": "Avez-vous des nouvelles du quartier ?",
+        "timestamp": "2024-01-15T10:05:00.000Z",
+        "type": "text"
+      },
+      {
+        "_id": "fake-message-3",
+        "sender": "test@communiconnect.gn",
+        "content": "Il y a une réunion demain à 14h.",
+        "timestamp": "2024-01-15T10:10:00.000Z",
+        "type": "text"
+      }
+    ],
+    "createdAt": "2024-01-15T10:00:00.000Z",
+    "updatedAt": "2024-01-15T10:10:00.000Z"
+  },
+  {
+    "_id": "fake-conversation-2",
+    "participants": ["test@communiconnect.gn"],
+    "name": "Conversation Test 2",
+    "messages": [
+      {
+        "_id": "fake-message-4",
+        "sender": "test@communiconnect.gn",
+        "content": "Merci pour l'information !",
+        "timestamp": "2024-01-15T11:00:00.000Z",
+        "type": "text"
+      },
+      {
+        "_id": "fake-message-5",
+        "sender": "test@communiconnect.gn",
+        "content": "À bientôt !",
+        "timestamp": "2024-01-15T11:05:00.000Z",
+        "type": "text"
+      }
+    ],
+    "createdAt": "2024-01-15T11:00:00.000Z",
+    "updatedAt": "2024-01-15T11:05:00.000Z"
+  },
+  {
+    "_id": "fake-conversation-3",
+    "participants": ["test@communiconnect.gn"],
+    "name": "Conversation Test 3",
+    "messages": [
+      {
+        "_id": "fake-message-6",
+        "sender": "test@communiconnect.gn",
+        "content": "Salut ! Comment ça va ?",
+        "timestamp": "2024-01-15T12:00:00.000Z",
+        "type": "text"
+      },
+      {
+        "_id": "fake-message-7",
+        "sender": "test@communiconnect.gn",
+        "content": "Tout va bien, merci !",
+        "timestamp": "2024-01-15T12:05:00.000Z",
+        "type": "text"
+      },
+      {
+        "_id": "fake-message-8",
+        "sender": "test@communiconnect.gn",
+        "content": "Parfait !",
+        "timestamp": "2024-01-15T12:10:00.000Z",
+        "type": "text"
+      }
+    ],
+    "createdAt": "2024-01-15T12:00:00.000Z",
+    "updatedAt": "2024-01-15T12:10:00.000Z"
+  }
+] 

@@ -1,0 +1,19 @@
+{
+  "short_name": "CommuniConnect",
+  "name": "CommuniConnect - Communauté Guinéenne",
+  "icons": [
+    {
+      "src": "favicon.ico",
+      "sizes": "64x64 32x32 24x24 16x16",
+      "type": "image/x-icon"
+    }
+  ],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#1976d2",
+  "background_color": "#ffffff",
+  "description": "Application communautaire pour connecter les résidents de Guinée",
+  "orientation": "portrait",
+  "scope": "/",
+  "lang": "fr"
+} 

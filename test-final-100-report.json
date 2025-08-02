@@ -1,0 +1,45 @@
+{
+  "timestamp": "2025-07-28T12:48:48.249Z",
+  "results": {
+    "events": {
+      "success": false,
+      "details": [
+        "✅ Navigation réussie",
+        "❌ Bouton FAB non trouvé"
+      ]
+    },
+    "alerts": {
+      "success": false,
+      "details": [
+        "✅ Navigation réussie",
+        "❌ Bouton FAB non trouvé"
+      ]
+    },
+    "help": {
+      "success": false,
+      "details": [
+        "✅ Navigation réussie",
+        "❌ Bouton FAB non trouvé"
+      ]
+    },
+    "sharing": {
+      "success": false,
+      "details": [
+        "✅ Navigation vers le feed réussie",
+        "❌ Boutons de partage non trouvés",
+        "❌ Boutons de partage sur la carte non trouvés"
+      ]
+    },
+    "overall": {
+      "success": false,
+      "score": 1,
+      "total": 4
+    }
+  },
+  "summary": {
+    "totalTests": 4,
+    "passedTests": 1,
+    "percentage": 25,
+    "success": false
+  }
+}

@@ -1,0 +1,241 @@
+{
+  "summary": {
+    "total": 8,
+    "passed": 7,
+    "failed": 1,
+    "successRate": "87.50"
+  },
+  "details": [
+    {
+      "timestamp": "2025-07-27T23:27:05.069Z",
+      "type": "info",
+      "message": "🚀 Début des tests frontend simplifiés"
+    },
+    {
+      "timestamp": "2025-07-27T23:27:05.075Z",
+      "type": "info",
+      "message": "🧪 Début du test: Accessibilité de base"
+    },
+    {
+      "timestamp": "2025-07-27T23:27:05.086Z",
+      "type": "info",
+      "message": "Page / accessible (1472 caractères)"
+    },
+    {
+      "timestamp": "2025-07-27T23:27:05.097Z",
+      "type": "error",
+      "message": "❌ Test échoué: Accessibilité de base - Statut HTTP 404 au lieu de 200"
+    },
+    {
+      "timestamp": "2025-07-27T23:27:05.097Z",
+      "type": "info",
+      "message": "🧪 Début du test: Pages principales"
+    },
+    {
+      "timestamp": "2025-07-27T23:27:05.105Z",
+      "type": "warning",
+      "message": "Page /feed non accessible: Statut HTTP 404 au lieu de 200"
+    },
+    {
+      "timestamp": "2025-07-27T23:27:05.112Z",
+      "type": "warning",
+      "message": "Page /alerts non accessible: Statut HTTP 404 au lieu de 200"
+    },
+    {
+      "timestamp": "2025-07-27T23:27:05.116Z",
+      "type": "warning",
+      "message": "Page /events non accessible: Statut HTTP 404 au lieu de 200"
+    },
+    {
+      "timestamp": "2025-07-27T23:27:05.126Z",
+      "type": "warning",
+      "message": "Page /livestreams non accessible: Statut HTTP 404 au lieu de 200"
+    },
+    {
+      "timestamp": "2025-07-27T23:27:05.131Z",
+      "type": "warning",
+      "message": "Page /map non accessible: Statut HTTP 404 au lieu de 200"
+    },
+    {
+      "timestamp": "2025-07-27T23:27:05.138Z",
+      "type": "warning",
+      "message": "Page /messages non accessible: Statut HTTP 404 au lieu de 200"
+    },
+    {
+      "timestamp": "2025-07-27T23:27:05.147Z",
+      "type": "warning",
+      "message": "Page /friends non accessible: Statut HTTP 404 au lieu de 200"
+    },
+    {
+      "timestamp": "2025-07-27T23:27:05.151Z",
+      "type": "warning",
+      "message": "Page /profile non accessible: Statut HTTP 404 au lieu de 200"
+    },
+    {
+      "timestamp": "2025-07-27T23:27:05.162Z",
+      "type": "warning",
+      "message": "Page /help non accessible: Statut HTTP 404 au lieu de 200"
+    },
+    {
+      "timestamp": "2025-07-27T23:27:05.166Z",
+      "type": "warning",
+      "message": "Page /moderation non accessible: Statut HTTP 404 au lieu de 200"
+    },
+    {
+      "timestamp": "2025-07-27T23:27:05.167Z",
+      "type": "success",
+      "message": "✅ Test réussi: Pages principales"
+    },
+    {
+      "timestamp": "2025-07-27T23:27:05.167Z",
+      "type": "info",
+      "message": "🧪 Début du test: Ressources statiques"
+    },
+    {
+      "timestamp": "2025-07-27T23:27:05.176Z",
+      "type": "warning",
+      "message": "Ressource /static/js/ non accessible: Statut HTTP 404 au lieu de 200"
+    },
+    {
+      "timestamp": "2025-07-27T23:27:05.180Z",
+      "type": "warning",
+      "message": "Ressource /static/css/ non accessible: Statut HTTP 404 au lieu de 200"
+    },
+    {
+      "timestamp": "2025-07-27T23:27:05.183Z",
+      "type": "warning",
+      "message": "Avertissement: Page ne semble pas être une application React"
+    },
+    {
+      "timestamp": "2025-07-27T23:27:05.184Z",
+      "type": "info",
+      "message": "Page /manifest.json accessible (489 caractères)"
+    },
+    {
+      "timestamp": "2025-07-27T23:27:05.194Z",
+      "type": "warning",
+      "message": "Ressource /favicon.ico non accessible: Statut HTTP 404 au lieu de 200"
+    },
+    {
+      "timestamp": "2025-07-27T23:27:05.194Z",
+      "type": "success",
+      "message": "✅ Test réussi: Ressources statiques"
+    },
+    {
+      "timestamp": "2025-07-27T23:27:05.195Z",
+      "type": "info",
+      "message": "🧪 Début du test: Redirections"
+    },
+    {
+      "timestamp": "2025-07-27T23:27:05.197Z",
+      "type": "info",
+      "message": "Page d'accueil accessible"
+    },
+    {
+      "timestamp": "2025-07-27T23:27:05.197Z",
+      "type": "success",
+      "message": "✅ Test réussi: Redirections"
+    },
+    {
+      "timestamp": "2025-07-27T23:27:05.198Z",
+      "type": "info",
+      "message": "🧪 Début du test: Performances"
+    },
+    {
+      "timestamp": "2025-07-27T23:27:05.200Z",
+      "type": "info",
+      "message": "Temps de chargement: 2ms"
+    },
+    {
+      "timestamp": "2025-07-27T23:27:05.200Z",
+      "type": "success",
+      "message": "Temps de chargement optimal (<3s)"
+    },
+    {
+      "timestamp": "2025-07-27T23:27:05.201Z",
+      "type": "success",
+      "message": "✅ Test réussi: Performances"
+    },
+    {
+      "timestamp": "2025-07-27T23:27:05.201Z",
+      "type": "info",
+      "message": "🧪 Début du test: Headers HTTP"
+    },
+    {
+      "timestamp": "2025-07-27T23:27:05.211Z",
+      "type": "info",
+      "message": "Header content-type présent: text/html; charset=utf-8"
+    },
+    {
+      "timestamp": "2025-07-27T23:27:05.211Z",
+      "type": "warning",
+      "message": "Header cache-control manquant"
+    },
+    {
+      "timestamp": "2025-07-27T23:27:05.212Z",
+      "type": "warning",
+      "message": "Header x-frame-options manquant"
+    },
+    {
+      "timestamp": "2025-07-27T23:27:05.212Z",
+      "type": "warning",
+      "message": "Header x-content-type-options manquant"
+    },
+    {
+      "timestamp": "2025-07-27T23:27:05.213Z",
+      "type": "success",
+      "message": "✅ Test réussi: Headers HTTP"
+    },
+    {
+      "timestamp": "2025-07-27T23:27:05.213Z",
+      "type": "info",
+      "message": "🧪 Début du test: Headers de sécurité"
+    },
+    {
+      "timestamp": "2025-07-27T23:27:05.215Z",
+      "type": "warning",
+      "message": "Header de sécurité x-frame-options manquant"
+    },
+    {
+      "timestamp": "2025-07-27T23:27:05.215Z",
+      "type": "warning",
+      "message": "Header de sécurité x-content-type-options manquant"
+    },
+    {
+      "timestamp": "2025-07-27T23:27:05.216Z",
+      "type": "warning",
+      "message": "Header de sécurité x-xss-protection manquant"
+    },
+    {
+      "timestamp": "2025-07-27T23:27:05.216Z",
+      "type": "warning",
+      "message": "Header de sécurité referrer-policy manquant"
+    },
+    {
+      "timestamp": "2025-07-27T23:27:05.216Z",
+      "type": "info",
+      "message": "Score de sécurité: 0/4"
+    },
+    {
+      "timestamp": "2025-07-27T23:27:05.216Z",
+      "type": "success",
+      "message": "✅ Test réussi: Headers de sécurité"
+    },
+    {
+      "timestamp": "2025-07-27T23:27:05.217Z",
+      "type": "info",
+      "message": "🧪 Début du test: Gestion des erreurs 404"
+    },
+    {
+      "timestamp": "2025-07-27T23:27:05.227Z",
+      "type": "info",
+      "message": "Gestion des erreurs 404 correcte"
+    },
+    {
+      "timestamp": "2025-07-27T23:27:05.227Z",
+      "type": "success",
+      "message": "✅ Test réussi: Gestion des erreurs 404"
+    }
+  ],
+  "timestamp": "2025-07-27T23:27:05.228Z"
+}

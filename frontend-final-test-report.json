@@ -1,0 +1,579 @@
+{
+  "summary": {
+    "total": 10,
+    "passed": 10,
+    "failed": 0,
+    "successRate": "100.00",
+    "totalTime": 167013
+  },
+  "performance": {
+    "loadTime": 0,
+    "domContentLoaded": 0,
+    "firstPaint": 0,
+    "firstContentfulPaint": 0
+  },
+  "accessibility": {
+    "hasTitle": true,
+    "hasMain": false,
+    "hasHeading": false,
+    "hasLandmarks": false,
+    "hasAltText": true,
+    "hasContrast": true,
+    "hasFocusIndicators": true
+  },
+  "security": {
+    "hasCSP": false,
+    "hasXFrameOptions": true,
+    "hasXContentTypeOptions": true,
+    "hasSecureCookies": true,
+    "hasHSTS": true
+  },
+  "details": [
+    {
+      "timestamp": "2025-07-28T00:15:58.296Z",
+      "type": "info",
+      "message": "✅ Serveur accessible (200)"
+    },
+    {
+      "timestamp": "2025-07-28T00:16:26.196Z",
+      "type": "info",
+      "message": "🚀 Navigateur initialisé avec succès"
+    },
+    {
+      "timestamp": "2025-07-28T00:16:26.197Z",
+      "type": "info",
+      "message": "🚀 Début des tests frontend finaux"
+    },
+    {
+      "timestamp": "2025-07-28T00:16:26.197Z",
+      "type": "info",
+      "message": "🧪 Début du test: Accessibilité de base"
+    },
+    {
+      "timestamp": "2025-07-28T00:16:33.744Z",
+      "type": "debug",
+      "message": "Console: %cDownload the React DevTools for a better development experience: https://reactjs.org/link/react-devtools font-weight:bold"
+    },
+    {
+      "timestamp": "2025-07-28T00:16:37.227Z",
+      "type": "warning",
+      "message": "Request Failed: http://localhost:5000/api/auth/me"
+    },
+    {
+      "timestamp": "2025-07-28T00:16:37.228Z",
+      "type": "debug",
+      "message": "Console: Failed to load resource: net::ERR_CONNECTION_REFUSED"
+    },
+    {
+      "timestamp": "2025-07-28T00:16:37.294Z",
+      "type": "debug",
+      "message": "Console: [DOM] Input elements should have autocomplete attributes (suggested: \"current-password\"): (More info: https://goo.gl/9p2vKq) %o"
+    },
+    {
+      "timestamp": "2025-07-28T00:16:38.826Z",
+      "type": "warning",
+      "message": "Request Failed: http://localhost:5000/api/auth/me"
+    },
+    {
+      "timestamp": "2025-07-28T00:16:38.827Z",
+      "type": "debug",
+      "message": "Console: Failed to load resource: net::ERR_CONNECTION_REFUSED"
+    },
+    {
+      "timestamp": "2025-07-28T00:16:39.843Z",
+      "type": "info",
+      "message": "📄 Titre de la page: CommuniConnect - Communauté Guinéenne"
+    },
+    {
+      "timestamp": "2025-07-28T00:16:39.847Z",
+      "type": "info",
+      "message": "🔍 Éléments React détectés: {\"hasRoot\":true,\"hasApp\":false,\"hasReact\":true}"
+    },
+    {
+      "timestamp": "2025-07-28T00:16:39.848Z",
+      "type": "success",
+      "message": "✅ Test réussi: Accessibilité de base (13651ms)"
+    },
+    {
+      "timestamp": "2025-07-28T00:16:39.848Z",
+      "type": "info",
+      "message": "🧪 Début du test: Navigation et routage"
+    },
+    {
+      "timestamp": "2025-07-28T00:16:40.707Z",
+      "type": "debug",
+      "message": "Console: %cDownload the React DevTools for a better development experience: https://reactjs.org/link/react-devtools font-weight:bold"
+    },
+    {
+      "timestamp": "2025-07-28T00:16:43.408Z",
+      "type": "warning",
+      "message": "Request Failed: http://localhost:5000/api/auth/me"
+    },
+    {
+      "timestamp": "2025-07-28T00:16:43.409Z",
+      "type": "debug",
+      "message": "Console: Failed to load resource: net::ERR_CONNECTION_REFUSED"
+    },
+    {
+      "timestamp": "2025-07-28T00:16:43.509Z",
+      "type": "debug",
+      "message": "Console: [DOM] Input elements should have autocomplete attributes (suggested: \"current-password\"): (More info: https://goo.gl/9p2vKq) %o"
+    },
+    {
+      "timestamp": "2025-07-28T00:16:45.658Z",
+      "type": "warning",
+      "message": "Request Failed: http://localhost:5000/api/auth/me"
+    },
+    {
+      "timestamp": "2025-07-28T00:16:45.659Z",
+      "type": "debug",
+      "message": "Console: Failed to load resource: net::ERR_CONNECTION_REFUSED"
+    },
+    {
+      "timestamp": "2025-07-28T00:16:47.661Z",
+      "type": "info",
+      "message": "✅ Route /login accessible"
+    },
+    {
+      "timestamp": "2025-07-28T00:16:48.311Z",
+      "type": "debug",
+      "message": "Console: %cDownload the React DevTools for a better development experience: https://reactjs.org/link/react-devtools font-weight:bold"
+    },
+    {
+      "timestamp": "2025-07-28T00:16:51.478Z",
+      "type": "warning",
+      "message": "Request Failed: http://localhost:5000/api/auth/me"
+    },
+    {
+      "timestamp": "2025-07-28T00:16:51.479Z",
+      "type": "debug",
+      "message": "Console: Failed to load resource: net::ERR_CONNECTION_REFUSED"
+    },
+    {
+      "timestamp": "2025-07-28T00:16:53.684Z",
+      "type": "warning",
+      "message": "Request Failed: http://localhost:5000/api/auth/me"
+    },
+    {
+      "timestamp": "2025-07-28T00:16:53.685Z",
+      "type": "debug",
+      "message": "Console: Failed to load resource: net::ERR_CONNECTION_REFUSED"
+    },
+    {
+      "timestamp": "2025-07-28T00:16:55.702Z",
+      "type": "info",
+      "message": "✅ Route /register accessible"
+    },
+    {
+      "timestamp": "2025-07-28T00:16:56.246Z",
+      "type": "debug",
+      "message": "Console: %cDownload the React DevTools for a better development experience: https://reactjs.org/link/react-devtools font-weight:bold"
+    },
+    {
+      "timestamp": "2025-07-28T00:16:59.277Z",
+      "type": "warning",
+      "message": "Request Failed: http://localhost:5000/api/auth/me"
+    },
+    {
+      "timestamp": "2025-07-28T00:16:59.279Z",
+      "type": "debug",
+      "message": "Console: Failed to load resource: net::ERR_CONNECTION_REFUSED"
+    },
+    {
+      "timestamp": "2025-07-28T00:16:59.280Z",
+      "type": "debug",
+      "message": "Console: [DOM] Input elements should have autocomplete attributes (suggested: \"current-password\"): (More info: https://goo.gl/9p2vKq) %o"
+    },
+    {
+      "timestamp": "2025-07-28T00:17:07.103Z",
+      "type": "warning",
+      "message": "Request Failed: http://localhost:5000/api/auth/me"
+    },
+    {
+      "timestamp": "2025-07-28T00:17:07.104Z",
+      "type": "debug",
+      "message": "Console: Failed to load resource: net::ERR_CONNECTION_REFUSED"
+    },
+    {
+      "timestamp": "2025-07-28T00:17:17.039Z",
+      "type": "info",
+      "message": "✅ Route /feed accessible"
+    },
+    {
+      "timestamp": "2025-07-28T00:17:23.707Z",
+      "type": "debug",
+      "message": "Console: %cDownload the React DevTools for a better development experience: https://reactjs.org/link/react-devtools font-weight:bold"
+    },
+    {
+      "timestamp": "2025-07-28T00:17:40.152Z",
+      "type": "warning",
+      "message": "Request Failed: http://localhost:5000/api/auth/me"
+    },
+    {
+      "timestamp": "2025-07-28T00:17:40.153Z",
+      "type": "debug",
+      "message": "Console: Failed to load resource: net::ERR_CONNECTION_REFUSED"
+    },
+    {
+      "timestamp": "2025-07-28T00:17:40.252Z",
+      "type": "debug",
+      "message": "Console: [DOM] Input elements should have autocomplete attributes (suggested: \"current-password\"): (More info: https://goo.gl/9p2vKq) %o"
+    },
+    {
+      "timestamp": "2025-07-28T00:17:42.371Z",
+      "type": "warning",
+      "message": "Request Failed: http://localhost:5000/api/auth/me"
+    },
+    {
+      "timestamp": "2025-07-28T00:17:42.372Z",
+      "type": "debug",
+      "message": "Console: Failed to load resource: net::ERR_CONNECTION_REFUSED"
+    },
+    {
+      "timestamp": "2025-07-28T00:17:43.368Z",
+      "type": "info",
+      "message": "✅ Route /alerts accessible"
+    },
+    {
+      "timestamp": "2025-07-28T00:17:46.388Z",
+      "type": "debug",
+      "message": "Console: %cDownload the React DevTools for a better development experience: https://reactjs.org/link/react-devtools font-weight:bold"
+    },
+    {
+      "timestamp": "2025-07-28T00:17:51.035Z",
+      "type": "warning",
+      "message": "Request Failed: http://localhost:5000/api/auth/me"
+    },
+    {
+      "timestamp": "2025-07-28T00:17:51.039Z",
+      "type": "debug",
+      "message": "Console: Failed to load resource: net::ERR_CONNECTION_REFUSED"
+    },
+    {
+      "timestamp": "2025-07-28T00:17:51.057Z",
+      "type": "warning",
+      "message": "Request Failed: http://localhost:5000/api/auth/me"
+    },
+    {
+      "timestamp": "2025-07-28T00:17:51.058Z",
+      "type": "debug",
+      "message": "Console: Failed to load resource: net::ERR_CONNECTION_REFUSED"
+    },
+    {
+      "timestamp": "2025-07-28T00:17:51.173Z",
+      "type": "debug",
+      "message": "Console: [DOM] Input elements should have autocomplete attributes (suggested: \"current-password\"): (More info: https://goo.gl/9p2vKq) %o"
+    },
+    {
+      "timestamp": "2025-07-28T00:17:51.784Z",
+      "type": "info",
+      "message": "✅ Route /events accessible"
+    },
+    {
+      "timestamp": "2025-07-28T00:17:52.450Z",
+      "type": "debug",
+      "message": "Console: %cDownload the React DevTools for a better development experience: https://reactjs.org/link/react-devtools font-weight:bold"
+    },
+    {
+      "timestamp": "2025-07-28T00:17:55.091Z",
+      "type": "warning",
+      "message": "Request Failed: http://localhost:5000/api/auth/me"
+    },
+    {
+      "timestamp": "2025-07-28T00:17:55.103Z",
+      "type": "debug",
+      "message": "Console: Failed to load resource: net::ERR_CONNECTION_REFUSED"
+    },
+    {
+      "timestamp": "2025-07-28T00:17:55.169Z",
+      "type": "debug",
+      "message": "Console: [DOM] Input elements should have autocomplete attributes (suggested: \"current-password\"): (More info: https://goo.gl/9p2vKq) %o"
+    },
+    {
+      "timestamp": "2025-07-28T00:17:57.218Z",
+      "type": "warning",
+      "message": "Request Failed: http://localhost:5000/api/auth/me"
+    },
+    {
+      "timestamp": "2025-07-28T00:17:57.219Z",
+      "type": "debug",
+      "message": "Console: Failed to load resource: net::ERR_CONNECTION_REFUSED"
+    },
+    {
+      "timestamp": "2025-07-28T00:17:58.002Z",
+      "type": "info",
+      "message": "✅ Route /map accessible"
+    },
+    {
+      "timestamp": "2025-07-28T00:17:58.394Z",
+      "type": "debug",
+      "message": "Console: %cDownload the React DevTools for a better development experience: https://reactjs.org/link/react-devtools font-weight:bold"
+    },
+    {
+      "timestamp": "2025-07-28T00:18:01.071Z",
+      "type": "warning",
+      "message": "Request Failed: http://localhost:5000/api/auth/me"
+    },
+    {
+      "timestamp": "2025-07-28T00:18:01.081Z",
+      "type": "debug",
+      "message": "Console: Failed to load resource: net::ERR_CONNECTION_REFUSED"
+    },
+    {
+      "timestamp": "2025-07-28T00:18:01.166Z",
+      "type": "debug",
+      "message": "Console: [DOM] Input elements should have autocomplete attributes (suggested: \"current-password\"): (More info: https://goo.gl/9p2vKq) %o"
+    },
+    {
+      "timestamp": "2025-07-28T00:18:03.851Z",
+      "type": "info",
+      "message": "✅ Route /messages accessible"
+    },
+    {
+      "timestamp": "2025-07-28T00:18:04.250Z",
+      "type": "debug",
+      "message": "Console: %cDownload the React DevTools for a better development experience: https://reactjs.org/link/react-devtools font-weight:bold"
+    },
+    {
+      "timestamp": "2025-07-28T00:18:05.297Z",
+      "type": "debug",
+      "message": "Console: [DOM] Input elements should have autocomplete attributes (suggested: \"current-password\"): (More info: https://goo.gl/9p2vKq) %o"
+    },
+    {
+      "timestamp": "2025-07-28T00:18:06.148Z",
+      "type": "info",
+      "message": "✅ Route /friends accessible"
+    },
+    {
+      "timestamp": "2025-07-28T00:18:06.537Z",
+      "type": "debug",
+      "message": "Console: %cDownload the React DevTools for a better development experience: https://reactjs.org/link/react-devtools font-weight:bold"
+    },
+    {
+      "timestamp": "2025-07-28T00:18:07.386Z",
+      "type": "debug",
+      "message": "Console: [DOM] Input elements should have autocomplete attributes (suggested: \"current-password\"): (More info: https://goo.gl/9p2vKq) %o"
+    },
+    {
+      "timestamp": "2025-07-28T00:18:07.864Z",
+      "type": "info",
+      "message": "✅ Route /profile accessible"
+    },
+    {
+      "timestamp": "2025-07-28T00:18:08.336Z",
+      "type": "debug",
+      "message": "Console: %cDownload the React DevTools for a better development experience: https://reactjs.org/link/react-devtools font-weight:bold"
+    },
+    {
+      "timestamp": "2025-07-28T00:18:09.146Z",
+      "type": "debug",
+      "message": "Console: [DOM] Input elements should have autocomplete attributes (suggested: \"current-password\"): (More info: https://goo.gl/9p2vKq) %o"
+    },
+    {
+      "timestamp": "2025-07-28T00:18:09.748Z",
+      "type": "info",
+      "message": "✅ Route /help accessible"
+    },
+    {
+      "timestamp": "2025-07-28T00:18:10.151Z",
+      "type": "debug",
+      "message": "Console: %cDownload the React DevTools for a better development experience: https://reactjs.org/link/react-devtools font-weight:bold"
+    },
+    {
+      "timestamp": "2025-07-28T00:18:11.102Z",
+      "type": "debug",
+      "message": "Console: [DOM] Input elements should have autocomplete attributes (suggested: \"current-password\"): (More info: https://goo.gl/9p2vKq) %o"
+    },
+    {
+      "timestamp": "2025-07-28T00:18:11.916Z",
+      "type": "info",
+      "message": "✅ Route /moderation accessible"
+    },
+    {
+      "timestamp": "2025-07-28T00:18:11.918Z",
+      "type": "success",
+      "message": "✅ Test réussi: Navigation et routage (92070ms)"
+    },
+    {
+      "timestamp": "2025-07-28T00:18:11.919Z",
+      "type": "info",
+      "message": "🧪 Début du test: Formulaires et interactions"
+    },
+    {
+      "timestamp": "2025-07-28T00:18:12.065Z",
+      "type": "debug",
+      "message": "Console: %cDownload the React DevTools for a better development experience: https://reactjs.org/link/react-devtools font-weight:bold"
+    },
+    {
+      "timestamp": "2025-07-28T00:18:12.665Z",
+      "type": "info",
+      "message": "📝 Éléments de formulaire: {\"hasForm\":false,\"hasEmailInput\":false,\"hasPasswordInput\":false,\"hasSubmitButton\":false}"
+    },
+    {
+      "timestamp": "2025-07-28T00:18:12.669Z",
+      "type": "warning",
+      "message": "⚠️ Test formulaire de connexion: Formulaire de connexion manquant"
+    },
+    {
+      "timestamp": "2025-07-28T00:18:12.676Z",
+      "type": "success",
+      "message": "✅ Test réussi: Formulaires et interactions (757ms)"
+    },
+    {
+      "timestamp": "2025-07-28T00:18:12.677Z",
+      "type": "info",
+      "message": "🧪 Début du test: Responsivité"
+    },
+    {
+      "timestamp": "2025-07-28T00:18:18.368Z",
+      "type": "debug",
+      "message": "Console: %cDownload the React DevTools for a better development experience: https://reactjs.org/link/react-devtools font-weight:bold"
+    },
+    {
+      "timestamp": "2025-07-28T00:18:18.969Z",
+      "type": "info",
+      "message": "📱 Desktop: 1920x1080"
+    },
+    {
+      "timestamp": "2025-07-28T00:18:37.680Z",
+      "type": "debug",
+      "message": "Console: %cDownload the React DevTools for a better development experience: https://reactjs.org/link/react-devtools font-weight:bold"
+    },
+    {
+      "timestamp": "2025-07-28T00:18:37.879Z",
+      "type": "info",
+      "message": "📱 Tablet: 768x1024"
+    },
+    {
+      "timestamp": "2025-07-28T00:18:39.165Z",
+      "type": "debug",
+      "message": "Console: %cDownload the React DevTools for a better development experience: https://reactjs.org/link/react-devtools font-weight:bold"
+    },
+    {
+      "timestamp": "2025-07-28T00:18:39.351Z",
+      "type": "info",
+      "message": "📱 Mobile: 375x667"
+    },
+    {
+      "timestamp": "2025-07-28T00:18:39.352Z",
+      "type": "success",
+      "message": "✅ Test réussi: Responsivité (26675ms)"
+    },
+    {
+      "timestamp": "2025-07-28T00:18:39.361Z",
+      "type": "info",
+      "message": "🧪 Début du test: Performance"
+    },
+    {
+      "timestamp": "2025-07-28T00:18:40.383Z",
+      "type": "debug",
+      "message": "Console: %cDownload the React DevTools for a better development experience: https://reactjs.org/link/react-devtools font-weight:bold"
+    },
+    {
+      "timestamp": "2025-07-28T00:18:40.829Z",
+      "type": "info",
+      "message": "⚡ Métriques de performance: {\"loadTime\":0,\"domContentLoaded\":0,\"firstPaint\":0,\"firstContentfulPaint\":0}"
+    },
+    {
+      "timestamp": "2025-07-28T00:18:40.830Z",
+      "type": "success",
+      "message": "✅ Test réussi: Performance (1469ms)"
+    },
+    {
+      "timestamp": "2025-07-28T00:18:40.831Z",
+      "type": "info",
+      "message": "🧪 Début du test: Accessibilité WCAG"
+    },
+    {
+      "timestamp": "2025-07-28T00:18:41.599Z",
+      "type": "debug",
+      "message": "Console: %cDownload the React DevTools for a better development experience: https://reactjs.org/link/react-devtools font-weight:bold"
+    },
+    {
+      "timestamp": "2025-07-28T00:18:41.798Z",
+      "type": "info",
+      "message": "♿ Vérifications d'accessibilité: {\"hasTitle\":true,\"hasMain\":false,\"hasHeading\":false,\"hasLandmarks\":false,\"hasAltText\":true,\"hasContrast\":true,\"hasFocusIndicators\":true}"
+    },
+    {
+      "timestamp": "2025-07-28T00:18:41.812Z",
+      "type": "success",
+      "message": "✅ Test réussi: Accessibilité WCAG (981ms)"
+    },
+    {
+      "timestamp": "2025-07-28T00:18:41.813Z",
+      "type": "info",
+      "message": "🧪 Début du test: Sécurité"
+    },
+    {
+      "timestamp": "2025-07-28T00:18:42.814Z",
+      "type": "debug",
+      "message": "Console: %cDownload the React DevTools for a better development experience: https://reactjs.org/link/react-devtools font-weight:bold"
+    },
+    {
+      "timestamp": "2025-07-28T00:18:43.013Z",
+      "type": "info",
+      "message": "🔒 Vérifications de sécurité: {\"hasCSP\":false,\"hasXFrameOptions\":true,\"hasXContentTypeOptions\":true,\"hasSecureCookies\":true,\"hasHSTS\":true}"
+    },
+    {
+      "timestamp": "2025-07-28T00:18:43.015Z",
+      "type": "success",
+      "message": "✅ Test réussi: Sécurité (1202ms)"
+    },
+    {
+      "timestamp": "2025-07-28T00:18:43.018Z",
+      "type": "info",
+      "message": "🧪 Début du test: Fonctionnalités JavaScript"
+    },
+    {
+      "timestamp": "2025-07-28T00:18:43.884Z",
+      "type": "debug",
+      "message": "Console: %cDownload the React DevTools for a better development experience: https://reactjs.org/link/react-devtools font-weight:bold"
+    },
+    {
+      "timestamp": "2025-07-28T00:18:43.962Z",
+      "type": "info",
+      "message": "✅ JavaScript fonctionne correctement"
+    },
+    {
+      "timestamp": "2025-07-28T00:18:43.963Z",
+      "type": "success",
+      "message": "✅ Test réussi: Fonctionnalités JavaScript (945ms)"
+    },
+    {
+      "timestamp": "2025-07-28T00:18:43.964Z",
+      "type": "info",
+      "message": "🧪 Début du test: Gestion des erreurs"
+    },
+    {
+      "timestamp": "2025-07-28T00:18:44.880Z",
+      "type": "debug",
+      "message": "Console: %cDownload the React DevTools for a better development experience: https://reactjs.org/link/react-devtools font-weight:bold"
+    },
+    {
+      "timestamp": "2025-07-28T00:18:45.049Z",
+      "type": "info",
+      "message": "🚨 Gestion d'erreur: {\"hasErrorContent\":true,\"hasErrorTitle\":true,\"hasErrorStructure\":true}"
+    },
+    {
+      "timestamp": "2025-07-28T00:18:45.049Z",
+      "type": "success",
+      "message": "✅ Test réussi: Gestion des erreurs (1085ms)"
+    },
+    {
+      "timestamp": "2025-07-28T00:18:45.050Z",
+      "type": "info",
+      "message": "🧪 Début du test: Compatibilité navigateur"
+    },
+    {
+      "timestamp": "2025-07-28T00:18:45.108Z",
+      "type": "info",
+      "message": "🌐 Compatibilité navigateur: {\"hasFetch\":true,\"hasPromise\":true,\"hasAsyncAwait\":true,\"hasES6\":true,\"hasLocalStorage\":true,\"hasSessionStorage\":true}"
+    },
+    {
+      "timestamp": "2025-07-28T00:18:45.109Z",
+      "type": "success",
+      "message": "✅ Test réussi: Compatibilité navigateur (59ms)"
+    }
+  ],
+  "timestamp": "2025-07-28T00:18:45.128Z"
+}

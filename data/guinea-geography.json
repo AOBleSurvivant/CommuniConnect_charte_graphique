@@ -1,0 +1,30 @@
+{
+  "Guinée": {
+    "Régions": [
+      {
+        "nom": "Conakry",
+        "préfectures": [
+          {
+            "nom": "Conakry",
+            "coordonnées": {
+              "latitude": 9.6412,
+              "longitude": -13.5784
+            },
+            "communes": [
+              {"nom": "Kaloum", "coordonnées": {"latitude": 9.5144, "longitude": -13.6783}},
+              {"nom": "Dixinn", "coordonnées": {"latitude": 9.5557, "longitude": -13.6710}},
+              {"nom": "Matam", "coordonnées": {"latitude": 9.5354, "longitude": -13.6589}},
+              {"nom": "Ratoma", "coordonnées": {"latitude": 9.6022, "longitude": -13.6294}},
+              {"nom": "Matoto", "coordonnées": {"latitude": 9.5628, "longitude": -13.6319}},
+              {"nom": "Kagbelen", "coordonnées": {"latitude": 9.6201, "longitude": -13.5987}},
+              {"nom": "Gbessia", "coordonnées": {"latitude": 9.5733, "longitude": -13.6175}},
+              {"nom": "Sonfonia", "coordonnées": {"latitude": 9.6354, "longitude": -13.5917}},
+              {"nom": "Lambanyi", "coordonnées": {"latitude": 9.6225, "longitude": -13.5978}},
+              {"nom": "Kassa", "coordonnées": {"latitude": 9.4546, "longitude": -13.7806}}
+            ]
+          }
+        ]
+      }
+    ]
+  }
+} 

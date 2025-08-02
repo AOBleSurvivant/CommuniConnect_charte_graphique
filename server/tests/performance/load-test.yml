@@ -1,0 +1,73 @@
+config:
+  target: 'http://localhost:5000'
+  phases:
+    - duration: 60
+      arrivalRate: 10
+      name: "Montée en charge progressive"
+    - duration: 120
+      arrivalRate: 20
+      name: "Charge normale"
+    - duration: 60
+      arrivalRate: 50
+      name: "Pic de charge"
+    - duration: 30
+      arrivalRate: 10
+      name: "Retour à la normale"
+  defaults:
+    headers:
+      Content-Type: 'application/json'
+      User-Agent: 'CommuniConnect-Performance-Test'
+
+scenarios:
+  - name: "Test des endpoints publics"
+    weight: 70
+    flow:
+      - get:
+          url: "/api/health"
+          expect:
+            - statusCode: 200
+      - think: 1
+      - get:
+          url: "/api/events"
+          expect:
+            - statusCode: 200
+      - think: 2
+      - get:
+          url: "/api/alerts"
+          expect:
+            - statusCode: 200
+      - think: 1
+      - get:
+          url: "/api/livestreams"
+          expect:
+            - statusCode: 200
+
+  - name: "Test des endpoints avec authentification"
+    weight: 30
+    flow:
+      - post:
+          url: "/api/auth/login"
+          json:
+            email: "test@example.com"
+            password: "testpassword123"
+          capture:
+            - json: "$.token"
+              as: "authToken"
+          expect:
+            - statusCode: [200, 401]
+      - think: 1
+      - get:
+          url: "/api/users/profile"
+          headers:
+            Authorization: "Bearer {{ authToken }}"
+          expect:
+            - statusCode: [200, 401]
+      - think: 2
+      - post:
+          url: "/api/posts"
+          headers:
+            Authorization: "Bearer {{ authToken }}"
+          json:
+            content: "Test post from performance test"
+          expect:
+            - statusCode: [201, 401] 

@@ -1,0 +1,46 @@
+{
+  "tests": [
+    {
+      "name": "Serveur API",
+      "passed": true,
+      "message": "Serveur opérationnel"
+    },
+    {
+      "name": "Documentation Swagger",
+      "passed": true,
+      "message": "Documentation accessible"
+    },
+    {
+      "name": "Client React",
+      "passed": false,
+      "message": "Erreur: fetch failed"
+    },
+    {
+      "name": "Headers de Sécurité",
+      "passed": true,
+      "message": "3 headers trouvés"
+    },
+    {
+      "name": "Système de Logging",
+      "passed": true,
+      "message": "Dossier de logs créé"
+    },
+    {
+      "name": "Tests de Performance",
+      "passed": true,
+      "message": "3 fichiers de test trouvés"
+    },
+    {
+      "name": "Optimisations Frontend",
+      "passed": true,
+      "message": "Utilitaires de performance créés"
+    },
+    {
+      "name": "Validation des Données",
+      "passed": true,
+      "message": "Middleware de validation créé"
+    }
+  ],
+  "score": 7,
+  "totalTests": 8
+}

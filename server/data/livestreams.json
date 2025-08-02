@@ -1,0 +1,127 @@
+[
+  {
+    "_id": "fake-live-1",
+    "author": "test@communiconnect.gn",
+    "title": "Incendie dans le quartier Centre",
+    "description": "Incendie signalé rue principale, pompiers en route. Évitez la zone.",
+    "type": "alert",
+    "urgency": "critical",
+    "status": "active",
+    "isPublic": true,
+    "location": {
+      "region": "Conakry",
+      "prefecture": "Conakry",
+      "commune": "Kaloum",
+      "quartier": "Centre",
+      "coordinates": {
+        "latitude": 9.537,
+        "longitude": -13.6785
+      }
+    },
+    "viewers": [],
+    "messages": [],
+    "reactions": [],
+    "createdAt": "2024-01-15T10:30:00.000Z",
+    "updatedAt": "2024-01-15T10:30:00.000Z"
+  },
+  {
+    "_id": "fake-live-2",
+    "author": "test@communiconnect.gn",
+    "title": "Coupure d'électricité - Quartier Almamya",
+    "description": "Coupure d'électricité prévue de 14h à 18h pour maintenance.",
+    "type": "alert",
+    "urgency": "medium",
+    "status": "active",
+    "isPublic": true,
+    "location": {
+      "region": "Conakry",
+      "prefecture": "Conakry",
+      "commune": "Ratoma",
+      "quartier": "Almamya",
+      "coordinates": {
+        "latitude": 9.545,
+        "longitude": -13.675
+      }
+    },
+    "viewers": [],
+    "messages": [],
+    "reactions": [],
+    "createdAt": "2024-01-15T11:00:00.000Z",
+    "updatedAt": "2024-01-15T11:00:00.000Z"
+  },
+  {
+    "_id": "fake-live-3",
+    "author": "test@communiconnect.gn",
+    "title": "Réunion communautaire - Nettoyage du quartier",
+    "description": "Réunion pour organiser le nettoyage du quartier ce weekend.",
+    "type": "community",
+    "urgency": "low",
+    "status": "active",
+    "isPublic": true,
+    "location": {
+      "region": "Conakry",
+      "prefecture": "Conakry",
+      "commune": "Dixinn",
+      "quartier": "Kipé",
+      "coordinates": {
+        "latitude": 9.530,
+        "longitude": -13.680
+      }
+    },
+    "viewers": [],
+    "messages": [],
+    "reactions": [],
+    "createdAt": "2024-01-15T12:00:00.000Z",
+    "updatedAt": "2024-01-15T12:00:00.000Z"
+  },
+  {
+    "_id": "fake-live-4",
+    "author": "test@communiconnect.gn",
+    "title": "Accident de circulation - Route de Donka",
+    "description": "Accident sur la route de Donka, circulation ralentie.",
+    "type": "alert",
+    "urgency": "high",
+    "status": "active",
+    "isPublic": true,
+    "location": {
+      "region": "Conakry",
+      "prefecture": "Conakry",
+      "commune": "Matam",
+      "quartier": "Donka",
+      "coordinates": {
+        "latitude": 9.540,
+        "longitude": -13.670
+      }
+    },
+    "viewers": [],
+    "messages": [],
+    "reactions": [],
+    "createdAt": "2024-01-15T13:00:00.000Z",
+    "updatedAt": "2024-01-15T13:00:00.000Z"
+  },
+  {
+    "_id": "fake-live-5",
+    "author": "test@communiconnect.gn",
+    "title": "Festival culturel - Place de l'Indépendance",
+    "description": "Festival culturel avec musique traditionnelle et danses.",
+    "type": "community",
+    "urgency": "low",
+    "status": "active",
+    "isPublic": true,
+    "location": {
+      "region": "Conakry",
+      "prefecture": "Conakry",
+      "commune": "Kaloum",
+      "quartier": "Centre",
+      "coordinates": {
+        "latitude": 9.537,
+        "longitude": -13.6785
+      }
+    },
+    "viewers": [],
+    "messages": [],
+    "reactions": [],
+    "createdAt": "2024-01-15T14:00:00.000Z",
+    "updatedAt": "2024-01-15T14:00:00.000Z"
+  }
+] 

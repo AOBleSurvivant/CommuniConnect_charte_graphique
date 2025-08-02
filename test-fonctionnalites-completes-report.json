@@ -1,0 +1,54 @@
+{
+  "timestamp": "2025-07-28T12:45:04.213Z",
+  "results": {
+    "events": {
+      "success": true,
+      "details": [
+        "✅ Navigation réussie",
+        "✅ Bouton FAB trouvé (alternative)",
+        "✅ Formulaire ouvert",
+        "✅ Formulaire rempli",
+        "❌ Bouton de soumission non trouvé"
+      ]
+    },
+    "alerts": {
+      "success": true,
+      "details": [
+        "✅ Navigation réussie",
+        "✅ Bouton FAB trouvé (alternative)",
+        "✅ Formulaire ouvert",
+        "✅ Formulaire rempli",
+        "❌ Bouton de soumission non trouvé"
+      ]
+    },
+    "help": {
+      "success": true,
+      "details": [
+        "✅ Navigation réussie",
+        "✅ Bouton FAB trouvé (alternative)",
+        "✅ Formulaire ouvert",
+        "✅ Formulaire rempli",
+        "❌ Bouton de soumission non trouvé"
+      ]
+    },
+    "sharing": {
+      "success": false,
+      "details": [
+        "✅ Navigation vers le feed réussie",
+        "❌ Boutons de partage non trouvés",
+        "❌ Boutons de partage sur la carte non trouvés"
+      ]
+    },
+    "overall": {
+      "success": false,
+      "score": 13,
+      "total": 22
+    }
+  },
+  "summary": {
+    "totalTests": 22,
+    "passedTests": 13,
+    "percentage": 59,
+    "success": false
+  }
+}

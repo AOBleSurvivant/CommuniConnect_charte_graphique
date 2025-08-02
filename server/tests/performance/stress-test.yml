@@ -1,0 +1,53 @@
+config:
+  target: 'http://localhost:5000'
+  phases:
+    - duration: 30
+      arrivalRate: 5
+      name: "Phase de réchauffement"
+    - duration: 60
+      arrivalRate: 10
+      name: "Charge de base"
+    - duration: 120
+      arrivalRate: 30
+      name: "Charge élevée"
+    - duration: 60
+      arrivalRate: 50
+      name: "Stress test"
+    - duration: 30
+      arrivalRate: 100
+      name: "Test de rupture"
+  defaults:
+    headers:
+      Content-Type: 'application/json'
+      User-Agent: 'CommuniConnect-Stress-Test'
+
+scenarios:
+  - name: "Test de stress des endpoints critiques"
+    weight: 100
+    flow:
+      - get:
+          url: "/api/health"
+          expect:
+            - statusCode: 200
+            - responseTime: [0, 1000]
+      - think: 0.5
+      - get:
+          url: "/api/events"
+          expect:
+            - statusCode: 200
+            - responseTime: [0, 2000]
+      - think: 1
+      - get:
+          url: "/api/alerts"
+          expect:
+            - statusCode: 200
+            - responseTime: [0, 2000]
+      - think: 0.5
+      - post:
+          url: "/api/auth/login"
+          json:
+            email: "test@example.com"
+            password: "testpassword123"
+          expect:
+            - statusCode: [200, 401]
+            - responseTime: [0, 3000] 

@@ -1,0 +1,63 @@
+{
+  "timestamp": "2025-07-30T08:21:41.442Z",
+  "serveur": {
+    "statut": "FONCTIONNEL",
+    "erreurs": []
+  },
+  "client": {
+    "statut": "FONCTIONNEL",
+    "erreurs": []
+  },
+  "fonctionnalites": {
+    "Authentification": {
+      "success": true,
+      "status": 200
+    },
+    "Posts": {
+      "success": true,
+      "status": 200
+    },
+    "Événements": {
+      "success": true,
+      "status": 200
+    },
+    "Alertes": {
+      "success": true,
+      "status": 200
+    },
+    "Livestreams": {
+      "success": true,
+      "status": 200
+    },
+    "Messages": {
+      "success": true,
+      "status": 200
+    },
+    "Amis": {
+      "success": true,
+      "status": 200
+    },
+    "Notifications": {
+      "success": true,
+      "status": 200
+    },
+    "Modération": {
+      "success": true,
+      "status": 200
+    },
+    "Recherche": {
+      "success": true,
+      "status": 200
+    },
+    "Statistiques": {
+      "success": true,
+      "status": 200
+    },
+    "Géolocalisation": {
+      "success": false,
+      "status": 404,
+      "message": "Request failed with status code 404"
+    }
+  },
+  "score": 96
+}
