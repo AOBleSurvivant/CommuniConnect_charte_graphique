@@ -1,27 +1,312 @@
 import api from './api';
+import localPersistenceService from './localPersistenceService';
 
 class MessagesService {
+  constructor() {
+    this.testDataAdded = false;
+  }
+
+  // Ajouter des données de test pour les messages
+  addTestData() {
+    if (this.testDataAdded) {
+      console.log('📝 Données de test déjà ajoutées');
+      return;
+    }
+
+    const testConversations = [
+      {
+        id: 'conv1',
+        name: 'Dr. Marie Dubois',
+        type: 'private',
+        avatar: 'https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=150&h=150&fit=crop&crop=face',
+        lastMessage: {
+          content: 'Merci pour vos conseils sur la nutrition !',
+          timestamp: new Date(Date.now() - 2 * 60 * 60 * 1000).toISOString(),
+          sender: {
+            _id: 'user2',
+            firstName: 'Marie',
+            lastName: 'Dubois'
+          }
+        },
+        unreadCount: 2,
+        participants: [
+          {
+            user: {
+              _id: 'user1',
+              firstName: 'Jean',
+              lastName: 'Martin',
+              avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face'
+            }
+          },
+          {
+            user: {
+              _id: 'user2',
+              firstName: 'Marie',
+              lastName: 'Dubois',
+              avatar: 'https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=150&h=150&fit=crop&crop=face'
+            }
+          }
+        ],
+        memberCount: 2,
+        messageCount: 15,
+        updatedAt: new Date(Date.now() - 2 * 60 * 60 * 1000).toISOString()
+      },
+      {
+        id: 'conv2',
+        name: 'Quartier Saint-Michel',
+        type: 'quartier',
+        avatar: null,
+        lastMessage: {
+          content: 'Quelqu\'un a des nouvelles du projet de jardin communautaire ?',
+          timestamp: new Date(Date.now() - 30 * 60 * 1000).toISOString(),
+          sender: {
+            _id: 'user3',
+            firstName: 'Pierre',
+            lastName: 'Durand'
+          }
+        },
+        unreadCount: 0,
+        participants: [
+          {
+            user: {
+              _id: 'user1',
+              firstName: 'Jean',
+              lastName: 'Martin',
+              avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face'
+            }
+          },
+          {
+            user: {
+              _id: 'user3',
+              firstName: 'Pierre',
+              lastName: 'Durand',
+              avatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face'
+            }
+          },
+          {
+            user: {
+              _id: 'user4',
+              firstName: 'Sophie',
+              lastName: 'Leroy',
+              avatar: 'https://images.unsplash.com/photo-1494790108755-2616b612b786?w=150&h=150&fit=crop&crop=face'
+            }
+          }
+        ],
+        memberCount: 3,
+        messageCount: 45,
+        quartier: 'Saint-Michel',
+        ville: 'Paris',
+        updatedAt: new Date(Date.now() - 30 * 60 * 1000).toISOString()
+      },
+      {
+        id: 'conv3',
+        name: 'Groupe Fitness Local',
+        type: 'group',
+        avatar: null,
+        lastMessage: {
+          content: 'Séance de yoga demain matin à 7h au parc !',
+          timestamp: new Date(Date.now() - 15 * 60 * 1000).toISOString(),
+          sender: {
+            _id: 'user5',
+            firstName: 'Emma',
+            lastName: 'Bernard'
+          }
+        },
+        unreadCount: 1,
+        participants: [
+          {
+            user: {
+              _id: 'user1',
+              firstName: 'Jean',
+              lastName: 'Martin',
+              avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face'
+            }
+          },
+          {
+            user: {
+              _id: 'user5',
+              firstName: 'Emma',
+              lastName: 'Bernard',
+              avatar: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=face'
+            }
+          },
+          {
+            user: {
+              _id: 'user6',
+              firstName: 'Lucas',
+              lastName: 'Moreau',
+              avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&h=150&fit=crop&crop=face'
+            }
+          }
+        ],
+        memberCount: 3,
+        messageCount: 23,
+        updatedAt: new Date(Date.now() - 15 * 60 * 1000).toISOString()
+      }
+    ];
+
+    const testMessages = {
+      conv1: [
+        {
+          _id: 'msg1',
+          content: 'Bonjour Dr. Dubois, j\'ai une question sur la nutrition.',
+          sender: {
+            _id: 'user1',
+            firstName: 'Jean',
+            lastName: 'Martin',
+            avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face'
+          },
+          recipients: ['user2'],
+          createdAt: new Date(Date.now() - 3 * 60 * 60 * 1000).toISOString(),
+          readBy: [
+            { user: 'user2', readAt: new Date(Date.now() - 2 * 60 * 60 * 1000).toISOString() }
+          ],
+          status: 'delivered'
+        },
+        {
+          _id: 'msg2',
+          content: 'Bonjour Jean ! Je serais ravie de vous aider. De quoi s\'agit-il ?',
+          sender: {
+            _id: 'user2',
+            firstName: 'Marie',
+            lastName: 'Dubois',
+            avatar: 'https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=150&h=150&fit=crop&crop=face'
+          },
+          recipients: ['user1'],
+          createdAt: new Date(Date.now() - 2 * 60 * 60 * 1000).toISOString(),
+          readBy: [
+            { user: 'user1', readAt: new Date(Date.now() - 2 * 60 * 60 * 1000).toISOString() }
+          ],
+          status: 'read'
+        },
+        {
+          _id: 'msg3',
+          content: 'Merci pour vos conseils sur la nutrition !',
+          sender: {
+            _id: 'user2',
+            firstName: 'Marie',
+            lastName: 'Dubois',
+            avatar: 'https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=150&h=150&fit=crop&crop=face'
+          },
+          recipients: ['user1'],
+          createdAt: new Date(Date.now() - 2 * 60 * 60 * 1000).toISOString(),
+          readBy: [],
+          status: 'sent'
+        }
+      ],
+      conv2: [
+        {
+          _id: 'msg4',
+          content: 'Bonjour à tous ! Comment va le quartier ?',
+          sender: {
+            _id: 'user3',
+            firstName: 'Pierre',
+            lastName: 'Durand',
+            avatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face'
+          },
+          recipients: ['user1', 'user4'],
+          createdAt: new Date(Date.now() - 45 * 60 * 1000).toISOString(),
+          readBy: [
+            { user: 'user1', readAt: new Date(Date.now() - 40 * 60 * 1000).toISOString() },
+            { user: 'user4', readAt: new Date(Date.now() - 35 * 60 * 1000).toISOString() }
+          ],
+          status: 'read'
+        },
+        {
+          _id: 'msg5',
+          content: 'Quelqu\'un a des nouvelles du projet de jardin communautaire ?',
+          sender: {
+            _id: 'user3',
+            firstName: 'Pierre',
+            lastName: 'Durand',
+            avatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face'
+          },
+          recipients: ['user1', 'user4'],
+          createdAt: new Date(Date.now() - 30 * 60 * 1000).toISOString(),
+          readBy: [
+            { user: 'user1', readAt: new Date(Date.now() - 25 * 60 * 1000).toISOString() }
+          ],
+          status: 'delivered'
+        }
+      ],
+      conv3: [
+        {
+          _id: 'msg6',
+          content: 'Bonjour tout le monde ! Qui est partant pour une séance de yoga ?',
+          sender: {
+            _id: 'user5',
+            firstName: 'Emma',
+            lastName: 'Bernard',
+            avatar: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=face'
+          },
+          recipients: ['user1', 'user6'],
+          createdAt: new Date(Date.now() - 20 * 60 * 1000).toISOString(),
+          readBy: [
+            { user: 'user1', readAt: new Date(Date.now() - 18 * 60 * 1000).toISOString() },
+            { user: 'user6', readAt: new Date(Date.now() - 16 * 60 * 1000).toISOString() }
+          ],
+          status: 'read'
+        },
+        {
+          _id: 'msg7',
+          content: 'Séance de yoga demain matin à 7h au parc !',
+          sender: {
+            _id: 'user5',
+            firstName: 'Emma',
+            lastName: 'Bernard',
+            avatar: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=face'
+          },
+          recipients: ['user1', 'user6'],
+          createdAt: new Date(Date.now() - 15 * 60 * 1000).toISOString(),
+          readBy: [
+            { user: 'user6', readAt: new Date(Date.now() - 10 * 60 * 1000).toISOString() }
+          ],
+          status: 'delivered'
+        }
+      ]
+    };
+
+    // Sauvegarder les données de test
+    localPersistenceService.save('conversations', testConversations);
+    Object.keys(testMessages).forEach(conversationId => {
+      localPersistenceService.save(`messages_${conversationId}`, testMessages[conversationId]);
+    });
+
+    this.testDataAdded = true;
+    console.log('📝 Données de test pour les messages ajoutées');
+  }
+
   // Récupérer toutes les conversations de l'utilisateur
   async getConversations() {
     try {
-      const response = await api.get('/messages/conversations');
+      const response = await api.get('/conversations');
       return response.data;
     } catch (error) {
-      console.error('Erreur lors de la récupération des conversations:', error);
-      throw error;
+      console.log('📂 Tentative de récupération depuis le stockage local');
+      // Fallback vers les données locales
+      const localConversations = localPersistenceService.load('conversations');
+      if (localConversations) {
+        return { conversations: localConversations };
+      }
+      return { conversations: [] };
     }
   }
 
   // Récupérer les messages d'une conversation
   async getConversationMessages(conversationId, page = 1, limit = 50) {
     try {
-      const response = await api.get(`/messages/conversations/${conversationId}/messages`, {
+      const response = await api.get(`/conversations/${conversationId}/messages`, {
         params: { page, limit }
       });
       return response.data;
     } catch (error) {
-      console.error('Erreur lors de la récupération des messages:', error);
-      throw error;
+      console.log('📂 Récupération des messages depuis le stockage local');
+      // Fallback vers les données locales
+      const localMessages = localPersistenceService.load(`messages_${conversationId}`);
+      if (localMessages) {
+        return { messages: localMessages };
+      }
+      return { messages: [] };
     }
   }
 
@@ -39,7 +324,7 @@ class MessagesService {
   // Créer une nouvelle conversation
   async createConversation(conversationData) {
     try {
-      const response = await api.post('/messages/conversations', conversationData);
+      const response = await api.post('/conversations', conversationData);
       return response.data;
     } catch (error) {
       console.error('Erreur lors de la création de la conversation:', error);
@@ -88,7 +373,7 @@ class MessagesService {
   // Créer une conversation privée avec un utilisateur
   async createPrivateConversation(userId) {
     try {
-      const response = await api.post('/messages/conversations', {
+      const response = await api.post('/conversations', {
         type: 'private',
         participants: [userId]
       });

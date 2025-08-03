@@ -18,6 +18,7 @@ import {
   Close,
   NotificationsActive,
   Group,
+  Lightbulb,
 } from '@mui/icons-material';
 import { logout } from '../../store/slices/authSlice';
 import NotificationCenter from '../common/NotificationCenter';
@@ -76,6 +77,7 @@ const NavigationCommuniConnect = () => {
         { text: 'Fil d\'actualité', icon: <Feed />, path: '/feed' },
         { text: 'Amis', icon: <Person />, path: '/friends' },
         { text: 'Messages', icon: <Chat />, path: '/messages' },
+        { text: 'CommuniConseil', icon: <Lightbulb />, path: '/communiconseil' },
         { text: 'Alertes', icon: <Notifications />, path: '/alerts' }
       ]
     },

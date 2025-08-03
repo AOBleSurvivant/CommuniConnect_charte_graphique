@@ -9,6 +9,7 @@ import livestreamsReducer from './slices/livestreamsSlice';
 import notificationsReducer from './slices/notificationsSlice';
 import moderationReducer from './slices/moderationSlice';
 import mapReducer from './slices/mapSlice';
+import communiconseilReducer from './slices/communiconseilSlice';
 
 const store = configureStore({
   reducer: {
@@ -22,6 +23,7 @@ const store = configureStore({
     notifications: notificationsReducer,
     moderation: moderationReducer,
     map: mapReducer,
+    communiconseil: communiconseilReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

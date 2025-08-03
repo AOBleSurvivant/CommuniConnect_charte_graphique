@@ -1,4 +1,5 @@
 import axios from 'axios';
+import localPersistenceService from './localPersistenceService';
 
 const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000/api';
 
@@ -58,6 +59,12 @@ const authService = {
     };
     
     const response = await authAPI.post('/register', registerData);
+    
+    // Sauvegarder localement les données utilisateur
+    if (response.data.success && response.data.user) {
+      localPersistenceService.saveProfile(response.data.user);
+    }
+    
     return response;
   },
 
@@ -69,24 +76,65 @@ const authService = {
       password: credentials.password
     };
     const response = await authAPI.post('/login', loginData);
+    
+    // Sauvegarder localement les données utilisateur
+    if (response.data.success && response.data.user) {
+      localPersistenceService.saveProfile(response.data.user);
+    }
+    
     return response;
   },
 
   // Déconnexion
   logout: async () => {
     const response = await authAPI.post('/logout');
+    
+    // Nettoyer les données locales
+    localPersistenceService.remove('profile');
+    localPersistenceService.remove('profile_picture');
+    
     return response;
   },
 
   // Obtenir l'utilisateur actuel
   getCurrentUser: async () => {
-    const response = await authAPI.get('/me');
-    return response;
+    try {
+      const response = await authAPI.get('/me');
+      
+      // Sauvegarder localement les données utilisateur
+      if (response.data.success && response.data.user) {
+        localPersistenceService.saveProfile(response.data.user);
+      }
+      
+      return response;
+    } catch (error) {
+      // En cas d'erreur, essayer de récupérer depuis le stockage local
+      const userId = localStorage.getItem('userId');
+      if (userId) {
+        const localProfile = localPersistenceService.loadProfile(userId);
+        if (localProfile) {
+          console.log('📂 Utilisateur récupéré depuis le stockage local');
+          return {
+            data: {
+              success: true,
+              user: localProfile
+            }
+          };
+        }
+      }
+      throw error;
+    }
   },
 
   // Mettre à jour le profil
   updateProfile: async (profileData) => {
     const response = await authAPI.put('/profile', profileData);
+    
+    // Sauvegarder localement les données mises à jour
+    if (response.data.success && response.data.user) {
+      localPersistenceService.saveProfile(response.data.user);
+    }
+    
     return response;
   },
 
@@ -97,36 +145,38 @@ const authService = {
         'Content-Type': 'multipart/form-data',
       },
     });
+    
+    // Sauvegarder localement la photo de profil
+    if (response.data.success && response.data.profilePicture) {
+      const userId = localStorage.getItem('userId') || 'current';
+      localPersistenceService.saveProfilePicture(userId, {
+        profilePicture: response.data.profilePicture,
+        updatedAt: new Date().toISOString()
+      });
+    }
+    
     return response;
   },
 
-  // Demande de réinitialisation de mot de passe
-  forgotPassword: async (email) => {
-    const response = await authAPI.post('/forgot-password', { email });
-    return response;
+  // Récupérer le profil depuis le stockage local
+  getLocalProfile: (userId) => {
+    return localPersistenceService.loadProfile(userId);
   },
 
-  // Réinitialisation de mot de passe
-  resetPassword: async (token, password) => {
-    const response = await authAPI.post(`/reset-password/${token}`, { password });
-    return response;
+  // Récupérer la photo de profil depuis le stockage local
+  getLocalProfilePicture: (userId) => {
+    return localPersistenceService.loadProfilePicture(userId);
   },
 
-  // Vérifier si l'utilisateur est connecté
-  isAuthenticated: () => {
-    const token = localStorage.getItem('token');
-    return !!token;
+  // Sauvegarder le profil localement
+  saveLocalProfile: (profileData) => {
+    return localPersistenceService.saveProfile(profileData);
   },
 
-  // Obtenir le token
-  getToken: () => {
-    return localStorage.getItem('token');
-  },
-
-  // Supprimer le token
-  removeToken: () => {
-    localStorage.removeItem('token');
-  },
+  // Sauvegarder la photo de profil localement
+  saveLocalProfilePicture: (userId, pictureData) => {
+    return localPersistenceService.saveProfilePicture(userId, pictureData);
+  }
 };
 
 export default authService; 

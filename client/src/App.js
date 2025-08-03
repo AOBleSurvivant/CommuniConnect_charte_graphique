@@ -6,6 +6,7 @@ import LoadingSpinner from './components/common/LoadingSpinner';
 import ErrorBoundary from './components/common/ErrorBoundary';
 import { AccessibilityProvider } from './components/common/AccessibilityProvider';
 import DesignSystemDemo from './components/common/DesignSystemDemo';
+import localPersistenceService from './services/localPersistenceService';
 
 // Import des composants lazy
 import Layout from './components/Layout/Layout';
@@ -24,13 +25,13 @@ import {
   LazyFriendsPage,
   LazyProfilePage,
   LazyModerationPage,
-  LazyAdminDashboard
+  LazyAdminDashboard,
+  LazyCommuniConseilPage,
+  LazyCommuniConseilAdminDashboard
 } from './components/common/LazyLoader';
 
 // Import des actions Redux
 import { checkAuthStatus } from './store/slices/authSlice';
-
-
 
 // Composant de route protégée
 const ProtectedRoute = ({ children, allowedRoles = [] }) => {
@@ -59,6 +60,9 @@ function App() {
   const { loading } = useSelector((state) => state.auth);
 
   useEffect(() => {
+    // Initialiser le service de persistance locale
+    localPersistenceService.init();
+    
     // Vérifier le statut d'authentification au chargement de l'app
     dispatch(checkAuthStatus());
   }, [dispatch]);
@@ -94,6 +98,7 @@ function App() {
             <Route path="map" element={<LazyMapPage />} />
             <Route path="messages" element={<LazyMessagesPage />} />
             <Route path="friends" element={<LazyFriendsPage />} />
+            <Route path="communiconseil" element={<LazyCommuniConseilPage />} />
             <Route path="profile" element={<LazyProfilePage />} />
                        <Route path="moderation" element={
                  <ProtectedRoute allowedRoles={['moderator', 'admin']}>
@@ -103,6 +108,11 @@ function App() {
                <Route path="admin" element={
                  <ProtectedRoute allowedRoles={['admin']}>
                        <LazyAdminDashboard />
+                 </ProtectedRoute>
+               } />
+               <Route path="admin/communiconseil" element={
+                 <ProtectedRoute allowedRoles={['admin']}>
+                       <LazyCommuniConseilAdminDashboard />
                  </ProtectedRoute>
                } />
       </Route>

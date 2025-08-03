@@ -11,6 +11,8 @@ const HelpPageLazy = lazy(() => import('../../pages/Help/HelpPage'));
 const MapPageLazy = lazy(() => import('../../pages/Map/MapPage'));
 const MessagesPageLazy = lazy(() => import('../../pages/Messages/MessagesPage'));
 const FriendsPageLazy = lazy(() => import('../../pages/Friends/FriendsPage'));
+const CommuniConseilPageLazy = lazy(() => import('../../pages/CommuniConseil'));
+const CommuniConseilAdminDashboardLazy = lazy(() => import('../../pages/Admin/CommuniConseilAdminDashboard'));
 const ProfilePageLazy = lazy(() => import('../../pages/Profile/ProfilePage'));
 const ModerationPageLazy = lazy(() => import('../../pages/Moderation/ModerationPage'));
 const AdminDashboardLazy = lazy(() => import('../../pages/Admin/AdminDashboard'));
@@ -39,6 +41,8 @@ export const LazyHelpPage = withSuspense(HelpPageLazy, "Chargement des demandes 
 export const LazyMapPage = withSuspense(MapPageLazy, "Chargement de la carte...");
 export const LazyMessagesPage = withSuspense(MessagesPageLazy, "Chargement des messages...");
 export const LazyFriendsPage = withSuspense(FriendsPageLazy, "Chargement des amis...");
+export const LazyCommuniConseilPage = withSuspense(CommuniConseilPageLazy, "Chargement de CommuniConseil...");
+export const LazyCommuniConseilAdminDashboard = withSuspense(CommuniConseilAdminDashboardLazy, "Chargement du tableau de bord CommuniConseil...");
 export const LazyProfilePage = withSuspense(ProfilePageLazy, "Chargement du profil...");
 export const LazyModerationPage = withSuspense(ModerationPageLazy, "Chargement de la modération...");
 export const LazyAdminDashboard = withSuspense(AdminDashboardLazy, "Chargement du dashboard administrateur...");

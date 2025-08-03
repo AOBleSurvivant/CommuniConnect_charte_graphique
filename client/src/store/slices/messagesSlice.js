@@ -1,4 +1,4 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import { createSlice, createAsyncThunk, createSelector } from '@reduxjs/toolkit';
 import messagesService from '../../services/messagesService';
 
 // Actions asynchrones
@@ -349,23 +349,62 @@ export const {
   clearSuccess
 } = messagesSlice.actions;
 
-// Sélecteurs
-export const selectConversations = (state) => state.messages.conversations;
-export const selectCurrentConversation = (state) => state.messages.currentConversation;
-export const selectMessages = (state) => state.messages.messages;
-export const selectSelectedConversationId = (state) => state.messages.selectedConversationId;
-export const selectMessagesLoading = (state) => state.messages.loading;
-export const selectMessagesError = (state) => state.messages.error;
-export const selectUnreadCount = (state) => state.messages.unreadCount;
-export const selectMessageStats = (state) => state.messages.stats;
-export const selectSearchResults = (state) => state.messages.searchResults;
+// Sélecteurs mémorisés
+export const selectConversations = createSelector(
+  [(state) => state.messages.conversations],
+  (conversations) => conversations
+);
+
+export const selectCurrentConversation = createSelector(
+  [(state) => state.messages.currentConversation],
+  (currentConversation) => currentConversation
+);
+
+export const selectMessages = createSelector(
+  [(state) => state.messages.messages],
+  (messages) => messages
+);
+
+export const selectSelectedConversationId = createSelector(
+  [(state) => state.messages.selectedConversationId],
+  (selectedConversationId) => selectedConversationId
+);
+
+export const selectMessagesLoading = createSelector(
+  [(state) => state.messages.loading],
+  (loading) => loading
+);
+
+export const selectMessagesError = createSelector(
+  [(state) => state.messages.error],
+  (error) => error
+);
+
+export const selectUnreadCount = createSelector(
+  [(state) => state.messages.unreadCount],
+  (unreadCount) => unreadCount
+);
+
+export const selectMessageStats = createSelector(
+  [(state) => state.messages.stats],
+  (stats) => stats
+);
+
+export const selectSearchResults = createSelector(
+  [(state) => state.messages.searchResults],
+  (searchResults) => searchResults
+);
 
 // Sélecteur pour les messages d'une conversation spécifique
-export const selectConversationMessages = (conversationId) => (state) => 
-  state.messages.messages[conversationId] || [];
+export const selectConversationMessages = (conversationId) => createSelector(
+  [(state) => state.messages.messages],
+  (messages) => messages[conversationId] || []
+);
 
 // Sélecteur pour une conversation spécifique
-export const selectConversationById = (conversationId) => (state) =>
-  state.messages.conversations.find(conv => conv.id === conversationId);
+export const selectConversationById = (conversationId) => createSelector(
+  [(state) => state.messages.conversations],
+  (conversations) => conversations.find(conv => conv.id === conversationId)
+);
 
 export default messagesSlice.reducer; 

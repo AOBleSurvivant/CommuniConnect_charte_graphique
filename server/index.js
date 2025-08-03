@@ -13,6 +13,21 @@ const MessageSocketService = require('./services/messageSocketService');
 const PushNotificationService = require('./services/pushNotificationService');
 const multer = require('multer');
 require('dotenv').config();
+
+// Configuration par défaut pour le mode développement
+if (!process.env.JWT_SECRET) {
+  process.env.JWT_SECRET = 'communiconnect-dev-secret-key-2024';
+  console.log('🔧 JWT_SECRET configuré par défaut pour le développement');
+}
+
+if (!process.env.JWT_EXPIRE) {
+  process.env.JWT_EXPIRE = '7d';
+}
+
+if (!process.env.CORS_ORIGIN) {
+  process.env.CORS_ORIGIN = 'http://localhost:3000';
+}
+
 const path = require('path'); // Added for serving static files
 
 // Configuration multer pour l'upload de fichiers
@@ -155,6 +170,7 @@ app.use('/api/locations', require('./routes/locations'));
 app.use('/api/users', require('./routes/users'));
 app.use('/api/search', require('./routes/search'));
 app.use('/api/stats', require('./routes/stats'));
+app.use('/api/communiconseil', require('./routes/communiconseil'));
 
 // Route pour servir les images statiques
 app.use('/api/static/avatars', express.static(path.join(__dirname, 'static/avatars')));

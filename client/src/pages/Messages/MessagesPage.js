@@ -21,7 +21,8 @@ import {
   Drawer,
   AppBar,
   Toolbar,
-  InputAdornment
+  InputAdornment,
+  Button
 } from '@mui/material';
 import {
   Send as SendIcon,
@@ -34,7 +35,8 @@ import {
   Person as PersonIcon,
   AttachFile as AttachFileIcon,
   Image as ImageIcon,
-  VideoLibrary as VideoLibraryIcon
+  VideoLibrary as VideoLibraryIcon,
+  Refresh as RefreshIcon
 } from '@mui/icons-material';
 import { format } from 'date-fns';
 import { fr } from 'date-fns/locale';
@@ -63,6 +65,7 @@ import TypingIndicator from '../../components/Messages/TypingIndicator';
 import ConnectionStatus from '../../components/Messages/ConnectionStatus';
 import useMessageSocket from '../../hooks/useMessageSocket';
 import { formatError } from '../../utils/errorHandler';
+import messagesService from '../../services/messagesService';
 
 const MessagesPage = () => {
   const dispatch = useDispatch();
@@ -99,9 +102,34 @@ const MessagesPage = () => {
   // Charger les messages quand une conversation est sélectionnée
   useEffect(() => {
     if (selectedConversationId) {
-      dispatch(fetchConversationMessages({ conversationId: selectedConversationId }));
+      dispatch(fetchConversationMessages(selectedConversationId));
     }
   }, [selectedConversationId, dispatch]);
+
+  // Gérer les erreurs et succès
+  useEffect(() => {
+    if (error) {
+      const timer = setTimeout(() => {
+        dispatch(clearError());
+      }, 5000);
+      return () => clearTimeout(timer);
+    }
+  }, [error, dispatch]);
+
+  useEffect(() => {
+    if (success) {
+      const timer = setTimeout(() => {
+        dispatch(clearSuccess());
+      }, 3000);
+      return () => clearTimeout(timer);
+    }
+  }, [success, dispatch]);
+
+  // Charger les données de test
+  const handleLoadTestData = () => {
+    messagesService.addTestData();
+    dispatch(fetchConversations());
+  };
 
   // Filtrer les conversations
   const filteredConversations = conversations.filter(conv => {
@@ -233,6 +261,14 @@ const MessagesPage = () => {
           <IconButton onClick={() => setShowCreateForm(true)}>
             <AddIcon />
           </IconButton>
+          <Button
+            variant="outlined"
+            startIcon={<RefreshIcon />}
+            onClick={handleLoadTestData}
+            sx={{ ml: 1 }}
+          >
+            Données de test
+          </Button>
         </Toolbar>
       </AppBar>
 

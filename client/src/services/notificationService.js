@@ -1,33 +1,28 @@
+// Service de notifications en temps réel pour le tableau de bord admin
+
 import io from 'socket.io-client';
 
 class NotificationService {
   constructor() {
     this.socket = null;
-    this.isConnected = false;
-    this.listeners = new Map();
     this.notifications = [];
-    this.unreadCount = 0;
-    this.userId = null;
-    this.token = null;
+    this.listeners = [];
+    this.isConnected = false;
+    this.reconnectAttempts = 0;
+    this.maxReconnectAttempts = 5;
   }
 
-  // Initialiser la connexion
-  connect(userId, token) {
-    if (this.socket && this.isConnected) {
-      return;
+  // Initialiser la connexion Socket.IO
+  init(userId = null) {
+    if (this.socket) {
+      this.disconnect();
     }
 
-    this.userId = userId;
-    this.token = token;
-
-    // Connexion au serveur WebSocket
-    this.socket = io(process.env.REACT_APP_API_URL || 'http://localhost:5000', {
-      transports: ['websocket', 'polling'],
-      autoConnect: true,
-      reconnection: true,
-      reconnectionDelay: 1000,
-      reconnectionDelayMax: 5000,
-      reconnectionAttempts: 5,
+    this.socket = io('http://localhost:5000', {
+      auth: {
+        userId: userId
+      },
+      transports: ['websocket', 'polling']
     });
 
     this.setupEventListeners();
@@ -36,184 +31,176 @@ class NotificationService {
   // Configurer les écouteurs d'événements
   setupEventListeners() {
     this.socket.on('connect', () => {
-      console.log('🔔 Connecté au service de notifications');
+      console.log('🔔 Notifications connectées');
       this.isConnected = true;
-      this.authenticate();
+      this.reconnectAttempts = 0;
     });
 
     this.socket.on('disconnect', () => {
-      console.log('🔔 Déconnecté du service de notifications');
+      console.log('🔔 Notifications déconnectées');
       this.isConnected = false;
+      this.handleReconnect();
     });
 
     this.socket.on('connect_error', (error) => {
-      console.error('🔔 Erreur de connexion aux notifications:', error);
-      this.isConnected = false;
+      console.error('🔔 Erreur de connexion notifications:', error);
+      this.handleReconnect();
     });
 
     // Écouter les notifications
     this.socket.on('notification', (notification) => {
-      console.log('📨 Nouvelle notification reçue:', notification);
-      this.handleNewNotification(notification);
+      this.addNotification(notification);
     });
 
-    // Écouter les notifications non lues
-    this.socket.on('unread_notifications', (data) => {
-      console.log('📨 Notifications non lues reçues:', data);
-      this.handleUnreadNotifications(data.data);
+    // Écouter les notifications admin spécifiques
+    this.socket.on('admin_notification', (notification) => {
+      this.addNotification({
+        ...notification,
+        type: 'admin',
+        priority: 'high'
+      });
     });
 
-    // Écouter les statistiques du serveur
-    this.socket.on('server_stats', (stats) => {
-      console.log('📊 Statistiques serveur:', stats);
-      this.emit('server_stats', stats);
+    // Écouter les nouveaux signalements
+    this.socket.on('new_report', (report) => {
+      this.addNotification({
+        id: Date.now(),
+        type: 'report',
+        title: 'Nouveau signalement',
+        message: `Signalement reçu pour "${report.publicationTitle}"`,
+        data: report,
+        priority: 'urgent',
+        timestamp: new Date().toISOString(),
+        read: false
+      });
+    });
+
+    // Écouter les nouvelles candidatures
+    this.socket.on('new_contributor_application', (application) => {
+      this.addNotification({
+        id: Date.now(),
+        type: 'contributor',
+        title: 'Nouvelle candidature',
+        message: `Candidature de ${application.name} (${application.expertise})`,
+        data: application,
+        priority: 'medium',
+        timestamp: new Date().toISOString(),
+        read: false
+      });
+    });
+
+    // Écouter les actions admin
+    this.socket.on('admin_action_completed', (action) => {
+      this.addNotification({
+        id: Date.now(),
+        type: 'action',
+        title: 'Action admin terminée',
+        message: `${action.action} sur ${action.targetType} #${action.targetId}`,
+        data: action,
+        priority: 'low',
+        timestamp: new Date().toISOString(),
+        read: false
+      });
+    });
+
+    // Écouter les tests utilisateur terminés
+    this.socket.on('user_test_completed', (test) => {
+      this.addNotification({
+        id: Date.now(),
+        type: 'test',
+        title: 'Test utilisateur terminé',
+        message: `Test "${test.scenarioTitle}" - Performance: ${test.performance}%`,
+        data: test,
+        priority: 'medium',
+        timestamp: new Date().toISOString(),
+        read: false
+      });
     });
   }
 
-  // Authentifier l'utilisateur
-  authenticate() {
-    if (this.socket && this.userId) {
-      this.socket.emit('authenticate', {
-        userId: this.userId,
-        token: this.token
+  // Gérer la reconnexion
+  handleReconnect() {
+    if (this.reconnectAttempts < this.maxReconnectAttempts) {
+      this.reconnectAttempts++;
+      console.log(`🔔 Tentative de reconnexion ${this.reconnectAttempts}/${this.maxReconnectAttempts}`);
+      
+      setTimeout(() => {
+        this.init();
+      }, 2000 * this.reconnectAttempts);
+    } else {
+      console.error('🔔 Échec de reconnexion après plusieurs tentatives');
+    }
+  }
+
+  // Ajouter une notification
+  addNotification(notification) {
+    // Limiter le nombre de notifications en mémoire
+    if (this.notifications.length > 100) {
+      this.notifications = this.notifications.slice(-50);
+    }
+
+    this.notifications.unshift(notification);
+    this.saveToLocalStorage();
+    this.notifyListeners();
+
+    // Notification push pour les priorités urgentes
+    if (notification.priority === 'urgent') {
+      this.showPushNotification(notification);
+    }
+  }
+
+  // Afficher une notification push
+  showPushNotification(notification) {
+    if ('Notification' in window && Notification.permission === 'granted') {
+      new Notification(notification.title, {
+        body: notification.message,
+        icon: '/favicon.ico',
+        badge: '/favicon.ico',
+        tag: notification.id
       });
     }
   }
 
-  // Rejoindre des rooms spécifiques
-  joinRooms(rooms) {
-    if (this.socket && this.isConnected) {
-      this.socket.emit('join-rooms', rooms);
-    }
-  }
-
-  // Quitter des rooms
-  leaveRooms(rooms) {
-    if (this.socket && this.isConnected) {
-      this.socket.emit('leave-rooms', rooms);
-    }
-  }
-
-  // Mettre à jour la localisation
-  updateLocation(location) {
-    if (this.socket && this.isConnected) {
-      this.socket.emit('update-location', location);
+  // Demander la permission pour les notifications push
+  requestPushPermission() {
+    if ('Notification' in window && Notification.permission === 'default') {
+      Notification.requestPermission().then(permission => {
+        console.log('🔔 Permission notifications:', permission);
+      });
     }
   }
 
   // Marquer une notification comme lue
   markAsRead(notificationId) {
-    if (this.socket && this.isConnected) {
-      this.socket.emit('mark-read', notificationId);
-      
-      // Mettre à jour localement
-      const notification = this.notifications.find(n => n.id === notificationId);
-      if (notification && !notification.read) {
-        notification.read = true;
-        this.unreadCount = Math.max(0, this.unreadCount - 1);
-        this.emit('notification_updated', { notification, unreadCount: this.unreadCount });
-      }
+    const notification = this.notifications.find(n => n.id === notificationId);
+    if (notification) {
+      notification.read = true;
+      this.saveToLocalStorage();
+      this.notifyListeners();
     }
   }
 
   // Marquer toutes les notifications comme lues
   markAllAsRead() {
-    if (this.socket && this.isConnected) {
-      this.socket.emit('mark-all-read');
-      
-      // Mettre à jour localement
-      this.notifications.forEach(notification => {
-        notification.read = true;
-      });
-      this.unreadCount = 0;
-      this.emit('all_notifications_read', { unreadCount: 0 });
-    }
+    this.notifications.forEach(notification => {
+      notification.read = true;
+    });
+    this.saveToLocalStorage();
+    this.notifyListeners();
   }
 
-  // Gérer une nouvelle notification
-  handleNewNotification(notification) {
-    // Ajouter à la liste des notifications
-    this.notifications.unshift(notification);
-    
-    // Limiter le nombre de notifications en mémoire
-    if (this.notifications.length > 100) {
-      this.notifications = this.notifications.slice(0, 100);
-    }
-
-    // Incrémenter le compteur de notifications non lues
-    if (!notification.read) {
-      this.unreadCount++;
-    }
-
-    // Émettre l'événement
-    this.emit('new_notification', { notification, unreadCount: this.unreadCount });
-
-    // Afficher une notification toast si l'utilisateur est sur la page
-    this.showToastNotification(notification);
+  // Supprimer une notification
+  deleteNotification(notificationId) {
+    this.notifications = this.notifications.filter(n => n.id !== notificationId);
+    this.saveToLocalStorage();
+    this.notifyListeners();
   }
 
-  // Gérer les notifications non lues
-  handleUnreadNotifications(notifications) {
-    this.notifications = notifications;
-    this.unreadCount = notifications.filter(n => !n.read).length;
-    this.emit('notifications_loaded', { notifications, unreadCount: this.unreadCount });
-  }
-
-  // Afficher une notification toast
-  showToastNotification(notification) {
-    // Vérifier si l'utilisateur est sur la page
-    if (document.visibilityState === 'visible') {
-      // Créer une notification native du navigateur seulement si autorisé
-      if ('Notification' in window && Notification.permission === 'granted') {
-        try {
-          new Notification(notification.title, {
-            body: notification.message,
-            icon: '/favicon.ico',
-            tag: notification.id,
-            requireInteraction: notification.priority === 'high'
-          });
-        } catch (error) {
-          console.warn('Erreur lors de l\'affichage de la notification:', error);
-        }
-      }
-    }
-  }
-
-  // Demander la permission pour les notifications
-  async requestPermission() {
-    if ('Notification' in window) {
-      try {
-        const permission = await Notification.requestPermission();
-        return permission === 'granted';
-      } catch (error) {
-        console.warn('Erreur lors de la demande de permission:', error);
-        return false;
-      }
-    }
-    return false;
-  }
-
-  // Vérifier la permission sans demander
-  checkPermission() {
-    if ('Notification' in window) {
-      return Notification.permission;
-    }
-    return 'denied';
-  }
-
-  // Obtenir les notifications
-  getNotifications() {
-    return this.notifications;
-  }
-
-  // Obtenir le nombre de notifications non lues
-  getUnreadCount() {
-    return this.unreadCount;
-  }
-
-  // Filtrer les notifications par type
-  getNotificationsByType(type) {
-    return this.notifications.filter(n => n.type === type);
+  // Supprimer toutes les notifications
+  clearAllNotifications() {
+    this.notifications = [];
+    this.saveToLocalStorage();
+    this.notifyListeners();
   }
 
   // Obtenir les notifications non lues
@@ -221,84 +208,166 @@ class NotificationService {
     return this.notifications.filter(n => !n.read);
   }
 
-  // Supprimer une notification
-  removeNotification(notificationId) {
-    const index = this.notifications.findIndex(n => n.id === notificationId);
-    if (index !== -1) {
-      const notification = this.notifications[index];
-      this.notifications.splice(index, 1);
-      
-      if (!notification.read) {
-        this.unreadCount = Math.max(0, this.unreadCount - 1);
+  // Obtenir le nombre de notifications non lues
+  getUnreadCount() {
+    return this.getUnreadNotifications().length;
+  }
+
+  // Obtenir les notifications par type
+  getNotificationsByType(type) {
+    return this.notifications.filter(n => n.type === type);
+  }
+
+  // Obtenir les notifications par priorité
+  getNotificationsByPriority(priority) {
+    return this.notifications.filter(n => n.priority === priority);
+  }
+
+  // Obtenir les statistiques des notifications
+  getNotificationStats() {
+    const total = this.notifications.length;
+    const unread = this.getUnreadCount();
+    const byType = {};
+    const byPriority = {};
+
+    this.notifications.forEach(notification => {
+      byType[notification.type] = (byType[notification.type] || 0) + 1;
+      byPriority[notification.priority] = (byPriority[notification.priority] || 0) + 1;
+    });
+
+    return {
+      total,
+      unread,
+      byType,
+      byPriority,
+      readRate: total > 0 ? ((total - unread) / total) * 100 : 0
+    };
+  }
+
+  // Sauvegarder dans le localStorage
+  saveToLocalStorage() {
+    try {
+      localStorage.setItem('admin_notifications', JSON.stringify(this.notifications));
+    } catch (error) {
+      console.warn('Impossible de sauvegarder les notifications:', error);
+    }
+  }
+
+  // Charger depuis le localStorage
+  loadFromLocalStorage() {
+    try {
+      const data = localStorage.getItem('admin_notifications');
+      if (data) {
+        this.notifications = JSON.parse(data);
       }
-      
-      this.emit('notification_removed', { notificationId, unreadCount: this.unreadCount });
+    } catch (error) {
+      console.warn('Impossible de charger les notifications:', error);
     }
   }
 
-  // Système d'événements pour les composants React
-  on(event, callback) {
-    if (!this.listeners.has(event)) {
-      this.listeners.set(event, []);
-    }
-    this.listeners.get(event).push(callback);
+  // Système d'écouteurs
+  addListener(callback) {
+    this.listeners.push(callback);
+    return () => {
+      this.listeners = this.listeners.filter(listener => listener !== callback);
+    };
   }
 
-  off(event, callback) {
-    if (this.listeners.has(event)) {
-      const callbacks = this.listeners.get(event);
-      const index = callbacks.indexOf(callback);
-      if (index !== -1) {
-        callbacks.splice(index, 1);
+  // Notifier les écouteurs
+  notifyListeners() {
+    this.listeners.forEach(callback => {
+      try {
+        callback(this.notifications, this.getUnreadCount());
+      } catch (error) {
+        console.error('Erreur dans le listener de notifications:', error);
       }
-    }
+    });
   }
 
-  emit(event, data) {
-    if (this.listeners.has(event)) {
-      this.listeners.get(event).forEach(callback => {
-        try {
-          callback(data);
-        } catch (error) {
-          console.error('Erreur dans le callback de notification:', error);
-        }
-      });
-    }
+  // Envoyer une notification de test
+  sendTestNotification() {
+    const testNotification = {
+      id: Date.now(),
+      type: 'test',
+      title: 'Test de notification',
+      message: 'Ceci est une notification de test pour vérifier le système',
+      priority: 'low',
+      timestamp: new Date().toISOString(),
+      read: false
+    };
+
+    this.addNotification(testNotification);
   }
 
-  // Déconnexion
+  // Simuler des notifications pour la démo
+  simulateNotifications() {
+    const notifications = [
+      {
+        id: Date.now() + 1,
+        type: 'report',
+        title: 'Nouveau signalement urgent',
+        message: 'Signalement reçu pour "Informations médicales incorrectes"',
+        priority: 'urgent',
+        timestamp: new Date(Date.now() - 300000).toISOString(),
+        read: false
+      },
+      {
+        id: Date.now() + 2,
+        type: 'contributor',
+        title: 'Nouvelle candidature',
+        message: 'Candidature de Dr. Fatoumata Camara (Médecine)',
+        priority: 'medium',
+        timestamp: new Date(Date.now() - 600000).toISOString(),
+        read: false
+      },
+      {
+        id: Date.now() + 3,
+        type: 'action',
+        title: 'Action admin terminée',
+        message: 'Publication "Guide santé" approuvée',
+        priority: 'low',
+        timestamp: new Date(Date.now() - 900000).toISOString(),
+        read: true
+      },
+      {
+        id: Date.now() + 4,
+        type: 'test',
+        title: 'Test utilisateur terminé',
+        message: 'Test "Gestion contributeurs" - Performance: 85%',
+        priority: 'medium',
+        timestamp: new Date(Date.now() - 1200000).toISOString(),
+        read: true
+      }
+    ];
+
+    notifications.forEach(notification => {
+      this.addNotification(notification);
+    });
+  }
+
+  // Déconnecter
   disconnect() {
     if (this.socket) {
       this.socket.disconnect();
       this.socket = null;
-      this.isConnected = false;
-      this.userId = null;
-      this.token = null;
-      this.notifications = [];
-      this.unreadCount = 0;
-      this.listeners.clear();
     }
+    this.isConnected = false;
   }
 
-  // Vérifier si connecté
-  isConnected() {
-    return this.isConnected;
-  }
-
-  // Obtenir les statistiques de connexion
-  getConnectionStats() {
-    if (this.socket) {
-      return {
-        connected: this.socket.connected,
-        id: this.socket.id,
-        transport: this.socket.io.engine.transport.name
-      };
-    }
-    return { connected: false };
+  // Obtenir l'état de connexion
+  getConnectionStatus() {
+    return {
+      connected: this.isConnected,
+      reconnectAttempts: this.reconnectAttempts,
+      maxReconnectAttempts: this.maxReconnectAttempts
+    };
   }
 }
 
 // Instance singleton
 const notificationService = new NotificationService();
+
+// Charger les notifications au démarrage
+notificationService.loadFromLocalStorage();
 
 export default notificationService; 
