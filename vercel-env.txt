@@ -1,0 +1,3 @@
+MONGODB_URI=mongodb+srv://aob_communiconnectgn:Alpha.o.b5@cluster0.7z6yujq.mongodb.net/
+JWT_SECRET=communiconnect_secret_key_2025_very_secure
+NODE_ENV=production 

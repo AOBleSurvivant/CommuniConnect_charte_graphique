@@ -1,6 +1,6 @@
 const express = require('express');
 const { body, validationResult, query } = require('express-validator');
-const auth = require('../middleware/auth');
+const devAuth = require('../middleware/devAuth');
 const { validateGuineanLocation } = require('../middleware/geographicValidation');
 const Event = require('../models/Event');
 const User = require('../models/User');
@@ -10,7 +10,7 @@ const router = express.Router();
 // @route   GET /api/events
 // @desc    Obtenir tous les événements avec filtres
 // @access  Public
-router.get('/', [
+router.get('/', devAuth, [
   query('type').optional().isIn(['reunion', 'formation', 'nettoyage', 'festival', 'sport', 'culture', 'sante', 'education', 'autre']),
   query('category').optional().isIn(['communautaire', 'professionnel', 'educatif', 'culturel', 'sportif', 'sante', 'environnement', 'social', 'autre']),
   query('status').optional().isIn(['draft', 'published', 'cancelled', 'completed', 'postponed']),
@@ -52,46 +52,8 @@ router.get('/', [
       search
     } = req.query;
 
-    // Construire la requête
-    let query = {
-      'moderation.isHidden': false
-    };
-
-    // Filtres
-    if (status) query.status = status;
-    if (type) query.type = type;
-    if (category) query.category = category;
-    if (region) query['location.region'] = region;
-    if (prefecture) query['location.prefecture'] = prefecture;
-    if (commune) query['location.commune'] = commune;
-
-    // Filtres de date
-    if (startDate || endDate) {
-      query.startDate = {};
-      if (startDate) query.startDate.$gte = new Date(startDate);
-      if (endDate) query.startDate.$lte = new Date(endDate);
-    }
-
-    // Recherche géographique si coordonnées fournies
-    if (latitude && longitude) {
-      query['location.coordinates'] = {
-        $near: {
-          $geometry: {
-            type: 'Point',
-            coordinates: [parseFloat(longitude), parseFloat(latitude)]
-          },
-          $maxDistance: radius * 1000 // Convertir en mètres
-        }
-      };
-    }
-
-    // Pagination
-    const skip = (parseInt(page) - 1) * parseInt(limit);
-
-    // Vérifier si MongoDB est disponible
-    if (process.env.NODE_ENV === 'development' && global.mongoConnected === false) {
-      // Mode développement sans MongoDB - utiliser des données fictives + vrais événements
-      
+    // En mode développement, utiliser des données fictives
+    if (process.env.NODE_ENV === 'development') {
       // Initialiser le tableau global des événements si nécessaire
       if (!global.mockEvents) {
         global.mockEvents = [
@@ -139,117 +101,18 @@ router.get('/', [
             startTime: '14:00',
             endTime: '17:00',
             location: {
-              coordinates: { latitude: 9.545, longitude: -13.675 },
-              region: 'Conakry',
-              prefecture: 'Conakry',
-              commune: 'Ratoma',
-              quartier: 'Almamya',
-              address: 'Centre culturel, Conakry',
-              venue: 'Salle de formation'
-            },
-            organizer: {
-              _id: '507f1f77bcf86cd799439014',
-              firstName: 'Fatou',
-              lastName: 'Camara',
-              profilePicture: null,
-              isVerified: true
-            },
-            status: 'published',
-            visibility: 'public',
-            participants: [],
-            media: { images: [], videos: [], documents: [] },
-            createdAt: new Date(),
-            updatedAt: new Date()
-          },
-          {
-            _id: 'fake-event-3',
-            title: 'Match de football inter-quartiers',
-            description: 'Tournoi de football entre les quartiers de Conakry.',
-            type: 'sport',
-            category: 'sportif',
-            startDate: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000), // Dans 7 jours
-            endDate: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000 + 2 * 60 * 60 * 1000), // +2h
-            startTime: '16:00',
-            endTime: '18:00',
-            location: {
-              coordinates: { latitude: 9.530, longitude: -13.680 },
-              region: 'Conakry',
-              prefecture: 'Conakry',
-              commune: 'Dixinn',
-              quartier: 'Kipé',
-              address: 'Stade municipal, Conakry',
-              venue: 'Terrain principal'
-            },
-            organizer: {
-              _id: '507f1f77bcf86cd799439015',
-              firstName: 'Ibrahim',
-              lastName: 'Bah',
-              profilePicture: null,
-              isVerified: true
-            },
-            status: 'published',
-            visibility: 'public',
-            participants: [],
-            media: { images: [], videos: [], documents: [] },
-            createdAt: new Date(),
-            updatedAt: new Date()
-          },
-          {
-            _id: 'fake-event-4',
-            title: 'Festival culturel de Conakry',
-            description: 'Grand festival culturel avec musique, danse et art.',
-            type: 'festival',
-            category: 'culturel',
-            startDate: new Date(Date.now() + 10 * 24 * 60 * 60 * 1000), // Dans 10 jours
-            endDate: new Date(Date.now() + 10 * 24 * 60 * 60 * 1000 + 6 * 60 * 60 * 1000), // +6h
-            startTime: '18:00',
-            endTime: '00:00',
-            location: {
-              coordinates: { latitude: 9.540, longitude: -13.670 },
+              coordinates: { latitude: 9.538, longitude: -13.680 },
               region: 'Conakry',
               prefecture: 'Conakry',
               commune: 'Matam',
               quartier: 'Donka',
-              address: 'Place de la République, Conakry',
-              venue: 'Place centrale'
+              address: 'Centre culturel, Conakry',
+              venue: 'Salle informatique'
             },
             organizer: {
-              _id: '507f1f77bcf86cd799439016',
-              firstName: 'Aissatou',
-              lastName: 'Sow',
-              profilePicture: null,
-              isVerified: true
-            },
-            status: 'published',
-            visibility: 'public',
-            participants: [],
-            media: { images: [], videos: [], documents: [] },
-            createdAt: new Date(),
-            updatedAt: new Date()
-          },
-          {
-            _id: 'fake-event-5',
-            title: 'Séance de sensibilisation santé',
-            description: 'Sensibilisation sur les bonnes pratiques de santé.',
-            type: 'sante',
-            category: 'sante',
-            startDate: new Date(Date.now() + 3 * 24 * 60 * 60 * 1000), // Dans 3 jours
-            endDate: new Date(Date.now() + 3 * 24 * 60 * 60 * 1000 + 2 * 60 * 60 * 1000), // +2h
-            startTime: '10:00',
-            endTime: '12:00',
-            location: {
-              coordinates: { latitude: 9.538, longitude: -13.680 },
-              region: 'Conakry',
-              prefecture: 'Conakry',
-              commune: 'Kaloum',
-              quartier: 'Sandervalia',
-              address: 'Centre de santé, Conakry',
-              venue: 'Salle de conférence'
-            },
-            organizer: {
-              _id: '507f1f77bcf86cd799439017',
-              firstName: 'Dr. Mariama',
-              lastName: 'Diallo',
+              _id: '507f1f77bcf86cd799439013',
+              firstName: 'Fatou',
+              lastName: 'Camara',
               profilePicture: null,
               isVerified: true
             },
@@ -263,11 +126,8 @@ router.get('/', [
         ];
       }
       
-      // Combiner les événements factices avec les vrais événements créés
-      const allEvents = [...global.mockEvents];
-      
-      // Appliquer les filtres sur tous les événements
-      let filteredEvents = allEvents.filter(event => {
+      // Appliquer les filtres sur les événements fictifs
+      let filteredEvents = global.mockEvents.filter(event => {
         // Filtre par type
         if (type && event.type !== type) return false;
         
@@ -299,44 +159,30 @@ router.get('/', [
       filteredEvents.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
       
       // Pagination
-      const total = filteredEvents.length;
+      const skip = (parseInt(page) - 1) * parseInt(limit);
       const paginatedEvents = filteredEvents.slice(skip, skip + parseInt(limit));
+      
+      console.log('📅 Événements récupérés (mode développement):', paginatedEvents.length);
       
       return res.json({
         success: true,
+        message: 'Événements récupérés avec succès',
         data: {
           events: paginatedEvents,
           pagination: {
-            page: parseInt(page),
-            limit: parseInt(limit),
-            total,
-            pages: Math.ceil(total / parseInt(limit))
+            currentPage: parseInt(page),
+            totalPages: Math.ceil(filteredEvents.length / parseInt(limit)),
+            totalEvents: filteredEvents.length,
+            eventsPerPage: parseInt(limit)
           }
         }
       });
     }
-
-    // En mode production, utiliser MongoDB
-    const events = await Event.find(query)
-      .populate('organizer', 'firstName lastName profilePicture isVerified')
-      .populate('coOrganizers.user', 'firstName lastName profilePicture')
-      .populate('participants.user', 'firstName lastName profilePicture')
-      .sort({ startDate: 1 })
-      .limit(parseInt(limit))
-      .skip(skip);
-
-    // Compter le total
-    const total = await Event.countDocuments(query);
-
-    res.json({
-      success: true,
-      events,
-      pagination: {
-        page: parseInt(page),
-        limit: parseInt(limit),
-        total,
-        pages: Math.ceil(total / parseInt(limit))
-      }
+    
+    // En production, utiliser MongoDB (non implémenté pour l'instant)
+    res.status(501).json({
+      success: false,
+      message: 'Mode production non implémenté'
     });
 
   } catch (error) {
@@ -773,7 +619,7 @@ router.get('/:id', async (req, res) => {
 // @desc    Créer un nouvel événement
 // @access  Private (Public en développement)
 router.post('/', [
-  // auth, // Désactivé en mode développement
+  devAuth, // Ajout du middleware devAuth
   body('title')
     .trim()
     .isLength({ min: 5, max: 100 })
@@ -999,7 +845,7 @@ router.post('/', [
 // @desc    Mettre à jour un événement
 // @access  Private (organisateur ou co-organisateur)
 router.put('/:id', [
-  auth,
+  devAuth,
   body('title')
     .optional()
     .trim()
@@ -1072,7 +918,7 @@ router.put('/:id', [
 });
 
 // POST /api/events/:eventId/participate - Participer à un événement
-router.post('/:eventId/participate', auth, async (req, res) => {
+router.post('/:eventId/participate', devAuth, async (req, res) => {
   try {
     const { eventId } = req.params;
     const userId = req.user._id || req.user.id;
@@ -1110,7 +956,7 @@ router.post('/:eventId/participate', auth, async (req, res) => {
 });
 
 // DELETE /api/events/:eventId/participate - Se désinscrire d'un événement
-router.delete('/:eventId/participate', auth, async (req, res) => {
+router.delete('/:eventId/participate', devAuth, async (req, res) => {
   try {
     const { eventId } = req.params;
     const userId = req.user._id || req.user.id;
@@ -1210,7 +1056,7 @@ router.get('/:eventId/participants', async (req, res) => {
 });
 
 // POST /api/events/:eventId/invite - Inviter des utilisateurs
-router.post('/:eventId/invite', auth, [
+router.post('/:eventId/invite', devAuth, [
   body('userIds').isArray({ min: 1 }),
   body('message').optional().trim().isLength({ max: 500 })
 ], async (req, res) => {
@@ -1260,7 +1106,7 @@ router.post('/:eventId/invite', auth, [
 // @desc    Signaler un événement
 // @access  Private
 router.post('/:id/report', [
-  auth,
+  devAuth,
   body('reason')
     .isIn(['inappropriate', 'spam', 'false_information', 'duplicate', 'other'])
     .withMessage('Raison de signalement invalide'),
@@ -1369,7 +1215,7 @@ router.post('/:id/report', [
 // @route   DELETE /api/events/:id
 // @desc    Supprimer un événement
 // @access  Private (organisateur uniquement)
-router.delete('/:id', auth, async (req, res) => {
+router.delete('/:id', devAuth, async (req, res) => {
   try {
     // En mode développement sans MongoDB, supprimer du tableau global
     if (process.env.NODE_ENV === 'development' && global.mongoConnected === false) {

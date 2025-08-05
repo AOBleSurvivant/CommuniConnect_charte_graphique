@@ -68,18 +68,21 @@ const FriendsPage = () => {
     setSuccess('');
 
     try {
+      // Correction : utiliser l'email comme recipientId
       const response = await friendsService.sendFriendRequest(emailToAdd.trim());
       
-      if (response.data.success) {
+      if (response.data && response.data.success) {
         setSuccess('Demande d\'ami envoyée avec succès');
         setEmailToAdd('');
         setShowAddFriendDialog(false);
+        // Recharger les données
+        loadFriendsData();
       } else {
-        setError('Erreur lors de l\'envoi de la demande');
+        setError(response.data?.message || 'Erreur lors de l\'envoi de la demande');
       }
     } catch (error) {
       console.error('Erreur lors de l\'envoi de la demande:', error);
-      setError('Erreur lors de l\'envoi de la demande');
+      setError(error.response?.data?.message || 'Erreur lors de l\'envoi de la demande');
     } finally {
       setIsLoading(false);
     }

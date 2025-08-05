@@ -6,7 +6,9 @@ import {
   ListItemAvatar, 
   Avatar, 
   Typography,
-  Paper
+  Paper,
+  CircularProgress,
+  Alert
 } from '@mui/material';
 import { styled } from '@mui/material/styles';
 
@@ -25,7 +27,7 @@ const MessageBubble = styled(Paper)(({ theme, isOwn }) => ({
   wordWrap: 'break-word',
 }));
 
-const MessageList = ({ messages = [], currentUserId }) => {
+const MessageList = ({ messages = [], currentUserId, loading = false, error = null }) => {
   const formatTime = (dateString) => {
     const date = new Date(dateString);
     return date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
@@ -34,6 +36,22 @@ const MessageList = ({ messages = [], currentUserId }) => {
   const isOwnMessage = (message) => {
     return message.sender?._id === currentUserId;
   };
+
+  if (loading) {
+    return (
+      <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%' }}>
+        <CircularProgress />
+      </Box>
+    );
+  }
+
+  if (error) {
+    return (
+      <Box sx={{ p: 2 }}>
+        <Alert severity="error">{error}</Alert>
+      </Box>
+    );
+  }
 
   return (
     <Box sx={{ height: '100%', overflow: 'auto', p: 2 }}>
@@ -98,10 +116,10 @@ const MessageList = ({ messages = [], currentUserId }) => {
                       {isOwn && (
                         <Typography 
                           variant="caption" 
-                          color={message.isRead ? 'success.main' : 'text.secondary'}
+                          color="text.secondary"
                           sx={{ ml: 1 }}
                         >
-                          {message.isRead ? '✓✓' : '✓'}
+                          {message.read ? '✓✓' : '✓'}
                         </Typography>
                       )}
                     </Box>

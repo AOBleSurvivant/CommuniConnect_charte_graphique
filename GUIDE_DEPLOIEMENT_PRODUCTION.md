@@ -1,147 +1,157 @@
-# 🚀 GUIDE DE DÉPLOIEMENT PRODUCTION - COMMUNICONNECT
+# 🚀 GUIDE DÉPLOIEMENT PRODUCTION - COMMUNICONNECT
 
-## ✅ **PRÉREQUIS**
+## 📋 **PRÉREQUIS**
 
-### **Serveur de Production**
-- **OS** : Ubuntu 20.04 LTS ou plus récent
-- **RAM** : 4GB minimum (8GB recommandé)
-- **CPU** : 2 cores minimum (4 cores recommandé)
-- **Stockage** : 20GB minimum
-- **Réseau** : Connexion stable avec IP publique
+### **1. Serveur de Production**
+- ✅ **OS** : Ubuntu 20.04+ ou CentOS 8+
+- ✅ **RAM** : 4GB minimum (8GB recommandé)
+- ✅ **CPU** : 2 cœurs minimum (4 cœurs recommandé)
+- ✅ **Stockage** : 50GB minimum
+- ✅ **Réseau** : Connexion internet stable
 
-### **Services Requis**
-- **Node.js** : Version 18+ 
-- **PM2** : Gestionnaire de processus
-- **Nginx** : Reverse proxy
-- **MongoDB** : Version 5.0+
-- **Redis** : Version 6.0+
-- **SSL Certificate** : Let's Encrypt
+### **2. Domaines et SSL**
+- ✅ **Domaine principal** : `communiconnect.gn`
+- ✅ **Sous-domaines** : `api.communiconnect.gn`, `admin.communiconnect.gn`
+- ✅ **Certificats SSL** : Let's Encrypt (gratuit)
+
+### **3. Services Externes**
+- ✅ **Base de données** : MongoDB Atlas (cloud) ou MongoDB local
+- ✅ **Cache** : Redis (optionnel)
+- ✅ **Stockage** : AWS S3 ou local
+- ✅ **Monitoring** : PM2 + Winston
 
 ---
 
-## 🔧 **INSTALLATION ET CONFIGURATION**
+## 🛠️ **INSTALLATION SERVEUR**
 
-### **1. Préparation du Serveur**
-
+### **1. Configuration Système**
 ```bash
 # Mise à jour du système
 sudo apt update && sudo apt upgrade -y
 
 # Installation des dépendances
-sudo apt install -y curl wget git build-essential
+sudo apt install -y curl wget git nginx certbot python3-certbot-nginx
 
-# Installation Node.js 18
+# Installation de Node.js 18+
 curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash -
 sudo apt-get install -y nodejs
 
-# Vérification
-node --version
-npm --version
-```
-
-### **2. Installation MongoDB**
-
-```bash
-# Import de la clé MongoDB
-wget -qO - https://www.mongodb.org/static/pgp/server-6.0.asc | sudo apt-key add -
-
-# Ajout du repository
-echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu focal/mongodb-org/6.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-6.0.list
-
-# Installation
-sudo apt update
-sudo apt install -y mongodb-org
-
-# Démarrage et activation
-sudo systemctl start mongod
-sudo systemctl enable mongod
-
-# Vérification
-sudo systemctl status mongod
-```
-
-### **3. Installation Redis**
-
-```bash
-# Installation Redis
-sudo apt install -y redis-server
-
-# Configuration Redis
-sudo sed -i 's/supervised no/supervised systemd/' /etc/redis/redis.conf
-
-# Démarrage et activation
-sudo systemctl start redis-server
-sudo systemctl enable redis-server
-
-# Vérification
-redis-cli ping
-```
-
-### **4. Installation Nginx**
-
-```bash
-# Installation Nginx
-sudo apt install -y nginx
-
-# Démarrage et activation
-sudo systemctl start nginx
-sudo systemctl enable nginx
-
-# Vérification
-sudo systemctl status nginx
-```
-
-### **5. Installation PM2**
-
-```bash
-# Installation PM2 global
+# Installation de PM2
 sudo npm install -g pm2
 
-# Vérification
-pm2 --version
+# Installation de MongoDB (si local)
+wget -qO - https://www.mongodb.org/static/pgp/server-6.0.asc | sudo apt-key add -
+echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu focal/mongodb-org/6.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-6.0.list
+sudo apt-get update
+sudo apt-get install -y mongodb-org
+sudo systemctl start mongod
+sudo systemctl enable mongod
+```
+
+### **2. Configuration Firewall**
+```bash
+# Configuration UFW
+sudo ufw allow ssh
+sudo ufw allow 80
+sudo ufw allow 443
+sudo ufw allow 3000
+sudo ufw allow 5000
+sudo ufw enable
+```
+
+### **3. Configuration Nginx**
+```bash
+# Création du fichier de configuration
+sudo nano /etc/nginx/sites-available/communiconnect
+
+# Configuration pour le frontend
+server {
+    listen 80;
+    server_name communiconnect.gn www.communiconnect.gn;
+    
+    location / {
+        proxy_pass http://localhost:3000;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection 'upgrade';
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_cache_bypass $http_upgrade;
+    }
+}
+
+# Configuration pour l'API
+server {
+    listen 80;
+    server_name api.communiconnect.gn;
+    
+    location / {
+        proxy_pass http://localhost:5000;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection 'upgrade';
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_cache_bypass $http_upgrade;
+    }
+}
+
+# Activation du site
+sudo ln -s /etc/nginx/sites-available/communiconnect /etc/nginx/sites-enabled/
+sudo nginx -t
+sudo systemctl restart nginx
 ```
 
 ---
 
-## 📁 **DÉPLOIEMENT DE L'APPLICATION**
+## 🔧 **CONFIGURATION APPLICATION**
 
-### **1. Clonage du Projet**
-
+### **1. Variables d'Environnement Production**
 ```bash
-# Création du répertoire
-sudo mkdir -p /var/www/communiconnect
-sudo chown $USER:$USER /var/www/communiconnect
+# Création du fichier .env.production
+sudo nano /var/www/communiconnect/.env.production
 
-# Clonage du projet
-cd /var/www/communiconnect
-git clone https://github.com/votre-repo/communiconnect.git .
-
-# Installation des dépendances
-npm install --production
-```
-
-### **2. Configuration Environnement**
-
-```bash
-# Création du fichier .env
-cat > .env << EOF
+# Configuration production
 NODE_ENV=production
 PORT=5000
-MONGODB_URI=mongodb://localhost:27017/communiconnect
+JWT_SECRET=votre_secret_tres_securise_production_2024
+JWT_EXPIRE=7d
+
+# Base de données MongoDB
+MONGODB_URI=mongodb://localhost:27017/communiconnect_prod
+# Ou MongoDB Atlas
+# MONGODB_URI=mongodb+srv://username:password@cluster.mongodb.net/communiconnect_prod
+
+# Redis (optionnel)
 REDIS_URL=redis://localhost:6379
-JWT_SECRET=votre_secret_tres_securise_et_long
-CORS_ORIGIN=https://votre-domaine.com
-EOF
+
+# CORS
+CORS_ORIGIN=https://communiconnect.gn
+
+# Logging
+LOG_LEVEL=info
+LOG_FILE=/var/log/communiconnect/app.log
+
+# Sécurité
+RATE_LIMIT_WINDOW=15m
+RATE_LIMIT_MAX=100
+
+# Monitoring
+PM2_MONITORING=true
 ```
 
-### **3. Configuration PM2**
-
+### **2. Configuration PM2**
 ```bash
 # Création du fichier ecosystem.config.js
-cat > ecosystem.config.js << EOF
+sudo nano /var/www/communiconnect/ecosystem.config.js
+
 module.exports = {
   apps: [{
-    name: 'communiconnect',
+    name: 'communiconnect-api',
     script: 'server/index.js',
     instances: 'max',
     exec_mode: 'cluster',
@@ -149,129 +159,53 @@ module.exports = {
       NODE_ENV: 'production',
       PORT: 5000
     },
-    error_file: './logs/err.log',
-    out_file: './logs/out.log',
-    log_file: './logs/combined.log',
-    time: true
+    error_file: '/var/log/communiconnect/err.log',
+    out_file: '/var/log/communiconnect/out.log',
+    log_file: '/var/log/communiconnect/combined.log',
+    time: true,
+    max_memory_restart: '1G',
+    node_args: '--max-old-space-size=1024'
+  }, {
+    name: 'communiconnect-client',
+    script: 'node_modules/serve/serve.js',
+    args: '-s build -l 3000',
+    env: {
+      NODE_ENV: 'production'
+    }
   }]
 };
-EOF
-
-# Création du répertoire logs
-mkdir -p logs
-```
-
-### **4. Démarrage avec PM2**
-
-```bash
-# Démarrage de l'application
-pm2 start ecosystem.config.js
-
-# Sauvegarde de la configuration PM2
-pm2 save
-
-# Configuration du démarrage automatique
-pm2 startup
-sudo env PATH=$PATH:/usr/bin /usr/lib/node_modules/pm2/bin/pm2 startup systemd -u $USER --hp /home/$USER
 ```
 
 ---
 
-## 🌐 **CONFIGURATION NGINX**
+## 🚀 **DÉPLOIEMENT**
 
-### **1. Configuration du Site**
-
+### **1. Clonage et Installation**
 ```bash
-# Création du fichier de configuration
-sudo tee /etc/nginx/sites-available/communiconnect << EOF
-server {
-    listen 80;
-    server_name votre-domaine.com www.votre-domaine.com;
+# Création du répertoire
+sudo mkdir -p /var/www/communiconnect
+sudo chown $USER:$USER /var/www/communiconnect
 
-    location / {
-        proxy_pass http://localhost:5000;
-        proxy_http_version 1.1;
-        proxy_set_header Upgrade \$http_upgrade;
-        proxy_set_header Connection 'upgrade';
-        proxy_set_header Host \$host;
-        proxy_set_header X-Real-IP \$remote_addr;
-        proxy_set_header X-Forwarded-For \$proxy_add_x_forwarded_for;
-        proxy_set_header X-Forwarded-Proto \$scheme;
-        proxy_cache_bypass \$http_upgrade;
-    }
+# Clonage du projet
+cd /var/www/communiconnect
+git clone https://github.com/votre-repo/CommuniConnect.git .
 
-    # Configuration pour les fichiers statiques
-    location /static/ {
-        alias /var/www/communiconnect/public/;
-        expires 1y;
-        add_header Cache-Control "public, immutable";
-    }
+# Installation des dépendances
+npm run install-all
 
-    # Configuration pour l'API
-    location /api/ {
-        proxy_pass http://localhost:5000;
-        proxy_set_header Host \$host;
-        proxy_set_header X-Real-IP \$remote_addr;
-        proxy_set_header X-Forwarded-For \$proxy_add_x_forwarded_for;
-        proxy_set_header X-Forwarded-Proto \$scheme;
-    }
-}
-EOF
+# Build de l'application
+npm run build
 ```
 
-### **2. Activation du Site**
-
+### **2. Configuration des Logs**
 ```bash
-# Activation du site
-sudo ln -s /etc/nginx/sites-available/communiconnect /etc/nginx/sites-enabled/
-
-# Test de la configuration
-sudo nginx -t
-
-# Redémarrage de Nginx
-sudo systemctl restart nginx
-```
-
----
-
-## 🔒 **CONFIGURATION SSL**
-
-### **1. Installation Certbot**
-
-```bash
-# Installation Certbot
-sudo apt install -y certbot python3-certbot-nginx
-
-# Obtention du certificat SSL
-sudo certbot --nginx -d votre-domaine.com -d www.votre-domaine.com
-
-# Test du renouvellement automatique
-sudo certbot renew --dry-run
-```
-
-### **2. Configuration SSL Automatique**
-
-```bash
-# Ajout du cron pour le renouvellement automatique
-sudo crontab -e
-
-# Ajouter cette ligne
-0 12 * * * /usr/bin/certbot renew --quiet
-```
-
----
-
-## 📊 **MONITORING ET LOGS**
-
-### **1. Configuration des Logs**
-
-```bash
-# Création du répertoire de logs
+# Création des répertoires de logs
 sudo mkdir -p /var/log/communiconnect
 sudo chown $USER:$USER /var/log/communiconnect
 
 # Configuration de la rotation des logs
-sudo tee /etc/logrotate.d/communiconnect << EOF
+sudo nano /etc/logrotate.d/communiconnect
+
 /var/log/communiconnect/*.log {
     daily
     missingok
@@ -280,277 +214,158 @@ sudo tee /etc/logrotate.d/communiconnect << EOF
     delaycompress
     notifempty
     create 644 $USER $USER
+    postrotate
+        pm2 reloadLogs
+    endscript
 }
-EOF
 ```
 
-### **2. Monitoring PM2**
-
+### **3. Démarrage de l'Application**
 ```bash
-# Monitoring en temps réel
-pm2 monit
+# Démarrage avec PM2
+pm2 start ecosystem.config.js
 
-# Statut des processus
-pm2 status
-
-# Logs de l'application
-pm2 logs communiconnect
-```
-
-### **3. Monitoring Système**
-
-```bash
-# Installation d'outils de monitoring
-sudo apt install -y htop iotop
-
-# Surveillance des ressources
-htop
-```
-
----
-
-## 🔄 **SCRIPT DE DÉPLOIEMENT AUTOMATISÉ**
-
-### **1. Création du Script**
-
-```bash
-# Création du script de déploiement
-cat > deploy.sh << 'EOF'
-#!/bin/bash
-
-echo "🚀 Déploiement CommuniConnect..."
-
-# Variables
-APP_DIR="/var/www/communiconnect"
-BACKUP_DIR="/var/backups/communiconnect"
-DATE=$(date +%Y%m%d_%H%M%S)
-
-# Création du backup
-echo "📦 Création du backup..."
-mkdir -p $BACKUP_DIR
-tar -czf $BACKUP_DIR/backup_$DATE.tar.gz -C $APP_DIR .
-
-# Mise à jour du code
-echo "📥 Mise à jour du code..."
-cd $APP_DIR
-git pull origin main
-
-# Installation des dépendances
-echo "📦 Installation des dépendances..."
-npm install --production
-
-# Vérification de la configuration
-echo "🔍 Vérification de la configuration..."
-if [ ! -f .env ]; then
-    echo "❌ Fichier .env manquant"
-    exit 1
-fi
-
-# Redémarrage de l'application
-echo "🔄 Redémarrage de l'application..."
-pm2 restart communiconnect
+# Sauvegarde de la configuration PM2
+pm2 save
+pm2 startup
 
 # Vérification du statut
-echo "✅ Vérification du statut..."
-sleep 5
-if pm2 status | grep -q "online"; then
-    echo "✅ Déploiement réussi"
-else
-    echo "❌ Échec du déploiement"
-    exit 1
-fi
-
-echo "🎉 Déploiement terminé avec succès !"
-EOF
-
-# Rendre le script exécutable
-chmod +x deploy.sh
-```
-
-### **2. Utilisation du Script**
-
-```bash
-# Exécution du déploiement
-./deploy.sh
-```
-
----
-
-## 🛡️ **SÉCURITÉ**
-
-### **1. Configuration Firewall**
-
-```bash
-# Installation UFW
-sudo apt install -y ufw
-
-# Configuration du firewall
-sudo ufw default deny incoming
-sudo ufw default allow outgoing
-sudo ufw allow ssh
-sudo ufw allow 80
-sudo ufw allow 443
-sudo ufw allow 22
-
-# Activation du firewall
-sudo ufw enable
-```
-
-### **2. Sécurisation MongoDB**
-
-```bash
-# Création d'un utilisateur MongoDB
-mongo
-use admin
-db.createUser({
-  user: "admin",
-  pwd: "votre_mot_de_passe_securise",
-  roles: [ { role: "userAdminAnyDatabase", db: "admin" } ]
-})
-
-# Configuration de l'authentification
-sudo sed -i 's/#security:/security:/' /etc/mongod.conf
-sudo sed -i '/security:/a \  authorization: enabled' /etc/mongod.conf
-
-# Redémarrage de MongoDB
-sudo systemctl restart mongod
-```
-
-### **3. Sécurisation Redis**
-
-```bash
-# Configuration Redis avec mot de passe
-sudo sed -i 's/# requirepass foobared/requirepass votre_mot_de_passe_redis/' /etc/redis/redis.conf
-
-# Redémarrage de Redis
-sudo systemctl restart redis-server
-```
-
----
-
-## 📋 **CHECKLIST DE DÉPLOIEMENT**
-
-### **✅ Préparation**
-- [ ] Serveur configuré avec les prérequis
-- [ ] Node.js 18+ installé
-- [ ] MongoDB installé et configuré
-- [ ] Redis installé et configuré
-- [ ] Nginx installé et configuré
-- [ ] PM2 installé
-
-### **✅ Application**
-- [ ] Code déployé sur le serveur
-- [ ] Variables d'environnement configurées
-- [ ] Dépendances installées
-- [ ] Application démarrée avec PM2
-- [ ] Logs configurés
-
-### **✅ Web**
-- [ ] Nginx configuré
-- [ ] Site activé
-- [ ] SSL configuré
-- [ ] Domaines configurés
-
-### **✅ Sécurité**
-- [ ] Firewall configuré
-- [ ] MongoDB sécurisé
-- [ ] Redis sécurisé
-- [ ] SSL activé
-
-### **✅ Monitoring**
-- [ ] Logs configurés
-- [ ] PM2 monitoring activé
-- [ ] Scripts de déploiement créés
-- [ ] Sauvegardes configurées
-
----
-
-## 🎯 **COMMANDES UTILES**
-
-### **Gestion de l'Application**
-```bash
-# Statut de l'application
 pm2 status
-
-# Logs en temps réel
-pm2 logs communiconnect
-
-# Redémarrage
-pm2 restart communiconnect
-
-# Arrêt
-pm2 stop communiconnect
-
-# Démarrage
-pm2 start communiconnect
+pm2 logs
 ```
 
-### **Monitoring**
+---
+
+## 🔒 **SÉCURITÉ**
+
+### **1. Certificats SSL**
 ```bash
-# Monitoring PM2
-pm2 monit
+# Installation des certificats Let's Encrypt
+sudo certbot --nginx -d communiconnect.gn -d www.communiconnect.gn
+sudo certbot --nginx -d api.communiconnect.gn
 
-# Logs système
-sudo journalctl -u nginx
-sudo journalctl -u mongod
-sudo journalctl -u redis-server
-
-# Ressources système
-htop
-df -h
-free -h
+# Renouvellement automatique
+sudo crontab -e
+# Ajouter : 0 12 * * * /usr/bin/certbot renew --quiet
 ```
 
-### **Maintenance**
+### **2. Configuration Sécurité Nginx**
 ```bash
-# Mise à jour du système
-sudo apt update && sudo apt upgrade
+# Ajout des headers de sécurité
+sudo nano /etc/nginx/sites-available/communiconnect
 
-# Nettoyage des logs
-sudo logrotate -f /etc/logrotate.d/communiconnect
+# Dans le bloc server, ajouter :
+add_header X-Frame-Options "SAMEORIGIN" always;
+add_header X-XSS-Protection "1; mode=block" always;
+add_header X-Content-Type-Options "nosniff" always;
+add_header Referrer-Policy "no-referrer-when-downgrade" always;
+add_header Content-Security-Policy "default-src 'self' http: https: data: blob: 'unsafe-inline'" always;
+```
+
+### **3. Monitoring et Alertes**
+```bash
+# Installation de monitoring
+pm2 install pm2-server-monit
+
+# Configuration des alertes
+pm2 set pm2-server-monit:email your-email@example.com
+pm2 set pm2-server-monit:threshold 80
+```
+
+---
+
+## 📊 **MONITORING ET MAINTENANCE**
+
+### **1. Scripts de Maintenance**
+```bash
+# Création du script de maintenance
+sudo nano /var/www/communiconnect/scripts/maintenance.sh
+
+#!/bin/bash
+# Script de maintenance CommuniConnect
+
+echo "🔄 Démarrage de la maintenance..."
 
 # Sauvegarde de la base de données
-mongodump --db communiconnect --out /var/backups/mongodb/
+mongodump --db communiconnect_prod --out /var/backups/communiconnect/$(date +%Y%m%d)
+
+# Nettoyage des logs
+find /var/log/communiconnect -name "*.log" -mtime +30 -delete
+
+# Redémarrage des services
+pm2 restart all
+
+echo "✅ Maintenance terminée"
+```
+
+### **2. Sauvegarde Automatique**
+```bash
+# Configuration de la sauvegarde
+sudo crontab -e
+
+# Ajouter : 0 2 * * * /var/www/communiconnect/scripts/maintenance.sh
 ```
 
 ---
 
-## 🎉 **VALIDATION DU DÉPLOIEMENT**
+## 🎯 **VALIDATION DU DÉPLOIEMENT**
 
-### **1. Tests de Connectivité**
+### **1. Tests de Validation**
 ```bash
 # Test de l'API
-curl -f https://votre-domaine.com/api/health
+curl -X GET https://api.communiconnect.gn/api/health
 
-# Test de la base de données
-mongo communiconnect --eval "db.stats()"
+# Test du frontend
+curl -X GET https://communiconnect.gn
 
-# Test de Redis
-redis-cli ping
+# Test des certificats SSL
+sudo certbot certificates
 ```
 
 ### **2. Tests de Performance**
 ```bash
-# Test de charge simple
-ab -n 1000 -c 10 https://votre-domaine.com/api/health
+# Test de charge avec Apache Bench
+ab -n 1000 -c 10 https://communiconnect.gn/
 
-# Monitoring en temps réel
+# Monitoring des ressources
+htop
 pm2 monit
-```
-
-### **3. Tests de Sécurité**
-```bash
-# Test SSL
-curl -I https://votre-domaine.com
-
-# Test des headers de sécurité
-curl -I https://votre-domaine.com/api/health
 ```
 
 ---
 
-**🎯 Votre application CommuniConnect est maintenant prête pour la production !**
+## 🚨 **DÉPANNAGE**
 
-**📞 Support** : En cas de problème, vérifiez les logs et le monitoring PM2.
-**🔄 Mises à jour** : Utilisez le script `deploy.sh` pour les déploiements futurs.
-**📊 Monitoring** : Surveillez régulièrement les performances et les logs. 
+### **1. Problèmes Courants**
+- **Port déjà utilisé** : `sudo lsof -i :5000` puis `sudo kill -9 PID`
+- **Permissions** : `sudo chown -R $USER:$USER /var/www/communiconnect`
+- **Logs** : `pm2 logs` ou `tail -f /var/log/communiconnect/app.log`
+
+### **2. Redémarrage Complet**
+```bash
+# Redémarrage complet
+pm2 stop all
+pm2 delete all
+pm2 start ecosystem.config.js
+pm2 save
+```
+
+---
+
+## 📞 **SUPPORT**
+
+### **Contacts**
+- **Développeur** : votre-email@example.com
+- **Administrateur** : admin@communiconnect.gn
+- **Support** : support@communiconnect.gn
+
+### **Documentation**
+- **API** : https://api.communiconnect.gn/docs
+- **Admin** : https://admin.communiconnect.gn
+- **Monitoring** : `pm2 monit`
+
+---
+
+*Guide créé le : 1er Août 2024*  
+*Version : 1.0*  
+*Statut : ✅ PRÊT POUR PRODUCTION* 

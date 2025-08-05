@@ -1,10 +1,10 @@
 const express = require('express');
 const { body, validationResult } = require('express-validator');
-const auth = require('../middleware/auth');
+const devAuth = require('../middleware/devAuth');
 const router = express.Router();
 
 // GET /api/messages - Récupérer tous les messages
-router.get('/', auth, async (req, res) => {
+router.get('/', devAuth, async (req, res) => {
   try {
     // En mode développement, simuler des messages
     const mockMessages = [
@@ -85,7 +85,7 @@ router.get('/', auth, async (req, res) => {
 });
 
 // GET /api/messages/:id - Récupérer un message spécifique
-router.get('/:id', auth, async (req, res) => {
+router.get('/:id', devAuth, async (req, res) => {
   try {
     const messageId = req.params.id;
     
@@ -125,7 +125,7 @@ router.get('/:id', auth, async (req, res) => {
 });
 
 // POST /api/messages - Créer un nouveau message
-router.post('/', auth, [
+router.post('/', devAuth, [
   body('receiverId').notEmpty().withMessage('ID du destinataire requis'),
   body('content').notEmpty().withMessage('Contenu du message requis'),
   body('type').optional().isIn(['text', 'image', 'file']).withMessage('Type de message invalide')
@@ -187,7 +187,7 @@ router.post('/', auth, [
 });
 
 // PUT /api/messages/:id - Mettre à jour un message
-router.put('/:id', auth, [
+router.put('/:id', devAuth, [
   body('content').optional().notEmpty().withMessage('Contenu du message requis'),
   body('isRead').optional().isBoolean().withMessage('Statut de lecture invalide')
 ], async (req, res) => {
@@ -233,7 +233,7 @@ router.put('/:id', auth, [
 });
 
 // DELETE /api/messages/:id - Supprimer un message
-router.delete('/:id', auth, async (req, res) => {
+router.delete('/:id', devAuth, async (req, res) => {
   try {
     const messageId = req.params.id;
 
@@ -253,7 +253,7 @@ router.delete('/:id', auth, async (req, res) => {
 });
 
 // GET /api/messages/conversation/:userId - Récupérer une conversation
-router.get('/conversation/:userId', auth, async (req, res) => {
+router.get('/conversation/:userId', devAuth, async (req, res) => {
   try {
     const otherUserId = req.params.userId;
     const currentUserId = req.user.id;
@@ -337,7 +337,7 @@ router.get('/conversation/:userId', auth, async (req, res) => {
 });
 
 // GET /api/messages/unread - Récupérer les messages non lus
-router.get('/unread/count', auth, async (req, res) => {
+router.get('/unread/count', devAuth, async (req, res) => {
   try {
     // En mode développement, simuler le comptage
     const unreadCount = 3;

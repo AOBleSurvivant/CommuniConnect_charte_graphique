@@ -179,40 +179,46 @@ const CreateEventForm = ({ onSubmit, loading = false }) => {
   const handleSubmit = (event) => {
     event.preventDefault();
     
-    if (validateForm()) {
-      // Formater les données pour l'API
-      const formattedData = {
-        title: formData.title.trim(),
-        description: formData.description.trim(),
-        type: formData.type,
-        category: formData.category || 'communautaire',
-        startDate: formData.date,
-        endDate: formData.date,
-        startTime: formData.time,
-        endTime: formData.time,
-        venue: formData.address.trim(),
+    // Validation du formulaire
+    const validationErrors = validateForm();
+    if (Object.keys(validationErrors).length > 0) {
+      setErrors(validationErrors);
+      return;
+    }
+
+    // Formatage des données pour l'API
+    const formattedData = {
+      title: formData.title.trim(),
+      description: formData.description.trim(),
+      type: formData.type,
+      category: formData.category,
+      startDate: formData.date,
+      endDate: formData.date, // Même date pour l'instant
+      venue: formData.address.trim(),
+      address: formData.address.trim(),
+      latitude: parseFloat(formData.latitude) || 9.5370,
+      longitude: parseFloat(formData.longitude) || -13.6785,
+      capacity: parseInt(formData.maxParticipants) || 50,
+      maxParticipants: parseInt(formData.maxParticipants) || 50,
+      contactPhone: formData.contactPhone.trim(),
+      isFree: formData.isFree,
+      price: formData.isFree ? { amount: 0, currency: 'GNF' } : formData.price,
+      location: {
+        region: formData.region || 'Conakry',
+        prefecture: formData.prefecture || 'Conakry',
+        commune: formData.commune || 'Kaloum',
+        quartier: formData.quartier || 'Centre',
         address: formData.address.trim(),
-        latitude: parseFloat(formData.latitude) || 9.5370,
-        longitude: parseFloat(formData.longitude) || -13.6785,
-        capacity: formData.maxParticipants ? parseInt(formData.maxParticipants) : undefined,
-        isFree: true,
-        price: { amount: 0, currency: 'GNF' },
-        contactPhone: formData.contactPhone?.trim() || '',
-        location: {
-          region: formData.region,
-          prefecture: formData.prefecture,
-          commune: formData.commune,
-          quartier: formData.quartier,
-          address: formData.address.trim(),
-          coordinates: {
-            latitude: parseFloat(formData.latitude) || 9.5370,
-            longitude: parseFloat(formData.longitude) || -13.6785
-          }
-        },
-        image: formData.image || undefined
-      };
-      
-      console.log('📤 Données formatées pour l\'API:', formattedData);
+        venue: formData.address.trim(),
+        coordinates: {
+          latitude: parseFloat(formData.latitude) || 9.5370,
+          longitude: parseFloat(formData.longitude) || -13.6785
+        }
+      }
+    };
+
+    // Appel de la fonction onSubmit passée en props
+    if (onSubmit) {
       onSubmit(formattedData);
     }
   };

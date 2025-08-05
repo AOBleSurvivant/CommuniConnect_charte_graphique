@@ -1,13 +1,6 @@
-{
+﻿{
   "version": 2,
   "builds": [
-    {
-      "src": "client/package.json",
-      "use": "@vercel/static-build",
-      "config": {
-        "distDir": "build"
-      }
-    },
     {
       "src": "server/index.js",
       "use": "@vercel/node"
@@ -15,21 +8,11 @@
   ],
   "routes": [
     {
-      "src": "/api/(.*)",
-      "dest": "/server/index.js"
-    },
-    {
       "src": "/(.*)",
-      "dest": "/client/build/index.html"
+      "dest": "server/index.js"
     }
   ],
   "env": {
-    "REACT_APP_API_URL": "@api-url",
     "NODE_ENV": "production"
-  },
-  "functions": {
-    "server/index.js": {
-      "maxDuration": 30
-    }
   }
-} 
+}

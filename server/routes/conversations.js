@@ -1,10 +1,10 @@
 const express = require('express');
 const { body, validationResult } = require('express-validator');
-const auth = require('../middleware/auth');
+const devAuth = require('../middleware/devAuth');
 const router = express.Router();
 
 // GET /api/conversations - Récupérer toutes les conversations de l'utilisateur
-router.get('/', auth, async (req, res) => {
+router.get('/', devAuth, async (req, res) => {
   try {
     const userId = req.user.id;
     
@@ -112,7 +112,7 @@ router.get('/', auth, async (req, res) => {
 });
 
 // GET /api/conversations/:id - Récupérer une conversation spécifique
-router.get('/:id', auth, async (req, res) => {
+router.get('/:id', devAuth, async (req, res) => {
   try {
     const conversationId = req.params.id;
     const userId = req.user.id;
@@ -182,7 +182,7 @@ router.get('/:id', auth, async (req, res) => {
 
 // POST /api/conversations - Créer une nouvelle conversation
 router.post('/', [
-  auth,
+  devAuth,
   body('participants').isArray().withMessage('Les participants doivent être un tableau'),
   body('participants').notEmpty().withMessage('Au moins un participant est requis'),
   body('isGroup').optional().isBoolean().withMessage('isGroup doit être un booléen'),
@@ -240,7 +240,7 @@ router.post('/', [
 
 // PUT /api/conversations/:id - Mettre à jour une conversation
 router.put('/:id', [
-  auth,
+  devAuth,
   body('groupName').optional().isString().withMessage('Le nom du groupe doit être une chaîne')
 ], async (req, res) => {
   try {
@@ -280,7 +280,7 @@ router.put('/:id', [
 });
 
 // DELETE /api/conversations/:id - Supprimer une conversation
-router.delete('/:id', auth, async (req, res) => {
+router.delete('/:id', devAuth, async (req, res) => {
   try {
     const conversationId = req.params.id;
     const userId = req.user.id;
@@ -303,7 +303,7 @@ router.delete('/:id', auth, async (req, res) => {
 
 // POST /api/conversations/:id/messages - Ajouter un message à une conversation
 router.post('/:id/messages', [
-  auth,
+  devAuth,
   body('content').notEmpty().withMessage('Le contenu du message est requis'),
   body('type').optional().isIn(['text', 'image', 'file']).withMessage('Type de message invalide')
 ], async (req, res) => {
@@ -353,7 +353,7 @@ router.post('/:id/messages', [
 });
 
 // PUT /api/conversations/:id/read - Marquer les messages comme lus
-router.put('/:id/read', auth, async (req, res) => {
+router.put('/:id/read', devAuth, async (req, res) => {
   try {
     const conversationId = req.params.id;
     const userId = req.user.id;
