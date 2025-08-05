@@ -7,19 +7,29 @@
       "config": {
         "distDir": "build"
       }
+    },
+    {
+      "src": "server/index.js",
+      "use": "@vercel/node"
     }
   ],
   "routes": [
     {
       "src": "/api/(.*)",
-      "dest": "/api/$1"
+      "dest": "/server/index.js"
     },
     {
       "src": "/(.*)",
-      "dest": "/index.html"
+      "dest": "/client/build/index.html"
     }
   ],
   "env": {
-    "REACT_APP_API_URL": "@api-url"
+    "REACT_APP_API_URL": "@api-url",
+    "NODE_ENV": "production"
+  },
+  "functions": {
+    "server/index.js": {
+      "maxDuration": 30
+    }
   }
 } 
