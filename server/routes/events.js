@@ -587,6 +587,149 @@ router.get('/nearby', [
   }
 });
 
+// GET /api/events/calendar - Calendrier d'événements
+router.get('/calendar', [
+  query('startDate').optional().isISO8601(),
+  query('endDate').optional().isISO8601(),
+  query('region').optional().trim(),
+  query('type').optional().trim()
+], async (req, res) => {
+  try {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({
+        success: false,
+        message: 'Paramètres de calendrier invalides',
+        errors: errors.array()
+      });
+    }
+
+    const { startDate, endDate, region, type } = req.query;
+    const userId = req.user?._id || req.user?.id || 'anonymous';
+
+    // En mode développement, retourner un calendrier fictif
+    const calendarEvents = [
+      {
+        _id: '1',
+        title: 'Meetup Tech Conakry',
+        startDate: new Date(Date.now() + 2 * 24 * 60 * 60 * 1000),
+        endDate: new Date(Date.now() + 2 * 24 * 60 * 60 * 1000 + 3 * 60 * 60 * 1000),
+        type: 'meetup',
+        region: 'Conakry',
+        location: 'Centre de Formation Tech',
+        organizer: {
+          firstName: 'Mamadou',
+          lastName: 'Diallo'
+        },
+        isParticipating: true,
+        participantsCount: 15
+      },
+      {
+        _id: '2',
+        title: 'Conférence Innovation',
+        startDate: new Date(Date.now() + 5 * 24 * 60 * 60 * 1000),
+        endDate: new Date(Date.now() + 5 * 24 * 60 * 60 * 1000 + 8 * 60 * 60 * 1000),
+        type: 'conference',
+        region: 'Conakry',
+        location: 'Palais du Peuple',
+        organizer: {
+          firstName: 'Fatoumata',
+          lastName: 'Camara'
+        },
+        isParticipating: false,
+        participantsCount: 120
+      },
+      {
+        _id: '3',
+        title: 'Formation Développement Web',
+        startDate: new Date(Date.now() + 10 * 24 * 60 * 60 * 1000),
+        endDate: new Date(Date.now() + 10 * 24 * 60 * 60 * 1000 + 6 * 60 * 60 * 1000),
+        type: 'formation',
+        region: 'Kindia',
+        location: 'Institut de Formation',
+        organizer: {
+          firstName: 'Ibrahima',
+          lastName: 'Bah'
+        },
+        isParticipating: true,
+        participantsCount: 8
+      }
+    ];
+
+    res.json({
+      success: true,
+      events: calendarEvents,
+      filters: {
+        startDate: startDate || new Date().toISOString(),
+        endDate: endDate || new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString(),
+        region,
+        type
+      }
+    });
+  } catch (error) {
+    console.error('Erreur lors de la récupération du calendrier:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Erreur serveur'
+    });
+  }
+});
+
+// GET /api/events/recommendations - Événements recommandés
+router.get('/recommendations', [
+  query('limit').optional().isInt({ min: 1, max: 20 })
+], async (req, res) => {
+  try {
+    const { limit = 10 } = req.query;
+    const userId = req.user?._id || req.user?.id || 'anonymous';
+
+    // En mode développement, retourner des recommandations fictives
+    const recommendations = [
+      {
+        _id: '1',
+        title: 'Hackathon Guinée 2024',
+        description: '48h de développement intensif pour créer des solutions innovantes',
+        startDate: new Date(Date.now() + 15 * 24 * 60 * 60 * 1000),
+        type: 'hackathon',
+        region: 'Conakry',
+        matchScore: 95,
+        reason: 'Basé sur vos intérêts en développement'
+      },
+      {
+        _id: '2',
+        title: 'Forum Entrepreneuriat',
+        description: 'Rencontrez des entrepreneurs et investisseurs',
+        startDate: new Date(Date.now() + 20 * 24 * 60 * 60 * 1000),
+        type: 'forum',
+        region: 'Conakry',
+        matchScore: 87,
+        reason: 'Similaire aux événements auxquels vous avez participé'
+      },
+      {
+        _id: '3',
+        title: 'Workshop IA & Machine Learning',
+        description: 'Introduction aux technologies d\'intelligence artificielle',
+        startDate: new Date(Date.now() + 25 * 24 * 60 * 60 * 1000),
+        type: 'workshop',
+        region: 'Kindia',
+        matchScore: 82,
+        reason: 'Basé sur vos compétences techniques'
+      }
+    ];
+
+    res.json({
+      success: true,
+      recommendations: recommendations.slice(0, parseInt(limit))
+    });
+  } catch (error) {
+    console.error('Erreur lors de la récupération des recommandations:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Erreur serveur'
+    });
+  }
+});
+
 // @route   GET /api/events/:id
 // @desc    Obtenir un événement spécifique
 // @access  Public
@@ -928,140 +1071,190 @@ router.put('/:id', [
   }
 });
 
-// @route   POST /api/events/:id/participate
-// @desc    Participer à un événement
-// @access  Private
-router.post('/:id/participate', [
-  auth,
-  body('status')
-    .optional()
-    .isIn(['confirmed', 'pending', 'declined', 'maybe'])
-    .withMessage('Statut invalide')
-], async (req, res) => {
+// POST /api/events/:eventId/participate - Participer à un événement
+router.post('/:eventId/participate', auth, async (req, res) => {
   try {
-    const { status = 'confirmed' } = req.body;
+    const { eventId } = req.params;
+    const userId = req.user._id || req.user.id;
+    const { role = 'participant', notes } = req.body;
 
-    // Vérifier si MongoDB est disponible
-    if (process.env.NODE_ENV === 'development' && global.mongoConnected === false) {
-      // Mode développement sans MongoDB - simulation de participation
-      const mockEvent = {
-        _id: req.params.id,
-        title: 'Réunion de quartier - Propreté et sécurité',
-        description: 'Réunion mensuelle pour discuter de la propreté et de la sécurité du quartier',
-        type: 'reunion',
-        category: 'communautaire',
-        startDate: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
-        endDate: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000 + 2 * 60 * 60 * 1000),
-        startTime: '18:00',
-        endTime: '20:00',
-        location: {
-          coordinates: { latitude: 9.5370, longitude: -13.6785 },
-          region: 'Conakry',
-          prefecture: 'Conakry',
-          commune: 'Kaloum',
-          quartier: 'Centre',
-          address: 'Salle communale du quartier',
-          venue: 'Salle communale'
-        },
-        organizer: {
-          _id: '507f1f77bcf86cd799439012',
-          firstName: 'Mamadou',
-          lastName: 'Diallo',
-          profilePicture: null,
-          isVerified: true
-        },
-        status: 'published',
-        visibility: 'public',
-        participants: [
-          {
-            user: {
-              _id: req.user._id,
-              firstName: req.user.firstName,
-              lastName: req.user.lastName,
-              profilePicture: req.user.profilePicture
-            },
-            status: status,
-            registeredAt: new Date(),
-            attended: false
-          }
-        ],
-        media: { images: [], videos: [], documents: [] },
-        createdAt: new Date(),
-        updatedAt: new Date()
-      };
-
-      res.json({
-        success: true,
-        message: 'Participation enregistrée avec succès',
-        data: mockEvent
-      });
-      return;
-    }
-
-    const event = await Event.findById(req.params.id);
-
-    if (!event) {
-      return res.status(404).json({
-        success: false,
-        message: 'Événement non trouvé'
-      });
-    }
-
-    // Vérifier si l'événement est complet
-    if (event.isFull && status === 'confirmed') {
-      return res.status(400).json({
-        success: false,
-        message: 'L\'événement est complet'
-      });
-    }
-
-    await event.addParticipant(req.user._id, status);
+    // En mode développement, simuler la participation
+    const participation = {
+      _id: `participation_${Date.now()}`,
+      eventId,
+      userId,
+      role,
+      notes: notes || '',
+      status: 'confirmed',
+      joinedAt: new Date(),
+      user: {
+        _id: userId,
+        firstName: req.user.firstName || 'Utilisateur',
+        lastName: req.user.lastName || 'Participant',
+        profilePicture: req.user.profilePicture || '/api/static/avatars/default.jpg'
+      }
+    };
 
     res.json({
       success: true,
       message: 'Participation enregistrée avec succès',
-      data: event
+      participation
     });
-
   } catch (error) {
-    console.error('Erreur lors de l\'inscription à l\'événement:', error);
+    console.error('Erreur lors de la participation:', error);
     res.status(500).json({
       success: false,
-      message: 'Erreur lors de l\'inscription à l\'événement'
+      message: 'Erreur serveur'
     });
   }
 });
 
-// @route   DELETE /api/events/:id/participate
-// @desc    Se désinscrire d'un événement
-// @access  Private
-router.delete('/:id/participate', auth, async (req, res) => {
+// DELETE /api/events/:eventId/participate - Se désinscrire d'un événement
+router.delete('/:eventId/participate', auth, async (req, res) => {
   try {
-    const event = await Event.findById(req.params.id);
-
-    if (!event) {
-      return res.status(404).json({
-        success: false,
-        message: 'Événement non trouvé'
-      });
-    }
-
-    await event.removeParticipant(req.user._id);
+    const { eventId } = req.params;
+    const userId = req.user._id || req.user.id;
 
     res.json({
       success: true,
-      message: 'Désinscription effectuée avec succès',
-      data: event
+      message: 'Désinscription effectuée avec succès'
     });
-
   } catch (error) {
     console.error('Erreur lors de la désinscription:', error);
     res.status(500).json({
       success: false,
-      message: 'Erreur lors de la désinscription'
+      message: 'Erreur serveur'
     });
   }
 });
+
+// GET /api/events/:eventId/participants - Liste des participants
+router.get('/:eventId/participants', async (req, res) => {
+  try {
+    const { eventId } = req.params;
+    const { role, limit = 50, page = 1 } = req.query;
+    const skip = (parseInt(page) - 1) * parseInt(limit);
+
+    // En mode développement, retourner des participants fictifs
+    const participants = [
+      {
+        _id: '1',
+        userId: 'user1',
+        role: 'participant',
+        status: 'confirmed',
+        joinedAt: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000),
+        user: {
+          _id: 'user1',
+          firstName: 'Mamadou',
+          lastName: 'Diallo',
+          profilePicture: '/api/static/avatars/user1.jpg',
+          isVerified: true
+        }
+      },
+      {
+        _id: '2',
+        userId: 'user2',
+        role: 'co-organizer',
+        status: 'confirmed',
+        joinedAt: new Date(Date.now() - 1 * 24 * 60 * 60 * 1000),
+        user: {
+          _id: 'user2',
+          firstName: 'Fatoumata',
+          lastName: 'Camara',
+          profilePicture: '/api/static/avatars/user2.jpg',
+          isVerified: true
+        }
+      },
+      {
+        _id: '3',
+        userId: 'user3',
+        role: 'participant',
+        status: 'pending',
+        joinedAt: new Date(),
+        user: {
+          _id: 'user3',
+          firstName: 'Ibrahima',
+          lastName: 'Bah',
+          profilePicture: '/api/static/avatars/user3.jpg',
+          isVerified: false
+        }
+      }
+    ];
+
+    // Filtrer par rôle si spécifié
+    let filteredParticipants = participants;
+    if (role) {
+      filteredParticipants = participants.filter(p => p.role === role);
+    }
+
+    const total = filteredParticipants.length;
+    const paginatedParticipants = filteredParticipants.slice(skip, skip + parseInt(limit));
+
+    res.json({
+      success: true,
+      participants: paginatedParticipants,
+      pagination: {
+        page: parseInt(page),
+        limit: parseInt(limit),
+        total,
+        pages: Math.ceil(total / parseInt(limit))
+      }
+    });
+  } catch (error) {
+    console.error('Erreur lors de la récupération des participants:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Erreur serveur'
+    });
+  }
+});
+
+// POST /api/events/:eventId/invite - Inviter des utilisateurs
+router.post('/:eventId/invite', auth, [
+  body('userIds').isArray({ min: 1 }),
+  body('message').optional().trim().isLength({ max: 500 })
+], async (req, res) => {
+  try {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({
+        success: false,
+        message: 'Données d\'invitation invalides',
+        errors: errors.array()
+      });
+    }
+
+    const { eventId } = req.params;
+    const { userIds, message } = req.body;
+    const inviterId = req.user._id || req.user.id;
+
+    // En mode développement, simuler les invitations
+    const invitations = userIds.map((userId, index) => ({
+      _id: `invitation_${Date.now()}_${index}`,
+      eventId,
+      userId,
+      inviterId,
+      message: message || 'Vous êtes invité à participer à cet événement',
+      status: 'pending',
+      sentAt: new Date(),
+      expiresAt: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000) // 7 jours
+    }));
+
+    res.json({
+      success: true,
+      message: `${invitations.length} invitation(s) envoyée(s) avec succès`,
+      invitations
+    });
+  } catch (error) {
+    console.error('Erreur lors de l\'envoi des invitations:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Erreur serveur'
+    });
+  }
+});
+
+
 
 // @route   POST /api/events/:id/report
 // @desc    Signaler un événement

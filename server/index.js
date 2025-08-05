@@ -12,6 +12,32 @@ const NotificationService = require('./services/notificationService');
 const MessageSocketService = require('./services/messageSocketService');
 const PushNotificationService = require('./services/pushNotificationService');
 const multer = require('multer');
+const { performanceMonitor, errorMonitor, memoryMonitor, requestMonitor } = require('./middleware/performance');
+
+// Import des middlewares de sécurité RENFORCÉS
+const { 
+  corsOptions, 
+  helmetConfig, 
+  blockInjection, 
+  validateContentType, 
+  limitRequestSize, 
+  blockDangerousMethods, 
+  addSecurityHeaders, 
+  logAttackAttempts 
+} = require('./middleware/security');
+
+const { 
+  apiLimiter, 
+  authLimiter, 
+  detectAttack, 
+  blockBadBots 
+} = require('./middleware/rateLimiter');
+
+const { 
+  requestLogger, 
+  errorLogger 
+} = require('./config/logger');
+
 require('dotenv').config();
 
 // Configuration par défaut pour le mode développement
@@ -74,48 +100,35 @@ const pushNotificationService = new PushNotificationService();
 
 const PORT = process.env.PORT || 5000;
 
-// Middleware de sécurité et de performance
-app.use(helmet({
-  contentSecurityPolicy: {
-    directives: {
-      defaultSrc: ["'self'"],
-      scriptSrc: ["'self'", "'unsafe-inline'", "'unsafe-eval'"],
-      styleSrc: ["'self'", "'unsafe-inline'", "https://fonts.googleapis.com", "https://unpkg.com"],
-      fontSrc: ["'self'", "data:", "https://fonts.gstatic.com"],
-      imgSrc: ["'self'", "data:", "https:"],
-      connectSrc: ["'self'", "http://localhost:3000", "ws://localhost:5000", "http://localhost:5000"]
-    }
-  },
-  xFrameOptions: { action: 'deny' },
-  xContentTypeOptions: true,
-  referrerPolicy: { policy: 'strict-origin-when-cross-origin' }
-}));
+// Middleware de sécurité CRITIQUE (appliqué en premier)
+app.use(helmetConfig);
+app.use(blockDangerousMethods);
+app.use(limitRequestSize);
+app.use(validateContentType);
+app.use(blockInjection);
+app.use(detectAttack);
+app.use(blockBadBots);
+app.use(logAttackAttempts);
+app.use(addSecurityHeaders);
+
+// Rate limiting RENFORCÉ
+app.use('/api/auth', authLimiter);
+app.use('/api', apiLimiter);
+
+// Middleware de monitoring de performance
+app.use(performanceMonitor);
+app.use(memoryMonitor);
+app.use(requestMonitor);
+
+// Middleware de base
 app.use(compression());
 app.use(morgan('combined'));
 
-// Rate limiting - Désactivé en mode développement
-if (process.env.NODE_ENV === 'production') {
-  const limiter = rateLimit({
-    windowMs: 15 * 60 * 1000, // 15 minutes
-    max: 100, // limite chaque IP à 100 requêtes par fenêtre
-    message: 'Trop de requêtes depuis cette IP, veuillez réessayer plus tard.',
-    standardHeaders: true,
-    legacyHeaders: false,
-    skip: (req) => {
-      // Ignorer le rate limiting pour les routes de santé et de test
-      return req.path === '/api/health' || req.path.startsWith('/api/test');
-    }
-  });
-  app.use('/api/', limiter);
-} else {
-  console.log('🔓 Rate limiting désactivé en mode développement');
-}
+// Logging des requêtes
+app.use(requestLogger);
 
-// CORS pour Express
-app.use(cors({
-  origin: process.env.CORS_ORIGIN || "http://localhost:3000",
-  credentials: true
-}));
+// CORS sécurisé
+app.use(cors(corsOptions));
 
 // Body parsing
 app.use(express.json({ limit: '10mb' }));
@@ -171,6 +184,7 @@ app.use('/api/users', require('./routes/users'));
 app.use('/api/search', require('./routes/search'));
 app.use('/api/stats', require('./routes/stats'));
 app.use('/api/communiconseil', require('./routes/communiconseil'));
+app.use('/api/location', require('./routes/location'));
 
 // Route pour servir les images statiques
 app.use('/api/static/avatars', express.static(path.join(__dirname, 'static/avatars')));
@@ -219,22 +233,11 @@ setInterval(() => {
   notificationService.broadcastStats();
 }, 30000);
 
-// Middleware de gestion d'erreurs
-app.use((err, req, res, next) => {
-  console.error('❌ Erreur serveur:', err);
-  res.status(500).json({ 
-    success: false, 
-    message: 'Erreur interne du serveur' 
-  });
-});
+// Middleware de gestion d'erreurs (doit être le dernier)
+app.use(errorLogger);
+app.use(errorMonitor);
 
-// Route 404
-app.use('*', (req, res) => {
-  res.status(404).json({ 
-    success: false, 
-    message: 'Route non trouvée' 
-  });
-});
+module.exports = { app, server, io };
 
 // Démarrage du serveur
 const startServer = async () => {
@@ -244,6 +247,7 @@ const startServer = async () => {
     console.log(`📱 Mode: ${process.env.NODE_ENV || 'development'}`);
     console.log(`🌍 API disponible sur: http://localhost:${PORT}`);
     console.log(`🔌 Socket.IO actif sur: http://localhost:${PORT}`);
+    console.log(`🛡️ Sécurité renforcée activée`);
   });
 };
 

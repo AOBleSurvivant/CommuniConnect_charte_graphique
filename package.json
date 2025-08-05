@@ -9,7 +9,12 @@
     "client": "cd client && npm start",
     "build": "cd client && npm run build",
     "install-all": "npm install && cd server && npm install && cd ../client && npm install",
-    "start": "cd server && npm start"
+    "start": "cd server && npm start",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage",
+    "test:auth": "jest tests/auth.test.js",
+    "test:integration": "jest tests/integration-complete.test.js"
   },
   "keywords": [
     "community",
@@ -26,7 +31,14 @@
   },
   "dependencies": {
     "axios": "^1.11.0",
+    "express-mongo-sanitize": "^2.2.0",
+    "express-rate-limit": "^8.0.1",
+    "hpp": "^0.2.3",
     "puppeteer": "^24.15.0",
-    "socket.io-client": "^4.8.1"
+    "rate-limit-redis": "^4.2.1",
+    "redis": "^5.8.0",
+    "socket.io-client": "^4.8.1",
+    "winston": "^3.17.0",
+    "xss-clean": "^0.1.4"
   }
 }
